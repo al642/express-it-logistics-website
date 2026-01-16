@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Express IT Logistics Limited - Uganda's premier logistics solutions provider. We deliver excellence in transportation, warehousing, and supply chain management across East Africa.">
+  <title>Express IT Logistics Limited</title>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-container">
+      <div class="nav-wrapper">
+        <!-- Logo -->
+        <a href="index.html" class="logo-link" aria-label="Express IT Logistics - Home">
+          <div class="logo-icon">
+            <i class="fas fa-truck-fast" aria-hidden="true"></i>
+          </div>
+          <div class="logo-text">
+            <span class="logo-title">Express IT</span>
+            <span class="logo-subtitle">Logistics</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="nav-menu" role="navigation" aria-label="Main navigation">
+          <a href="index.html" class="nav-link active" aria-current="page">Home</a>
+          <a href="pages/services.html" class="nav-link">Services</a>
+          <a href="pages/team.html" class="nav-link">Team</a>
+          <a href="pages/contact.html" class="nav-link">Contact</a>
+          <a href="pages/contact.html" class="btn btn-primary">
+            Get Quote
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+          <!-- Dark Mode Toggle -->
+          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </button>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <div class="mobile-menu-btn-container">
+          <button id="dark-mode-toggle-mobile" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </button>
+          <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <nav id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+        <a href="index.html" class="mobile-nav-link active" aria-current="page">Home</a>
+        <a href="pages/services.html" class="mobile-nav-link">Services</a>
+        <a href="pages/team.html" class="mobile-nav-link">Team</a>
+        <a href="pages/contact.html" class="mobile-nav-link">Contact</a>
+        <a href="pages/contact.html" class="btn btn-primary inline-block mt-2">
+          Get Quote
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main role="main">
+
+    <!-- Hero Section -->
+    <section class="hero-section" aria-label="Hero">
+      <div class="hero-content">
+        <div class="animate-fade-in-up">
+          <span class="hero-badge">
+            <i class="fas fa-truck mr-2" aria-hidden="true"></i>
+            Trusted Logistics Partner in Uganda
+          </span>
+
+          <h1 class="hero-title">
+            We Deliver What<br>
+            <span class="highlight">Others Promise!</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Express IT Logistics Limited is Uganda's premier logistics solutions provider, delivering excellence in transportation, warehousing, and supply chain management across East Africa.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="pages/services.html" class="btn btn-white">
+              Our Services
+              <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
+            </a>
+            <a href="pages/contact.html" class="btn btn-secondary">
+              <i class="fas fa-phone mr-2" aria-hidden="true"></i>
+              Contact Us
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="hero-stats" aria-label="Company statistics">
+            <div class="stat-item">
+              <div class="stat-value">10+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">500+</div>
+              <div class="stat-label">Clients Served</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">50K+</div>
+              <div class="stat-label">Deliveries Made</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">99%</div>
+              <div class="stat-label">Satisfaction Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Down Indicator -->
+      <div class="scroll-indicator">
+        <a href="#about" class="scroll-link" aria-label="Scroll to about section">
+          <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section section-light" aria-labelledby="about-title">
+      <div class="section-content">
+        <div class="grid grid-2" style="align-items: center;">
+          <!-- Content -->
+          <div>
+            <span class="section-label">About Us</span>
+            <h2 id="about-title" class="section-title mt-2 mb-6">
+              Your Trusted Logistics Partner in Uganda
+            </h2>
+            <p class="text-secondary text-lg mb-6">
+              Express IT Logistics Limited is a leading logistics and transportation company headquartered in Uganda, dedicated to providing world-class logistics solutions across East Africa.
+            </p>
+            <p class="text-secondary text-lg mb-6">
+              Since our inception, we have been committed to excellence, reliability, and customer satisfaction. Our team of experienced professionals understands the unique challenges of logistics in Uganda and the greater East African region.
+            </p>
+            <p class="text-secondary text-lg mb-8">
+              Whether you need freight forwarding, warehouse management, distribution services, or supply chain consulting, we have the expertise and resources to deliver your cargo safely and on time.
+            </p>
+
+            <div class="flex flex-wrap gap-4 mb-8">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-primary" aria-hidden="true"></i>
+                <span class="text-secondary">Licensed & Insured</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-primary" aria-hidden="true"></i>
+                <span class="text-secondary">24/7 Support</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-primary" aria-hidden="true"></i>
+                <span class="text-secondary">Real-time Tracking</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-primary" aria-hidden="true"></i>
+                <span class="text-secondary">Nationwide Coverage</span>
+              </div>
+            </div>
+
+            <div>
+              <a href="pages/contact.html" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+                Learn More About Us
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Image/Visual -->
+          <div class="relative">
+            <div class="card">
+              <div class="text-center py-8">
+                <div class="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <i class="fas fa-map-marker-alt text-white text-4xl" aria-hidden="true"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Based in Uganda</h3>
+                <p class="text-muted mb-8">Serving all regions across East Africa</p>
+
+                <div class="grid grid-3 gap-4">
+                  <div class="card-secondary p-4 text-center">
+                    <i class="fas fa-truck text-primary text-2xl mb-2" aria-hidden="true"></i>
+                    <div class="text-sm text-secondary">Fleet of 50+ Vehicles</div>
+                  </div>
+                  <div class="card-secondary p-4 text-center">
+                    <i class="fas fa-warehouse text-primary text-2xl mb-2" aria-hidden="true"></i>
+                    <div class="text-sm text-secondary">10,000 sq.m Warehouse</div>
+                  </div>
+                  <div class="card-secondary p-4 text-center">
+                    <i class="fas fa-users text-primary text-2xl mb-2" aria-hidden="true"></i>
+                    <div class="text-sm text-secondary">100+ Staff Members</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Decorative Elements -->
+            <div class="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full"></div>
+            <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/20 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Preview Section -->
+    <section id="services" class="section section-secondary" aria-labelledby="services-title">
+      <div class="section-content">
+        <!-- Section Header -->
+        <div class="section-header">
+          <span class="section-label">Our Services</span>
+          <h2 id="services-title" class="section-title mt-2 mb-4">
+            Comprehensive Logistics Solutions
+          </h2>
+          <p class="section-subtitle">
+            We offer a wide range of logistics services tailored to meet your business needs across Uganda and East Africa.
+          </p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-3">
+          <!-- Service 1 -->
+          <article class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-truck" aria-hidden="true"></i>
+            </div>
+            <h3 class="service-title">Freight Transportation</h3>
+            <p class="service-description">
+              Reliable road freight services across Uganda and East Africa. Our modern fleet ensures safe and timely delivery of your cargo.
+            </p>
+            <a href="pages/services.html" class="text-primary font-medium hover:gap-2 flex items-center gap-1 transition-all">
+              Learn More
+              <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- Service 2 -->
+          <article class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-warehouse" aria-hidden="true"></i>
+            </div>
+            <h3 class="service-title">Warehousing</h3>
+            <p class="service-description">
+              Secure warehousing solutions with inventory management. Climate-controlled storage for sensitive goods and bulk storage options.
+            </p>
+            <a href="pages/services.html" class="text-primary font-medium hover:gap-2 flex items-center gap-1 transition-all">
+              Learn More
+              <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- Service 3 -->
+          <article class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-boxes-stacked" aria-hidden="true"></i>
+            </div>
+            <h3 class="service-title">Distribution Services</h3>
+            <p class="service-description">
+              Efficient last-mile delivery and distribution network covering all major cities and towns in Uganda.
+            </p>
+            <a href="pages/services.html" class="text-primary font-medium hover:gap-2 flex items-center gap-1 transition-all">
+              Learn More
+              <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- Service 4 -->
+          <article class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+            </div>
+            <h3 class="service-title">Supply Chain Consulting</h3>
+            <p class="service-description">
+              Expert advice to optimize your supply chain. We analyze and improve efficiency to reduce costs and improve delivery times.
+            </p>
+            <a href="pages/services.html" class="text-primary font-medium hover:gap-2 flex items-center gap-1 transition-all">
+              Learn More
+              <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- Service 5 -->
+          <article class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-earth-africa" aria-hidden="true"></i>
+            </div>
+            <h3 class="service-title">Cross-Border Logistics</h3>
+            <p class="service-description">
+              Seamless cross-border transportation to Kenya, Tanzania, Rwanda, and Democratic Republic of Congo.
+            </p>
+            <a href="pages/services.html" class="text-primary font-medium hover:gap-2 flex items-center gap-1 transition-all">
+              Learn More
+              <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <!-- Service 6 -->
+          <article class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-headset" aria-hidden="true"></i>
+            </div>
+            <h3 class="service-title">24/7 Customer Support</h3>
+            <p class="service-description">
+              Round-the-clock customer service to handle your queries and emergencies. Real-time tracking updates for your shipments.
+            </p>
+            <a href="pages/services.html" class="text-primary font-medium hover:gap-2 flex items-center gap-1 transition-all">
+              Learn More
+              <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+
+        <!-- View All Services Button -->
+        <div class="text-center mt-12">
+          <a href="pages/services.html" class="btn btn-primary">
+            View All Services
+            <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="section section-dark" aria-labelledby="cta-title">
+      <div class="section-content text-center">
+        <h2 id="cta-title" class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Optimize Your Logistics?</h2>
+        <p class="hero-subtitle mb-8">
+          Contact us today for a free consultation and quote. Let us help streamline your supply chain.
+        </p>
+        <div class="hero-buttons">
+          <a href="pages/contact.html" class="btn btn-white">
+            Get Free Quote
+          </a>
+          <a href="pages/contact.html" class="btn btn-secondary">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-grid">
+        <!-- Company Info -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <i class="fas fa-truck-fast text-white text-xl" aria-hidden="true"></i>
+            </div>
+            <div class="logo-text">
+              <span class="logo-title text-white">Express IT</span>
+              <span class="logo-subtitle">Logistics</span>
+            </div>
+          </div>
+          <p class="footer-description">
+            Uganda's premier logistics solutions provider. We deliver what others promise!
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="pages/services.html" class="footer-link">Services</a></li>
+            <li><a href="pages/team.html" class="footer-link">Our Team</a></li>
+            <li><a href="pages/contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h3 class="footer-title">Services</h3>
+          <ul class="footer-links">
+            <li><a href="pages/services.html" class="footer-link">Freight Transportation</a></li>
+            <li><a href="pages/services.html" class="footer-link">Warehousing</a></li>
+            <li><a href="pages/services.html" class="footer-link">Distribution</a></li>
+            <li><a href="pages/services.html" class="footer-link">Supply Chain Consulting</a></li>
+            <li><a href="pages/services.html" class="footer-link">Cross-Border Logistics</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="contact-list">
+            <li>
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+              <span>Kampala, Uganda<br>Mengo Road, Nakasero</span>
+            </li>
+            <li>
+              <i class="fas fa-phone" aria-hidden="true"></i>
+              <span>+256 700 123 456</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <span>info@expressitlogistics.com</span>
+            </li>
+            <li>
+              <i class="fas fa-clock" aria-hidden="true"></i>
+              <span>Mon - Sat: 8:00 AM - 6:00 PM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Copyright Bar -->
+      <div class="footer-bottom">
+        <p>&copy; <span class="copyright-year"></span> Express IT Logistics Limited. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
+
