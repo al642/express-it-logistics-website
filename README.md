@@ -103,10 +103,10 @@ Edit the corresponding HTML files to update:
 
 ## License
 
-© 2024 Express IT Logistics Limited. All rights reserved.
+© 2026 Express IT Logistics Limited. All rights reserved.
 
 ## Contact
 
 - **Email:** <info@expressitlogistics.com>
-- **Phone:** +256 700 123 456
-- **Address:** Mengo Road, Nakasero, Kampala, Uganda
+- **Phone:** +256 772 200 122, +256 773 001 030, +256 701 447 750,
+- **Address:** Rumee House, 3rd Floor, Plot 19 Lumumba Avenue - Nakasero, P.O.Box 74638, Kampala - Uganda
