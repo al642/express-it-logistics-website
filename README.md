@@ -69,7 +69,7 @@ This website is designed to be hosted on GitHub Pages:
 1. Push the repository to GitHub
 2. Go to Repository Settings → Pages
 3. Select the main branch as source
-4. The site will be live at `https://yourusername.github.io/repository-name/`
+4. The site will be live at `https://al642.github.io/express-it-logistics-website/`
 
 ## Customization
 
