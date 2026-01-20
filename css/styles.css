@@ -1,37 +1,49 @@
 /* Express IT Logistics - Main Styles */
 
 /* ============================================
-   CSS VARIABLES - LIGHT/DARK MODE SUPPORT
+   PINK BRAND COLOR SYSTEM
+   Consistent, brand-faithful pink accent system
    ============================================ */
 :root {
   /* Light Mode Colors (Default) */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
+  --bg-secondary: #faf5f7;
+  --bg-tertiary: #f5eef2;
 
-  --text-primary: #0f172a;
-  --text-secondary: #1e293b;
-  --text-muted: #475569;
+  --text-primary: #1a1a2e;
+  --text-secondary: #2d2d44;
+  --text-muted: #5c5c70;
 
-  --color-primary: #0369a1;
-  --color-primary-light: #0ea5e9;
-  --color-primary-dark: #01579b;
-  --color-primary-bg: #f0f9ff;
+  /* Pink Brand Colors - Primary */
+  --color-pink: #e91e63;
+  --color-pink-light: #f06292;
+  --color-pink-dark: #c2185b;
+  --color-pink-subtle: #f8bbd9;
+  --color-pink-bg: #fce4ec;
+  --color-pink-bg-light: #fff5f8;
+
+  /* Mapped to semantic names for consistency */
+  --color-primary: var(--color-pink);
+  --color-primary-light: var(--color-pink-light);
+  --color-primary-dark: var(--color-pink-dark);
+  --color-primary-bg: var(--color-pink-bg);
+  --color-primary-bg-light: var(--color-pink-bg-light);
 
   --accent-success: #059669;
   --accent-warning: #d97706;
   --accent-error: #dc2626;
 
-  --border-color: #e2e8f0;
-  --border-color-light: #f1f5f9;
+  --border-color: #f0d9e0;
+  --border-color-light: #f5eef2;
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 2px 0 rgb(233 30 99 / 0.05);
+  --shadow-md:
+    0 4px 6px -1px rgb(233 30 99 / 0.1), 0 2px 4px -2px rgb(233 30 99 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(233 30 99 / 0.1), 0 4px 6px -4px rgb(233 30 99 / 0.1);
 
   --nav-bg: rgba(255, 255, 255, 0.98);
-  --footer-bg: #0f172a;
+  --footer-bg: #1a1a2e;
 
   --transition-fast: 150ms ease;
   --transition-normal: 300ms ease;
@@ -39,28 +51,38 @@
 
 /* Dark Mode Colors */
 .dark {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #252542;
+  --bg-tertiary: #323258;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #e2e8f0;
-  --text-muted: #94a3b8;
+  --text-primary: #ffffff;
+  --text-secondary: #e8e8f0;
+  --text-muted: #a8a8c0;
 
-  --color-primary: #38bdf8;
-  --color-primary-light: #7dd3fc;
-  --color-primary-dark: #0ea5e9;
-  --color-primary-bg: #1e293b;
+  /* Adjusted pinks for dark mode contrast */
+  --color-pink: #f48fb1;
+  --color-pink-light: #f8bbd9;
+  --color-pink-dark: #e91e63;
+  --color-pink-subtle: #ad1457;
+  --color-pink-bg: #3d2544;
+  --color-pink-bg-light: #2d1a35;
+
+  /* Mapped to semantic names */
+  --color-primary: var(--color-pink);
+  --color-primary-light: var(--color-pink-light);
+  --color-primary-dark: var(--color-pink-dark);
+  --color-primary-bg: var(--color-pink-bg);
+  --color-primary-bg-light: var(--color-pink-bg-light);
 
   --accent-success: #34d399;
   --accent-warning: #fbbf24;
   --accent-error: #f87171;
 
-  --border-color: #334155;
-  --border-color-light: #1e293b;
+  --border-color: #3d3550;
+  --border-color-light: #2d2542;
 
-  --nav-bg: rgba(15, 23, 42, 0.98);
-  --footer-bg: #020617;
+  --nav-bg: rgba(26, 26, 46, 0.98);
+  --footer-bg: #12121f;
 }
 
 /* ============================================
@@ -77,12 +99,18 @@ html {
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
     sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  transition: background-color var(--transition-normal),
+  transition:
+    background-color var(--transition-normal),
     color var(--transition-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -133,14 +161,14 @@ body {
   height: 48px;
   background: linear-gradient(
     135deg,
-    var(--color-primary),
-    var(--color-primary-light)
+    var(--color-pink-dark),
+    var(--color-pink)
   );
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
 }
 
 .logo-icon i {
@@ -227,7 +255,9 @@ body {
 .dark-mode-toggle i {
   color: var(--text-secondary);
   font-size: 1rem;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
   width: 1.25rem;
   text-align: center;
 }
@@ -272,13 +302,26 @@ body {
   display: block;
 }
 
+/* Mobile Dark Mode Toggle */
+.mobile-dark-mode-toggle {
+  padding: 1rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.dark-mode-toggle .dark-mode-label {
+  margin-left: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
 .mobile-nav-link {
   display: block;
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
   padding: 0.75rem 1.5rem;
-  transition: color var(--transition-fast),
+  transition:
+    color var(--transition-fast),
     background-color var(--transition-fast);
 }
 
@@ -299,9 +342,9 @@ body {
   justify-content: center;
   background: linear-gradient(
     135deg,
-    var(--color-primary-dark) 0%,
-    var(--color-primary) 50%,
-    var(--color-primary-light) 100%
+    var(--color-pink-dark) 0%,
+    var(--color-pink) 50%,
+    var(--color-pink-light) 100%
   );
   overflow: hidden;
   padding-top: 80px;
@@ -439,21 +482,21 @@ body {
 .btn-primary {
   background: linear-gradient(
     135deg,
-    var(--color-primary),
-    var(--color-primary-light)
+    var(--color-pink),
+    var(--color-pink-light)
   );
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+  box-shadow: 0 4px 14px rgba(233, 30, 99, 0.4);
 }
 
 .btn-primary:hover {
   background: linear-gradient(
     135deg,
-    var(--color-primary-dark),
-    var(--color-primary)
+    var(--color-pink-dark),
+    var(--color-pink)
   );
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
 }
 
 .btn-secondary {
@@ -511,8 +554,8 @@ body {
 .section-dark {
   background: linear-gradient(
     135deg,
-    var(--color-primary-dark),
-    var(--color-primary)
+    var(--color-pink-dark),
+    var(--color-pink)
   );
   color: #ffffff;
   position: relative;
@@ -617,8 +660,8 @@ body {
   height: 4rem;
   background: linear-gradient(
     135deg,
-    var(--color-primary-bg),
-    var(--bg-secondary)
+    var(--color-pink-bg),
+    var(--color-pink-bg-light)
   );
   border-radius: 12px;
   display: flex;
@@ -630,14 +673,14 @@ body {
 
 .service-icon i {
   font-size: 1.5rem;
-  color: var(--color-primary);
+  color: var(--color-pink);
 }
 
 .service-card:hover .service-icon {
   background: linear-gradient(
     135deg,
-    var(--color-primary),
-    var(--color-primary-light)
+    var(--color-pink-dark),
+    var(--color-pink)
   );
 }
 
@@ -698,7 +741,7 @@ body {
 .form-textarea:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+  box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.15);
 }
 
 .form-textarea {
@@ -1045,12 +1088,12 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
+  background: var(--color-pink);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-dark);
+  background: var(--color-pink-dark);
 }
 
 /* ============================================
