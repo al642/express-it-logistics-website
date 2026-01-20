@@ -1,10 +1,10 @@
 # Express IT Logistics Limited
 
-A professional static website for Uganda's premier logistics solutions provider.
+A professional static website for Uganda's premier logistics solutions provider and leading dry ice producer in East Africa.
 
 ## Description
 
-Express IT Logistics Limited is a leading logistics and transportation company headquartered in Uganda. This website showcases their services, team, and contact information, providing a comprehensive online presence for their business.
+Express IT Logistics Limited is a leading logistics and transportation company headquartered in Uganda, and the premier producer of dry ice in East Africa. This website showcases their services, team, and contact information, providing a comprehensive online presence for their business.
 
 ## Tech Stack
 
@@ -40,12 +40,13 @@ express-it-logistics-website/
 - **Accessible** - ARIA labels, focus states, and proper contrast ratios
 - **Fast Loading** - No heavy frameworks, pure HTML/CSS/JS
 - **Print Friendly** - Optimized print styles
+- **Auto-Scrolling Partners Carousel** - Dynamic partner showcase
 
 ## Pages
 
-1. **Home (index.html)** - Company overview, services preview, and call-to-action
-2. **Services (pages/services.html)** - Detailed list of logistics services
-3. **Team (pages/team.html)** - Company leadership and team members
+1. **Home (index.html)** - Company overview, services preview, trusted partners, and call-to-action
+2. **Services (pages/services.html)** - Detailed list of logistics services including dry ice production
+3. **Team (pages/team.html)** - Role-based capability groupings
 4. **Contact (pages/contact.html)** - Contact form and company information
 
 ## Getting Started
@@ -69,7 +70,7 @@ This website is designed to be hosted on GitHub Pages:
 1. Push the repository to GitHub
 2. Go to Repository Settings → Pages
 3. Select the main branch as source
-4. The site will be live at `https://al642.github.io/express-it-logistics-website/`
+4. The site will be live at your GitHub Pages URL
 
 ## Customization
 
@@ -79,9 +80,9 @@ Edit CSS variables in `css/styles.css`:
 
 ```css
 :root {
-    --color-primary: #0284c7;
-    --color-primary-light: #0ea5e9;
-    --color-primary-dark: #0369a1;
+    --color-pink: #e91e63;
+    --color-pink-light: #f06292;
+    --color-pink-dark: #c2185b;
     /* ... more variables */
 }
 ```
@@ -90,8 +91,9 @@ Edit CSS variables in `css/styles.css`:
 
 Edit the corresponding HTML files to update:
 
+- Homepage content in `index.html`
 - Services in `pages/services.html`
-- Team members in `pages/team.html`
+- Team capabilities in `pages/team.html`
 - Contact info in `pages/contact.html` and `index.html`
 
 ## Browser Support
@@ -103,10 +105,11 @@ Edit the corresponding HTML files to update:
 
 ## License
 
-© 2026 Express IT Logistics Limited. All rights reserved.
+Copyright © Express IT Logistics Limited. All rights reserved.
 
 ## Contact
 
-- **Email:** <info@expressitlogistics.com>
-- **Phone:** +256 772 200 122, +256 773 001 030, +256 701 447 750,
-- **Address:** Rumee House, 3rd Floor, Plot 19 Lumumba Avenue - Nakasero, P.O.Box 74638, Kampala - Uganda
+- **Email:** info@expressitlogistics.co.ug
+- **Phone:** +256 772 200 122, +256 773 001 030, +256 701 447 750
+- **Address:** Rumme House, 3rd Floor, Plot 19 Lumumba Avenue - Nakasero, P.O. Box 74638, Kampala - Uganda
+

@@ -155,6 +155,54 @@
 
     forms.forEach(function (form) {
       form.addEventListener("submit", function (e) {
+        // Only handle non-mailto forms with JavaScript
+        if (form.getAttribute("action") && form.getAttribute("action").indexOf("mailto:") === 0) {
+          // For mailto forms, just show confirmation and let browser handle it
+          e.preventDefault();
+          
+          // Basic validation
+          const name = form.querySelector("#name");
+          const email = form.querySelector("#email");
+          const message = form.querySelector("#message");
+
+          let isValid = true;
+          let errors = [];
+
+          if (!name || !name.value.trim()) {
+            errors.push("Please enter your name");
+            isValid = false;
+          }
+
+          if (!email || !email.value.trim()) {
+            errors.push("Please enter your email");
+            isValid = false;
+          } else if (!isValidEmail(email.value)) {
+            errors.push("Please enter a valid email address");
+            isValid = false;
+          }
+
+          if (!message || !message.value.trim()) {
+            errors.push("Please enter your message");
+            isValid = false;
+          }
+
+          if (isValid) {
+            // Show success message
+            showNotification("Thank you for your inquiry. Our team will get back to you shortly.", "success");
+            
+            // Add a small delay then submit the form
+            setTimeout(function() {
+              form.submit();
+            }, 1500);
+          } else {
+            // Show errors
+            showNotification(errors.join(". "), "error");
+          }
+          
+          return;
+        }
+
+        // Original form handling for other forms
         e.preventDefault();
 
         // Basic validation
@@ -185,7 +233,7 @@
 
         if (isValid) {
           // Form is valid - show success message
-          showNotification("Thank you! Your message has been sent successfully.", "success");
+          showNotification("Thank you for your inquiry. Our team will get back to you shortly.", "success");
           form.reset();
         } else {
           // Show errors
