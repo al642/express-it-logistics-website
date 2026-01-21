@@ -327,5 +327,63 @@
     isValidEmail: isValidEmail
   };
 
+  // Initialize Service Worker for PWA support
+  initServiceWorker();
+
 })();
+
+/**
+ * Service Worker Registration
+ * Provides offline capability and improved performance
+ */
+function initServiceWorker() {
+  // Check if service workers are supported
+  if ('serviceWorker' in navigator) {
+    // Wait for the page to load
+    window.addEventListener('load', function() {
+      // Register the service worker
+      navigator.serviceWorker.register('./sw.js')
+        .then(function(registration) {
+          console.log('[SW] Service Worker registered successfully');
+          console.log('[SW] Scope:', registration.scope);
+          
+          // Check for updates
+          registration.addEventListener('updatefound', function() {
+            const installingWorker = registration.installing;
+            console.log('[SW] New service worker found');
+            
+            installingWorker.addEventListener('statechange', function() {
+              if (installingWorker.state === 'installed') {
+                if (navigator.serviceWorker.controller) {
+                  // New update available
+                  console.log('[SW] New content available, please refresh');
+                  showNotification('New version available! Refresh to update.', 'info');
+                } else {
+                  // Content cached for offline use
+                  console.log('[SW] Content cached for offline use');
+                }
+              }
+            });
+          });
+        })
+        .catch(function(error) {
+          console.error('[SW] Service Worker registration failed:', error);
+        });
+      
+      // Check for updates periodically
+      setInterval(function() {
+        registration.update();
+      }, 60000); // Check every minute
+      
+      // Handle messages from service worker
+      navigator.serviceWorker.addEventListener('message', function(event) {
+        if (event.data && event.data.version) {
+          console.log('[SW] Current cache version:', event.data.version);
+        }
+      });
+    });
+  } else {
+    console.log('[SW] Service workers not supported in this browser');
+  }
+}
 
