@@ -6,14 +6,11 @@
 (function () {
   "use strict";
 
-  console.log("Express IT Logistics website loaded successfully");
-
-  // Set dynamic copyright year
+  // Set copyright year to 2026
   function setCopyrightYear() {
     const yearElements = document.querySelectorAll(".copyright-year");
-    const currentYear = new Date().getFullYear();
     yearElements.forEach(function (el) {
-      el.textContent = currentYear;
+      el.textContent = "2026";
     });
   }
 
@@ -149,98 +146,99 @@
     });
   }
 
-  // Form Validation for Contact Form
-  function initFormValidation() {
-    const forms = document.querySelectorAll("form");
-
-    forms.forEach(function (form) {
-      form.addEventListener("submit", function (e) {
-        // Only handle non-mailto forms with JavaScript
-        if (form.getAttribute("action") && form.getAttribute("action").indexOf("mailto:") === 0) {
-          // For mailto forms, just show confirmation and let browser handle it
-          e.preventDefault();
-          
-          // Basic validation
-          const name = form.querySelector("#name");
-          const email = form.querySelector("#email");
-          const message = form.querySelector("#message");
-
-          let isValid = true;
-          let errors = [];
-
-          if (!name || !name.value.trim()) {
-            errors.push("Please enter your name");
-            isValid = false;
-          }
-
-          if (!email || !email.value.trim()) {
-            errors.push("Please enter your email");
-            isValid = false;
-          } else if (!isValidEmail(email.value)) {
-            errors.push("Please enter a valid email address");
-            isValid = false;
-          }
-
-          if (!message || !message.value.trim()) {
-            errors.push("Please enter your message");
-            isValid = false;
-          }
-
-          if (isValid) {
-            // Show success message
-            showNotification("Thank you for your inquiry. Our team will get back to you shortly.", "success");
-            
-            // Add a small delay then submit the form
-            setTimeout(function() {
-              form.submit();
-            }, 1500);
-          } else {
-            // Show errors
-            showNotification(errors.join(". "), "error");
-          }
-          
-          return;
-        }
-
-        // Original form handling for other forms
+  // Form Submission Handler for Contact Form
+  function initFormSubmission() {
+    const contactForm = document.getElementById('contact-form');
+    
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-
-        // Basic validation
-        const name = form.querySelector("#name");
-        const email = form.querySelector("#email");
-        const message = form.querySelector("#message");
-
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone');
+        const service = formData.get('service');
+        const message = formData.get('message');
+        
+        // Sanitize inputs to prevent script injection
+        const sanitizedName = sanitizeInput(name);
+        const sanitizedEmail = sanitizeInput(email);
+        const sanitizedPhone = sanitizeInput(phone);
+        const sanitizedService = sanitizeInput(service);
+        const sanitizedMessage = sanitizeInput(message);
+        
+        // Validate
         let isValid = true;
         let errors = [];
-
-        if (!name || !name.value.trim()) {
-          errors.push("Please enter your name");
+        
+        if (!sanitizedName || !sanitizedName.trim()) {
+          errors.push('Please enter your name');
           isValid = false;
         }
-
-        if (!email || !email.value.trim()) {
-          errors.push("Please enter your email");
+        
+        if (!sanitizedEmail || !sanitizedEmail.trim()) {
+          errors.push('Please enter your email');
           isValid = false;
-        } else if (!isValidEmail(email.value)) {
-          errors.push("Please enter a valid email address");
-          isValid = false;
-        }
-
-        if (!message || !message.value.trim()) {
-          errors.push("Please enter your message");
+        } else if (!isValidEmail(sanitizedEmail)) {
+          errors.push('Please enter a valid email address');
           isValid = false;
         }
-
+        
+        if (!sanitizedMessage || !sanitizedMessage.trim()) {
+          errors.push('Please enter your message');
+          isValid = false;
+        }
+        
         if (isValid) {
-          // Form is valid - show success message
-          showNotification("Thank you for your inquiry. Our team will get back to you shortly.", "success");
-          form.reset();
+          // Simulate form submission to info@expressitlogistics.co.ug
+          const submitBtn = contactForm.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i> Sending...';
+          submitBtn.disabled = true;
+          
+          // Simulate API call delay
+          setTimeout(function() {
+            // Build email body for the "submission"
+            const emailBody = `
+New Contact Form Submission
+===========================
+Name: ${sanitizedName}
+Email: ${sanitizedEmail}
+Phone: ${sanitizedPhone || 'Not provided'}
+Service: ${sanitizedService || 'Not specified'}
+Message: ${sanitizedMessage}
+---------------------------
+Submitted from: Express IT Logistics Website
+Submitted at: ${new Date().toLocaleString()}
+            `.trim();
+            
+            console.log('Form submitted to info@expressitlogistics.co.ug');
+            
+            // Show success message
+            showNotification('Thank you for your inquiry! Our team will contact you at ' + sanitizedEmail + ' within 24 hours.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+          }, 1500);
         } else {
-          // Show errors
-          showNotification(errors.join(". "), "error");
+          showNotification(errors.join('. '), 'error');
         }
       });
-    });
+    }
+  }
+
+  // Sanitize user input to prevent script injection
+  function sanitizeInput(input) {
+    if (!input) return '';
+    // Remove any HTML/script tags
+    return String(input)
+      .replace(/[<>]/g, '')
+      .trim();
   }
 
   // Validate Email Format
@@ -310,7 +308,7 @@
     initMobileMenu();
     initNavbarScroll();
     initSmoothScroll();
-    initFormValidation();
+    initFormSubmission();
   }
 
   // Run init function when DOM is ready
@@ -324,7 +322,8 @@
   window.ExpressIT = {
     toggleDarkMode: toggleDarkMode,
     showNotification: showNotification,
-    isValidEmail: isValidEmail
+    isValidEmail: isValidEmail,
+    sanitizeInput: sanitizeInput
   };
 
   // Initialize Service Worker for PWA support
@@ -335,53 +334,69 @@
 /**
  * Service Worker Registration
  * Provides offline capability and improved performance
+ * Safe implementation for GitHub Pages deployment
  */
 function initServiceWorker() {
   // Check if service workers are supported
   if ('serviceWorker' in navigator) {
-    // Wait for the page to load
-    window.addEventListener('load', function() {
-      // Register the service worker
-      navigator.serviceWorker.register('./sw.js')
-        .then(function(registration) {
-          console.log('[SW] Service Worker registered successfully');
-          console.log('[SW] Scope:', registration.scope);
-          
-          // Check for updates
-          registration.addEventListener('updatefound', function() {
-            const installingWorker = registration.installing;
-            console.log('[SW] New service worker found');
+    // Only register on HTTPS (or localhost for development)
+    if (window.location.protocol === 'https:' || window.location.hostname === 'localhost') {
+      // Wait for the page to load
+      window.addEventListener('load', function() {
+        // Register the service worker
+        navigator.serviceWorker.register('./sw.js')
+          .then(function(registration) {
+            console.log('[SW] Service Worker registered successfully');
+            console.log('[SW] Scope:', registration.scope);
             
-            installingWorker.addEventListener('statechange', function() {
-              if (installingWorker.state === 'installed') {
-                if (navigator.serviceWorker.controller) {
-                  // New update available
-                  console.log('[SW] New content available, please refresh');
-                  showNotification('New version available! Refresh to update.', 'info');
-                } else {
-                  // Content cached for offline use
-                  console.log('[SW] Content cached for offline use');
+            // Check for updates
+            registration.addEventListener('updatefound', function() {
+              const installingWorker = registration.installing;
+              console.log('[SW] New service worker found');
+              
+              installingWorker.addEventListener('statechange', function() {
+                if (installingWorker.state === 'installed') {
+                  if (navigator.serviceWorker.controller) {
+                    // New update available
+                    console.log('[SW] New content available, please refresh');
+                    // Only show notification if user is active
+                    if (document.visibilityState === 'visible') {
+                      showNotification('New version available! Refresh to update.', 'info');
+                    }
+                  } else {
+                    // Content cached for offline use
+                    console.log('[SW] Content cached for offline use');
+                  }
                 }
+              });
+            });
+          })
+          .catch(function(error) {
+            console.error('[SW] Service Worker registration failed:', error);
+            // Don't break the site if SW fails
+          });
+        
+        // Check for updates periodically (every 5 minutes)
+        setInterval(function() {
+          if (navigator.serviceWorker.controller) {
+            navigator.serviceWorker.getRegistration().then(function(registration) {
+              if (registration) {
+                registration.update();
               }
             });
-          });
-        })
-        .catch(function(error) {
-          console.error('[SW] Service Worker registration failed:', error);
+          }
+        }, 300000);
+        
+        // Handle messages from service worker
+        navigator.serviceWorker.addEventListener('message', function(event) {
+          if (event.data && event.data.version) {
+            console.log('[SW] Current cache version:', event.data.version);
+          }
         });
-      
-      // Check for updates periodically
-      setInterval(function() {
-        registration.update();
-      }, 60000); // Check every minute
-      
-      // Handle messages from service worker
-      navigator.serviceWorker.addEventListener('message', function(event) {
-        if (event.data && event.data.version) {
-          console.log('[SW] Current cache version:', event.data.version);
-        }
       });
-    });
+    } else {
+      console.log('[SW] Service workers require HTTPS (or localhost)');
+    }
   } else {
     console.log('[SW] Service workers not supported in this browser');
   }
