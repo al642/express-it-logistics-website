@@ -232,7 +232,6 @@ Submitted at: ${new Date().toLocaleString()}
   };
 
   // Sanitize user input to prevent script injection
-  function sanitizeInput(input) {
   const sanitizeInput = (input) => {
     if (!input) return '';
     // Remove any HTML/script tags
@@ -301,7 +300,6 @@ Submitted at: ${new Date().toLocaleString()}
     }, 5000);
   };
   // Initialize when DOM is ready
-  function init() {
   const init = () => {
     setCopyrightYear();
     initDarkMode();
@@ -310,6 +308,7 @@ Submitted at: ${new Date().toLocaleString()}
     initSmoothScroll();
     initFormSubmission();
   };
+
   // Run init function when DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
