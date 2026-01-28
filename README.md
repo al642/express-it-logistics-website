@@ -112,4 +112,3 @@ Copyright © Express IT Logistics Limited. All rights reserved.
 - **Email:** <info@expressitlogistics.co.ug>
 - **Phone:** +256 772 200 122, +256 773 001 030, +256 701 447 750
 - **Address:** Rumee House, 3rd Floor, Plot 19 Lumumba Avenue - Nakasero, P.O. Box 74638, Kampala - Uganda
-

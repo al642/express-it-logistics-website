@@ -60,10 +60,10 @@
   --text-muted: #a8a8c0;
 
   /* Adjusted pinks for dark mode contrast */
-  --color-pink: #f48fb1;
-  --color-pink-light: #f8bbd9;
-  --color-pink-dark: #e91e63;
-  --color-pink-subtle: #ad1457;
+  --color-pink: #d471a8;
+  --color-pink-light: #e89bb4;
+  --color-pink-dark: #ad4f85;
+  --color-pink-subtle: #8b2e4a;
   --color-pink-bg: #3d2544;
   --color-pink-bg-light: #2d1a35;
 
@@ -326,9 +326,7 @@ body {
 }
 
 .dark-mode-toggle .dark-mode-label {
-  margin-left: 0.75rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  display: none;
 }
 
 .mobile-nav-link {
@@ -769,7 +767,7 @@ body {
 
 .partners-carousel {
   display: flex;
-  animation: scroll-infinite 40s linear infinite;
+  animation: scroll-infinite 25s linear infinite;
   will-change: transform;
 }
 
@@ -1449,7 +1447,7 @@ body {
   }
 
   .partners-carousel {
-    animation: scroll-infinite 40s linear infinite;
+    animation: scroll-infinite 25s linear infinite;
   }
 
   .partner-item {
@@ -1507,7 +1505,7 @@ body {
 
   /* Mobile carousel styling */
   .partners-carousel {
-    animation: scroll-infinite 40s linear infinite;
+    animation: scroll-infinite 25s linear infinite;
   }
 }
 
