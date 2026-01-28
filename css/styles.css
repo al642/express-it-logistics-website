@@ -60,10 +60,10 @@
   --text-muted: #a8a8c0;
 
   /* Adjusted pinks for dark mode contrast */
-  --color-pink: #d471a8;
-  --color-pink-light: #e89bb4;
-  --color-pink-dark: #ad4f85;
-  --color-pink-subtle: #8b2e4a;
+  --color-pink: #e91e63;
+  --color-pink-light: #f06292;
+  --color-pink-dark: #c2185b;
+  --color-pink-subtle: #f8bbd9;
   --color-pink-bg: #3d2544;
   --color-pink-bg-light: #2d1a35;
 
