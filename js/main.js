@@ -19,12 +19,13 @@
     const darkModeToggles = document.querySelectorAll("#dark-mode-toggle, #dark-mode-toggle-mobile");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const savedPreference = localStorage.getItem("darkMode");
+    const { classList } = document.documentElement;
 
     // Apply dark mode if: saved preference is true OR (no saved preference AND system is dark)
     const shouldBeDark = savedPreference === "true" || (savedPreference === null && prefersDark);
 
     if (shouldBeDark) {
-      document.documentElement.classList.add("dark");
+      classList.add("dark");
     }
 
     // Update toggle icons
@@ -43,9 +44,9 @@
         // Only auto-switch if user hasn't set a manual preference
         if (localStorage.getItem("darkMode") === null) {
           if (e.matches) {
-            document.documentElement.classList.add("dark");
+            classList.add("dark");
           } else {
-            document.documentElement.classList.remove("dark");
+            classList.remove("dark");
           }
           updateDarkModeIcons();
         }
@@ -55,14 +56,16 @@
 
   // Toggle Dark Mode
   const toggleDarkMode = () => {
-    const isDark = document.documentElement.classList.toggle("dark");
+    const { classList } = document.documentElement;
+    const isDark = classList.toggle("dark");
     localStorage.setItem("darkMode", isDark);
     updateDarkModeIcons();
   };
 
   // Update Dark Mode Icons
   const updateDarkModeIcons = () => {
-    const isDark = document.documentElement.classList.contains("dark");
+    const { classList: rootClassList } = document.documentElement;
+    const isDark = rootClassList.contains("dark");
     const icons = document.querySelectorAll("#dark-mode-toggle i, #dark-mode-toggle-mobile i");
 
     icons.forEach((icon) => {
@@ -105,13 +108,31 @@
     const navbar = document.getElementById("navbar");
 
     if (navbar) {
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
+      let lastScrollY = window.scrollY;
+      let ticking = false;
+
+      const updateScroll = () => {
+        const scrollY = window.scrollY;
+        
+        // Add/remove scrolled class based on scroll position
+        if (scrollY > 50) {
           navbar.classList.add("scrolled");
         } else {
           navbar.classList.remove("scrolled");
         }
-      });
+        
+        lastScrollY = scrollY;
+        ticking = false;
+      };
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateScroll();
+          });
+          ticking = true;
+        }
+      }, { passive: true });
     }
   };
 
