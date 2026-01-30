@@ -105,13 +105,31 @@
     const navbar = document.getElementById("navbar");
 
     if (navbar) {
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
+      let lastScrollY = window.scrollY;
+      let ticking = false;
+
+      const updateScroll = () => {
+        const scrollY = window.scrollY;
+        
+        // Add/remove scrolled class based on scroll position
+        if (scrollY > 50) {
           navbar.classList.add("scrolled");
         } else {
           navbar.classList.remove("scrolled");
         }
-      });
+        
+        lastScrollY = scrollY;
+        ticking = false;
+      };
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateScroll();
+          });
+          ticking = true;
+        }
+      }, { passive: true });
     }
   };
 
