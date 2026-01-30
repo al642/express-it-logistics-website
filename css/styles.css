@@ -1,8 +1,8 @@
 /* Express IT Logistics - Main Styles */
 
 /* ============================================
-   PINK BRAND COLOR SYSTEM
-   Consistent, brand-faithful pink accent system
+PINK BRAND COLOR SYSTEM
+Consistent, brand-faithful pink accent system
    ============================================ */
 :root {
   /* Light Mode Colors (Default) */
@@ -413,7 +413,6 @@ body {
   display: none;
   min-width: 44px;
   min-height: 44px;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -455,7 +454,7 @@ body {
 }
 
 .mobile-nav-link {
-  display: block;
+  display: flex;
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
@@ -464,7 +463,6 @@ body {
     color var(--transition-fast),
     background-color var(--transition-fast);
   min-height: 44px;
-  display: flex;
   align-items: center;
   user-select: none;
 }
@@ -1680,8 +1678,11 @@ textarea {
 }
 
 /* Sticky elements iOS fix */
-position: sticky;
-will-change: transform;
+.nav-wrapper {
+  position: sticky;
+  top: 0;
+  will-change: transform;
+}
 
 /* Improve touch performance */
 .nav-link,

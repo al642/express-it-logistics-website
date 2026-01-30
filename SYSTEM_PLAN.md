@@ -18,12 +18,13 @@ This document outlines the planned future backend systems for Express IT Logisti
 ### 1.1 Customer Order Flow
 
 #### Customer Types
+
 - **One-time Customers**: Businesses or individuals needing dry ice for a single order
-- **Subscription Customers**: Regular clients with recurring dry ice needs (pharmaceutical companies, cold chain logistics, event organizers, food services)
+**Subscription Customers**: Regular clients with recurring dry ice needs (pharmaceutical companies, cold chain logistics, event organizers, food services)
 
 #### Order Flow Stages
 
-```
+```text
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   1. Account    │───▶│   2. Product    │───▶│   3. Cart &     │
 │   Creation      │    │   Selection     │    │   Configuration │
@@ -45,59 +46,68 @@ This document outlines the planned future backend systems for Express IT Logisti
 #### Detailed Flow
 
 **Stage 1: Account Creation**
+
 - Customer registration with business details
 - Verification of business license (for B2B)
 - Assignment of customer tier (Standard, Premium, Enterprise)
 
 **Stage 2: Product Selection**
+
 - Browse dry ice products (pellets, blocks, slices)
 - Select grade: Food Grade, Pharmaceutical Grade, Industrial Grade
 - Specify quantity in kg
 - View availability and estimated delivery times
 
 **Stage 3: Cart & Configuration**
+
 - Add products to cart
 - Configure delivery requirements (temperature-controlled vehicle, timing preferences)
 - Apply subscription discounts if applicable
 - Add special instructions
 
 **Stage 4: Review & Submit**
+
 - Review order summary
 - Confirm delivery address and preferred time window
 - Submit order
-
 **Stage 5: Order Confirmation**
 - Receive order confirmation email/SMS
 - Order ID generated for tracking
 - Estimated delivery time displayed
 
 **Stage 6: Payment Processing**
+
 - Payment gateway integration (Mobile Money, Credit Card, Bank Transfer)
 - Invoice generation
 - Payment confirmation
 
 **Stage 7: Delivery Scheduling**
+
 - Assign to delivery fleet
 - Schedule delivery slot
 - Customer notification of delivery window
 
 **Stage 8: Delivery Execution**
+
 - Real-time tracking link provided to customer
 - Driver app navigation
 - Proof of delivery (signature/photo)
 - Temperature log verification for cold chain
 
 **Stage 9: Delivery Confirmation**
+
 - Customer receives delivery confirmation
 - Order marked as completed
 - Update inventory levels
 
 **Stage 10: Feedback & Review**
+
 - Customer satisfaction survey
 - Review collection (optional public reviews)
 - Feedback loop for service improvement
 
 **Stage 11: Re-order Quick Action**
+
 - One-click reorder from order history
 - Subscribe and save option
 - Auto-reorder for subscription customers
@@ -105,6 +115,7 @@ This document outlines the planned future backend systems for Express IT Logisti
 ### 1.2 Subscription-Based vs One-Time Orders
 
 #### Subscription Features
+
 - **Flexible Frequencies**: Weekly, bi-weekly, monthly, custom
 - **Volume Commitments**: Discount tiers based on committed volume
 - **Priority Scheduling**: Subscription customers get priority delivery slots
@@ -112,6 +123,7 @@ This document outlines the planned future backend systems for Express IT Logisti
 - **Skip a Delivery**: One-time skip option with advance notice
 
 #### One-Time Order Features
+
 - Standard pricing
 - Available delivery slots based on capacity
 - No commitment required
@@ -122,7 +134,7 @@ This document outlines the planned future backend systems for Express IT Logisti
 
 ### 2.1 Core Entities
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                           USERS                                  │
 ├─────────────────────────────────────────────────────────────────┤
@@ -347,7 +359,7 @@ This document outlines the planned future backend systems for Express IT Logisti
 
 ### 2.2 Relationship Diagram
 
-```
+```text
 USERS (1) ────── (1) CUSTOMERS
   │
   ├── (1) ────── (1) DRIVERS
@@ -375,7 +387,7 @@ CUSTOMERS (1) ──── (M) SUBSCRIPTIONS
 
 ### 3.1 Dashboard Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  Express IT Logistics - Admin Dashboard                         👤 Admin ▼   │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -416,6 +428,7 @@ CUSTOMERS (1) ──── (M) SUBSCRIPTIONS
 #### 3.2.1 Order Management
 
 **Features:**
+
 - Real-time order list with filtering and search
 - Order status workflow management
 - Bulk actions (assign driver, print invoices)
@@ -424,7 +437,8 @@ CUSTOMERS (1) ──── (M) SUBSCRIPTIONS
 - Order cancellation with reason tracking
 
 **Order Status Workflow:**
-```
+
+```text
 Pending → Confirmed → Processing → Out for Delivery → Delivered
                            ↓
                      Cancelled
@@ -435,6 +449,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 #### 3.2.2 Delivery Tracking
 
 **Features:**
+
 - Real-time map view of all active deliveries
 - Driver location tracking
 - Delivery status updates
@@ -443,6 +458,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 - Proof of delivery upload
 
 **Live Tracking Dashboard:**
+
 - Color-coded delivery status
 - Driver performance metrics
 - Route optimization suggestions
@@ -451,6 +467,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 #### 3.2.3 Inventory Monitoring
 
 **Features:**
+
 - Real-time dry ice production levels
 - Stock level alerts (low stock, reorder point)
 - Production scheduling
@@ -459,6 +476,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 - Supplier management for raw materials
 
 **Inventory Alerts:**
+
 - ⚠️ Low stock warning (< 500 kg)
 - 🔄 Reorder suggestion
 - 📊 Production capacity status
@@ -466,6 +484,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 #### 3.2.4 Driver Management
 
 **Features:**
+
 - Driver profiles with license info
 - Availability scheduling
 - Performance metrics (deliveries, ratings, timeliness)
@@ -474,6 +493,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 - Payroll integration ready
 
 **Driver App Features:**
+
 - Order assignment notifications
 - Navigation integration (Google Maps)
 - Delivery confirmation with photo/signature
@@ -483,6 +503,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 #### 3.2.5 Customer Management
 
 **Features:**
+
 - Customer database with full history
 - Customer tiers and pricing groups
 - Credit limit management
@@ -494,6 +515,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 #### 3.2.6 Reporting & Analytics
 
 **Reports Available:**
+
 - Daily/Monthly Revenue Reports
 - Order Volume Reports
 - Delivery Performance Reports
@@ -503,6 +525,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 - Geographic Heat Maps
 
 **Export Options:**
+
 - PDF reports
 - Excel/CSV data export
 - Email scheduled reports
@@ -510,6 +533,7 @@ Pending → Confirmed → Processing → Out for Delivery → Delivered
 #### 3.2.7 Settings & Configuration
 
 **Configuration Options:**
+
 - Pricing tiers and discounts
 - Delivery zones and fees
 - Working hours
@@ -529,6 +553,7 @@ These processes require human judgment, relationship management, or external coo
 #### Customer-Facing Manual Processes
 
 | Process | Reason for Manual | Future Automation Potential |
+
 |---------|------------------|----------------------------|
 | **New Customer Verification** | Need to verify business legitimacy, credit checks, relationship building | Partial (automated KYC checks) |
 | **Contract Negotiation** | Custom pricing, terms negotiation for enterprise clients | Low |
@@ -538,6 +563,7 @@ These processes require human judgment, relationship management, or external coo
 #### Operational Manual Processes
 
 | Process | Reason for Manual | Future Automation Potential |
+
 |---------|------------------|----------------------------|
 | **Dispatch Approval** | Security verification, routing optimization | Medium (AI-assisted) |
 | **Payment Processing (Cash)** | Cash handling, receipt management | Low |
@@ -547,6 +573,7 @@ These processes require human judgment, relationship management, or external coo
 #### Financial Manual Processes
 
 | Process | Reason for Manual | Future Automation Potential |
+
 |---------|------------------|----------------------------|
 | **Invoice Approval** | Multi-level approval for large amounts | Medium (workflow automation) |
 | **Bank Reconciliations** | Matching payments to orders | High |
@@ -560,6 +587,7 @@ These processes are suitable for full automation:
 #### Fully Automated Processes
 
 | Process | Automation Method | Benefits |
+
 |---------|------------------|----------|
 | **Order Confirmation Emails** | Triggered email workflows | Instant communication |
 | **SMS Delivery Notifications** | SMS gateway integration | Customer satisfaction |
@@ -576,6 +604,7 @@ These processes are suitable for full automation:
 #### Partially Automated (Human-in-the-Loop)
 
 | Process | Automation Level | Description |
+
 |---------|-----------------|-------------|
 | **Route Optimization** | 90% automated | System suggests routes, driver approves |
 | **Pricing Calculations** | 80% automated | Base pricing auto, discounts manual |
@@ -585,6 +614,7 @@ These processes are suitable for full automation:
 ### 4.3 Automation Roadmap
 
 #### Phase 1: Immediate Automation (0-3 months)
+
 - Order confirmation emails and SMS
 - Invoice generation
 - Basic inventory alerts
@@ -592,6 +622,7 @@ These processes are suitable for full automation:
 - Order status tracking page
 
 #### Phase 2: Short-term Automation (3-6 months)
+
 - Driver assignment algorithm
 - Route optimization
 - Payment gateway integration
@@ -599,6 +630,7 @@ These processes are suitable for full automation:
 - Real-time tracking link generation
 
 #### Phase 3: Medium-term Automation (6-12 months)
+
 - AI-powered demand forecasting
 - Automated subscription management
 - IoT temperature monitoring
@@ -606,6 +638,7 @@ These processes are suitable for full automation:
 - Mobile app for drivers
 
 #### Phase 4: Long-term Automation (12+ months)
+
 - Full dispatch automation
 - Predictive maintenance for vehicles
 - AI customer service chatbot
@@ -618,7 +651,7 @@ For processes that remain manual, standard operating procedures (SOPs) should be
 
 #### Sample SOP: New Customer Onboarding
 
-```
+```text
 Purpose: Standardize the process of onboarding new B2B customers
 Scope: Sales team and customer service
 
@@ -650,23 +683,27 @@ Escalation: Manager for terms > Net 30 or volume > 1000 kg/month
 ### Technology Stack Recommendations
 
 **Frontend (Admin Dashboard):**
+
 - React.js or Vue.js
 - Bootstrap or Tailwind CSS
 - Chart.js or D3.js for analytics
 - Leaflet or Google Maps for tracking
 
 **Backend:**
+
 - Node.js (Express) or Python (Django/FastAPI)
 - PostgreSQL for database
 - Redis for caching and sessions
 
 **Infrastructure:**
+
 - Cloud hosting (AWS, Google Cloud, or DigitalOcean)
 - HTTPS enforced
 - Daily backups
 - Monitoring and alerting
 
 **Integrations:**
+
 - Payment gateway (Flutterwave, Stripe)
 - SMS gateway (Twilio, Africa's Talking)
 - Email service (SendGrid, Mailgun)
@@ -706,4 +743,3 @@ This plan provides a roadmap for building a comprehensive logistics management s
 *Document Version: 1.0*
 *Last Updated: 2026*
 *For: Express IT Logistics Limited*
-
