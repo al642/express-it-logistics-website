@@ -23,8 +23,8 @@
     <circle cx="0" cy="0" r="4" fill="white"/>
   </g>
   
-  <!-- Grey gear: rotated +60° for 4 o'clock orientation, increased size r=10 -->
-  <g id="gear-grey" transform="translate(32, 42) rotate(60)">
+  <!-- Grey gear: rotated +120° for 4 o'clock orientation, increased size r=10 -->
+  <g id="gear-grey" transform="translate(32, 42) rotate(120)">
     <g fill="#6b7280">
       <use href="#tooth" y="-13.5" x="-2" />
       <use href="#tooth" y="-13.5" x="-2" transform="rotate(36)" />

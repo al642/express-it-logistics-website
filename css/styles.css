@@ -268,10 +268,10 @@ body {
 
 @keyframes gearGreyRotate {
   0% {
-    transform: translate(32px, 44px) rotate(0deg);
+    transform: translate(32px, 42px) rotate(0deg);
   }
   100% {
-    transform: translate(32px, 44px) rotate(-360deg);
+    transform: translate(32px, 42px) rotate(-360deg);
   }
 }
 
