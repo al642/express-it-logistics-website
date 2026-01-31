@@ -253,7 +253,7 @@ body {
 
   .logo-link:hover #gear-grey {
     animation: gearGreyRotate 1s ease-in-out forwards;
-    transform-origin: 32px 44px;
+    transform-origin: 32px 42px;
   }
 }
 
