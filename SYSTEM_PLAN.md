@@ -45,27 +45,27 @@ This document outlines the planned future backend systems for Express IT Logisti
 
 #### Detailed Flow
 
-**Stage 1: Account Creation**
+**Stage 1:Account Creation**
 
 - Customer registration with business details
 - Verification of business license (for B2B)
 - Assignment of customer tier (Standard, Premium, Enterprise)
 
-**Stage 2: Product Selection**
+**Stage 2:Product Selection**
 
 - Browse dry ice products (pellets, blocks, slices)
 - Select grade: Food Grade, Pharmaceutical Grade, Industrial Grade
 - Specify quantity in kg
 - View availability and estimated delivery times
 
-**Stage 3: Cart & Configuration**
+**Stage 3:Cart & Configuration**
 
 - Add products to cart
 - Configure delivery requirements (temperature-controlled vehicle, timing preferences)
 - Apply subscription discounts if applicable
 - Add special instructions
 
-**Stage 4: Review & Submit**
+**Stage 4:Review & Submit**
 
 - Review order summary
 - Confirm delivery address and preferred time window
@@ -75,38 +75,38 @@ This document outlines the planned future backend systems for Express IT Logisti
 - Order ID generated for tracking
 - Estimated delivery time displayed
 
-**Stage 6: Payment Processing**
+**Stage 6:Payment Processing**
 
 - Payment gateway integration (Mobile Money, Credit Card, Bank Transfer)
 - Invoice generation
 - Payment confirmation
 
-**Stage 7: Delivery Scheduling**
+**Stage 7:Delivery Scheduling**
 
 - Assign to delivery fleet
 - Schedule delivery slot
 - Customer notification of delivery window
 
-**Stage 8: Delivery Execution**
+**Stage 8:Delivery Execution**
 
 - Real-time tracking link provided to customer
 - Driver app navigation
 - Proof of delivery (signature/photo)
 - Temperature log verification for cold chain
 
-**Stage 9: Delivery Confirmation**
+**Stage 9:Delivery Confirmation**
 
 - Customer receives delivery confirmation
 - Order marked as completed
 - Update inventory levels
 
-**Stage 10: Feedback & Review**
+**Stage 10:Feedback & Review**
 
 - Customer satisfaction survey
 - Review collection (optional public reviews)
 - Feedback loop for service improvement
 
-**Stage 11: Re-order Quick Action**
+**Stage 11:Re-order Quick Action**
 
 - One-click reorder from order history
 - Subscribe and save option
