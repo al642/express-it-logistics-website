@@ -328,6 +328,8 @@ Submitted at: ${new Date().toLocaleString()}
     initNavbarScroll();
     initSmoothScroll();
     initFormSubmission();
+    initServicesCarousel();
+    initServicesAccordion();
   };
 
   // Run init function when DOM is ready
@@ -343,6 +345,81 @@ Submitted at: ${new Date().toLocaleString()}
     showNotification: showNotification,
     isValidEmail: isValidEmail,
     sanitizeInput: sanitizeInput
+  };
+
+  /**
+   * Services Carousel Functionality
+   */
+  const initServicesCarousel = () => {
+    const carousel = document.getElementById('services-carousel');
+    const prevBtn = document.querySelector('.services-carousel-prev');
+    const nextBtn = document.querySelector('.services-carousel-next');
+
+    if (!carousel || !prevBtn || !nextBtn) return;
+
+    let scrollAmount = 0;
+    const slideWidth = 320 + 24; // Slide width + gap
+    const maxScroll = carousel.scrollWidth - carousel.parentElement.offsetWidth;
+
+    const updateButtons = () => {
+      prevBtn.disabled = scrollAmount <= 0;
+      nextBtn.disabled = scrollAmount >= maxScroll;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      scrollAmount = Math.max(0, scrollAmount - slideWidth);
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+      updateButtons();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      scrollAmount = Math.min(maxScroll, scrollAmount + slideWidth);
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+      updateButtons();
+    });
+
+    // Initialize button states
+    updateButtons();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      scrollAmount = Math.min(scrollAmount, carousel.scrollWidth - carousel.parentElement.offsetWidth);
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+      updateButtons();
+    });
+  };
+
+  /**
+   * Services Accordion Functionality
+   */
+  const initServicesAccordion = () => {
+    const learnMoreButtons = document.querySelectorAll('.service-learn-more');
+
+    learnMoreButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const contentId = button.getAttribute('aria-controls');
+        const content = document.getElementById(contentId);
+
+        // Close other open items
+        learnMoreButtons.forEach(otherButton => {
+          if (otherButton !== button) {
+            otherButton.setAttribute('aria-expanded', 'false');
+            const otherContentId = otherButton.getAttribute('aria-controls');
+            const otherContent = document.getElementById(otherContentId);
+            if (otherContent) {
+              otherContent.hidden = true;
+            }
+          }
+        });
+
+        // Toggle current item
+        button.setAttribute('aria-expanded', !isExpanded);
+        if (content) {
+          content.hidden = isExpanded;
+        }
+      });
+    });
   };
 
   /**
