@@ -331,34 +331,44 @@ Submitted at: ${new Date().toLocaleString()}
     if (!carousel || !prevBtn || !nextBtn) return;
 
     let scrollAmount = 0;
-    const slideWidth = 280 + 24; // Slide width + gap
-    const maxScroll = carousel.scrollWidth - carousel.parentElement.offsetWidth;
+    let maxScroll = 0;
+    const slideWidth = 280 + 24; // Slide width + gap (280px + 1.5rem = 24px)
+
+    const updateMaxScroll = () => {
+      // Calculate max scroll based on carousel content width minus visible container width
+      // Container width includes padding for arrows, so we need to account for that
+      const container = carousel.parentElement;
+      const containerWidth = container.offsetWidth - 160; // Subtract side padding (5rem + 5rem = 10rem = 160px)
+      maxScroll = Math.max(0, carousel.scrollWidth - containerWidth);
+    };
 
     const updateButtons = () => {
       prevBtn.disabled = scrollAmount <= 0;
       nextBtn.disabled = scrollAmount >= maxScroll;
     };
 
-    prevBtn.addEventListener('click', () => {
-      scrollAmount = Math.max(0, scrollAmount - slideWidth);
+    const scrollTo = (newScrollAmount) => {
+      scrollAmount = Math.max(0, Math.min(newScrollAmount, maxScroll));
       carousel.style.transform = `translateX(-${scrollAmount}px)`;
       updateButtons();
+    };
+
+    prevBtn.addEventListener('click', () => {
+      scrollTo(Math.max(0, scrollAmount - slideWidth));
     });
 
     nextBtn.addEventListener('click', () => {
-      scrollAmount = Math.min(maxScroll, scrollAmount + slideWidth);
-      carousel.style.transform = `translateX(-${scrollAmount}px)`;
-      updateButtons();
+      scrollTo(Math.min(maxScroll, scrollAmount + slideWidth));
     });
 
-    // Initialize button states
+    // Initialize
+    updateMaxScroll();
     updateButtons();
 
     // Handle window resize
     window.addEventListener('resize', () => {
-      scrollAmount = Math.min(scrollAmount, carousel.scrollWidth - carousel.parentElement.offsetWidth);
-      carousel.style.transform = `translateX(-${scrollAmount}px)`;
-      updateButtons();
+      updateMaxScroll();
+      scrollTo(Math.min(scrollAmount, maxScroll));
     });
   };
 

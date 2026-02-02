@@ -983,8 +983,8 @@ body {
    ============================================ */
 .services-page-carousel-container {
   position: relative;
-  overflow: hidden;
-  padding: 0 3.5rem;
+  padding: 0 5rem;
+  /* overflow is NOT hidden - allows arrows to be visible outside container */
 }
 
 .services-page-carousel {
@@ -1078,6 +1078,7 @@ body {
   border-bottom-color: var(--color-primary);
 }
 
+/* Navigation - Desktop: arrows outside container */
 .services-page-carousel-nav {
   position: absolute;
   top: 50%;
@@ -1088,6 +1089,8 @@ body {
   justify-content: space-between;
   pointer-events: none;
   z-index: 10;
+  /* Arrows sit outside the visible carousel area on desktop */
+  padding: 0 0.5rem;
 }
 
 .services-page-carousel-btn {
@@ -1104,6 +1107,7 @@ body {
   transition: all var(--transition-normal);
   pointer-events: auto;
   box-shadow: var(--shadow-md);
+  flex-shrink: 0;
 }
 
 .services-page-carousel-btn:hover {
@@ -1118,16 +1122,34 @@ body {
 }
 
 .services-page-carousel-prev {
-  margin-left: -22px;
+  position: relative;
+  left: -54px;
 }
 
 .services-page-carousel-next {
-  margin-right: -22px;
+  position: relative;
+  right: -54px;
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .services-page-carousel-container {
+    padding: 0 4.5rem;
+  }
+
+  .services-page-carousel-prev {
+    left: -44px;
+  }
+
+  .services-page-carousel-next {
+    right: -44px;
+  }
+}
+
+/* Mobile (max-width: 768px) - arrows inside container */
 @media (max-width: 768px) {
   .services-page-carousel-container {
-    padding: 0 2.5rem;
+    padding: 0 3.5rem;
   }
 
   .service-page-slide {
@@ -1139,18 +1161,20 @@ body {
     height: 36px;
   }
 
+  /* Mobile: arrows sit inside container edges */
   .services-page-carousel-prev {
-    margin-left: -18px;
+    left: 0;
   }
 
   .services-page-carousel-next {
-    margin-right: -18px;
+    right: 0;
   }
 }
 
+/* Small mobile (max-width: 480px) */
 @media (max-width: 480px) {
   .services-page-carousel-container {
-    padding: 0 2rem;
+    padding: 0 2.75rem;
   }
 
   .service-page-slide {
@@ -1164,14 +1188,6 @@ body {
   .services-page-carousel-btn {
     width: 32px;
     height: 32px;
-  }
-
-  .services-page-carousel-prev {
-    margin-left: -16px;
-  }
-
-  .services-page-carousel-next {
-    margin-right: -16px;
   }
 }
 .services-carousel-container {
