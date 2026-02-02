@@ -320,6 +320,48 @@ Submitted at: ${new Date().toLocaleString()}
       }
     }, 5000);
   };
+  /**
+   * Services Page Carousel Functionality
+   */
+  const initServicesPageCarousel = () => {
+    const carousel = document.getElementById('services-page-carousel');
+    const prevBtn = document.querySelector('.services-page-carousel-prev');
+    const nextBtn = document.querySelector('.services-page-carousel-next');
+
+    if (!carousel || !prevBtn || !nextBtn) return;
+
+    let scrollAmount = 0;
+    const slideWidth = 280 + 24; // Slide width + gap
+    const maxScroll = carousel.scrollWidth - carousel.parentElement.offsetWidth;
+
+    const updateButtons = () => {
+      prevBtn.disabled = scrollAmount <= 0;
+      nextBtn.disabled = scrollAmount >= maxScroll;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      scrollAmount = Math.max(0, scrollAmount - slideWidth);
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+      updateButtons();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      scrollAmount = Math.min(maxScroll, scrollAmount + slideWidth);
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+      updateButtons();
+    });
+
+    // Initialize button states
+    updateButtons();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      scrollAmount = Math.min(scrollAmount, carousel.scrollWidth - carousel.parentElement.offsetWidth);
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+      updateButtons();
+    });
+  };
+
   // Initialize when DOM is ready
   const init = () => {
     setCopyrightYear();
@@ -330,6 +372,7 @@ Submitted at: ${new Date().toLocaleString()}
     initFormSubmission();
     initServicesCarousel();
     initServicesAccordion();
+    initServicesPageCarousel();
   };
 
   // Run init function when DOM is ready
