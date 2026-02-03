@@ -14,24 +14,18 @@
     PINK GEAR (Left, ~10 o'clock orientation):
     - Center: (24, 24)
     - Body radius: 13
-    - Teeth: 24 teeth, 3×3.5px, 15° intervals
-    - Inner white hub radius: 4 (EXACT VALUE)
-    - Rotation: -60° (EXACT VALUE)
+    - Teeth: 24 teeth, 3x3.5px, 15 deg intervals
+    - Inner white hub radius: 5.5 (EXACT VALUE)
+    - Rotation: -60 deg (EXACT VALUE)
     - Orientation reference: 10 o'clock
     
     GREY GEAR (Right, ~4 o'clock orientation):
     - Center: (40, 40)
     - Body radius: 10
-    - Teeth: 16 teeth, 4×3.5px, 22.5° intervals
-    - Inner white hub radius: 7 (EXACT VALUE)
-    - Rotation: +60° (EXACT VALUE)
+    - Teeth: 16 teeth, 4x3.5px, 22.5 deg intervals
+    - Inner white hub radius: 6 (EXACT VALUE)
+    - Rotation: +60 deg (EXACT VALUE)
     - Orientation reference: 4 o'clock
-    
-    Clock-to-Degree Reference (for verification):
-    - 12 o'clock = -90°
-    - 3 o'clock = 0°
-    - 6 o'clock = 90°
-    - 9 o'clock = 180° / -180°
     
     Multi-Output Safety:
     - Solid fills only (no gradients)
@@ -44,115 +38,59 @@
   -->
   
   <!-- PINK GEAR (Larger, Top-Left) -->
-  <!-- 24 teeth, stubby design for embroidery -->
-  <!-- Rotated -60° for 10 o'clock orientation -->
   <g id="gear-pink" transform="rotate(-60 24 24)">
-    <!-- Gear body (pink fill) -->
     <circle cx="24" cy="24" r="13" fill="#e91e63"/>
-    
-    <!-- Inner white hub (bearing style) -->
-    <!-- Radius tuned to be near tooth root with minimal clearance -->
-    <circle cx="24" cy="24" r="4" fill="white"/>
-    
-    <!-- 24 teeth using direct paths (embroidery-safe) -->
-    <!-- Teeth positioned around the gear center (24, 24) -->
+    <!-- Inner white hub: radius increased from 4 to 5.5 for mechanical realism -->
+    <circle cx="24" cy="24" r="5.5" fill="white"/>
     <g fill="#e91e63">
-      <!-- Tooth 1 (top, at 0° before rotation) -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5"/>
-      <!-- Tooth 2 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(15 24 24)"/>
-      <!-- Tooth 3 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(30 24 24)"/>
-      <!-- Tooth 4 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(45 24 24)"/>
-      <!-- Tooth 5 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(60 24 24)"/>
-      <!-- Tooth 6 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(75 24 24)"/>
-      <!-- Tooth 7 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(90 24 24)"/>
-      <!-- Tooth 8 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(105 24 24)"/>
-      <!-- Tooth 9 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(120 24 24)"/>
-      <!-- Tooth 10 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(135 24 24)"/>
-      <!-- Tooth 11 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(150 24 24)"/>
-      <!-- Tooth 12 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(165 24 24)"/>
-      <!-- Tooth 13 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(180 24 24)"/>
-      <!-- Tooth 14 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(195 24 24)"/>
-      <!-- Tooth 15 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(210 24 24)"/>
-      <!-- Tooth 16 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(225 24 24)"/>
-      <!-- Tooth 17 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(240 24 24)"/>
-      <!-- Tooth 18 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(255 24 24)"/>
-      <!-- Tooth 19 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(270 24 24)"/>
-      <!-- Tooth 20 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(285 24 24)"/>
-      <!-- Tooth 21 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(300 24 24)"/>
-      <!-- Tooth 22 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(315 24 24)"/>
-      <!-- Tooth 23 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(330 24 24)"/>
-      <!-- Tooth 24 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(345 24 24)"/>
     </g>
   </g>
 
   <!-- GREY GEAR (Smaller, Bottom-Right) -->
-  <!-- 16 teeth, stubby design for embroidery -->
-  <!-- Rotated +60° for 4 o'clock orientation -->
   <g id="gear-grey" transform="rotate(60 40 40)">
-    <!-- Gear body (grey fill) -->
     <circle cx="40" cy="40" r="10" fill="#6b7280"/>
-    
-    <!-- Inner white hub (bearing style) -->
-    <!-- Radius tuned to be near tooth root with minimal clearance -->
-    <circle cx="40" cy="40" r="7" fill="white"/>
-    
-    <!-- 16 teeth using direct paths (embroidery-safe) -->
-    <!-- Teeth positioned around the gear center (40, 40) -->
+    <!-- Inner white hub: radius reduced from 7 to 6 for visual harmony -->
+    <circle cx="40" cy="40" r="6" fill="white"/>
     <g fill="#6b7280">
-      <!-- Tooth 1 (top, at 0° before rotation) -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5"/>
-      <!-- Tooth 2 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(22.5 40 40)"/>
-      <!-- Tooth 3 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(45 40 40)"/>
-      <!-- Tooth 4 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(67.5 40 40)"/>
-      <!-- Tooth 5 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(90 40 40)"/>
-      <!-- Tooth 6 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(112.5 40 40)"/>
-      <!-- Tooth 7 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(135 40 40)"/>
-      <!-- Tooth 8 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(157.5 40 40)"/>
-      <!-- Tooth 9 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(180 40 40)"/>
-      <!-- Tooth 10 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(202.5 40 40)"/>
-      <!-- Tooth 11 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(225 40 40)"/>
-      <!-- Tooth 12 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(247.5 40 40)"/>
-      <!-- Tooth 13 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(270 40 40)"/>
-      <!-- Tooth 14 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(292.5 40 40)"/>
-      <!-- Tooth 15 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(315 40 40)"/>
-      <!-- Tooth 16 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(337.5 40 40)"/>
     </g>
   </g>
