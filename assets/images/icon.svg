@@ -6,23 +6,58 @@
     Colors:
     - Pink: #e91e63
     - Grey: #6b7280
+    - White: #ffffff (inner hubs only - transparent background)
     
-    Gear Orientation:
-    - Pink gear: ~10 o'clock position
-    - Grey gear: ~4 o'clock position
+    Geometry Documentation (Soft Lock):
+    ==========================================
+    
+    PINK GEAR (Left, ~10 o'clock orientation):
+    - Center: (24, 24)
+    - Body radius: 13
+    - Teeth: 24 teeth, 3×3.5px, 15° intervals
+    - Inner white hub radius: 4 (EXACT VALUE)
+    - Rotation: -60° (EXACT VALUE)
+    - Orientation reference: 10 o'clock
+    
+    GREY GEAR (Right, ~4 o'clock orientation):
+    - Center: (40, 40)
+    - Body radius: 10
+    - Teeth: 16 teeth, 4×3.5px, 22.5° intervals
+    - Inner white hub radius: 7 (EXACT VALUE)
+    - Rotation: +60° (EXACT VALUE)
+    - Orientation reference: 4 o'clock
+    
+    Clock-to-Degree Reference (for verification):
+    - 12 o'clock = -90°
+    - 3 o'clock = 0°
+    - 6 o'clock = 90°
+    - 9 o'clock = 180° / -180°
+    
+    Multi-Output Safety:
+    - Solid fills only (no gradients)
+    - Closed paths only
+    - No raster effects
+    - Transparent background (no white outside gears)
+    - Suitable for: web, favicon, PWA (192/512), print, embroidery
+    
+    ==========================================
   -->
   
   <!-- PINK GEAR (Larger, Top-Left) -->
   <!-- 24 teeth, stubby design for embroidery -->
-  <g id="gear-pink">
-    <!-- Gear body -->
+  <!-- Rotated -60° for 10 o'clock orientation -->
+  <g id="gear-pink" transform="rotate(-60 24 24)">
+    <!-- Gear body (pink fill) -->
     <circle cx="24" cy="24" r="13" fill="#e91e63"/>
-    <circle cx="24" cy="24" r="18" fill="white"/>
+    
+    <!-- Inner white hub (bearing style) -->
+    <!-- Radius tuned to be near tooth root with minimal clearance -->
+    <circle cx="24" cy="24" r="4" fill="white"/>
     
     <!-- 24 teeth using direct paths (embroidery-safe) -->
+    <!-- Teeth positioned around the gear center (24, 24) -->
     <g fill="#e91e63">
-      <!-- Teeth positioned around the gear center (24, 24) -->
-      <!-- Tooth 1 (top) -->
+      <!-- Tooth 1 (top, at 0° before rotation) -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5"/>
       <!-- Tooth 2 -->
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(15 24 24)"/>
@@ -75,15 +110,19 @@
 
   <!-- GREY GEAR (Smaller, Bottom-Right) -->
   <!-- 16 teeth, stubby design for embroidery -->
-  <g id="gear-grey">
-    <!-- Gear body -->
+  <!-- Rotated +60° for 4 o'clock orientation -->
+  <g id="gear-grey" transform="rotate(60 40 40)">
+    <!-- Gear body (grey fill) -->
     <circle cx="40" cy="40" r="10" fill="#6b7280"/>
-    <circle cx="40" cy="40" r="14" fill="white"/>
+    
+    <!-- Inner white hub (bearing style) -->
+    <!-- Radius tuned to be near tooth root with minimal clearance -->
+    <circle cx="40" cy="40" r="7" fill="white"/>
     
     <!-- 16 teeth using direct paths (embroidery-safe) -->
+    <!-- Teeth positioned around the gear center (40, 40) -->
     <g fill="#6b7280">
-      <!-- Teeth positioned around the gear center (40, 40) -->
-      <!-- Tooth 1 (top) -->
+      <!-- Tooth 1 (top, at 0° before rotation) -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5"/>
       <!-- Tooth 2 -->
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(22.5 40 40)"/>
