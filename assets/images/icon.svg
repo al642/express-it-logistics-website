@@ -17,7 +17,7 @@
   <g id="gear-pink">
     <!-- Gear body -->
     <circle cx="24" cy="24" r="13" fill="#e91e63"/>
-    <circle cx="24" cy="24" r="4" fill="white"/>
+    <circle cx="24" cy="24" r="18" fill="white"/>
     
     <!-- 24 teeth using direct paths (embroidery-safe) -->
     <g fill="#e91e63">
@@ -78,7 +78,7 @@
   <g id="gear-grey">
     <!-- Gear body -->
     <circle cx="40" cy="40" r="10" fill="#6b7280"/>
-    <circle cx="40" cy="40" r="3" fill="white"/>
+    <circle cx="40" cy="40" r="14" fill="white"/>
     
     <!-- 16 teeth using direct paths (embroidery-safe) -->
     <g fill="#6b7280">
