@@ -42,6 +42,7 @@
 - [ ] 5.6 Document prohibited modifications
 
 ### Phase 6: Testing & Validation
+
 - [ ] 6.1 Test gear animation on desktop hover
 - [ ] 6.2 Verify touch devices disable animation
 - [ ] 6.3 Verify reduced motion support
@@ -51,8 +52,8 @@
 ---
 
 ## Notes
+
 - Pink Brand Color: #e91e63
 - Grey Brand Color: #6b7280
 - Gear Orientation: Pink at 10 o'clock, Grey at 4 o'clock
 - Typography: "Express IT Logistics Ltd" (exact capitalization)
-

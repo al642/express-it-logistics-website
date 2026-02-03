@@ -112,7 +112,7 @@
       let ticking = false;
 
       const updateScroll = () => {
-        const scrollY = window.scrollY;
+        const {scrollY} = window;
         
         // Add/remove scrolled class based on scroll position
         if (scrollY > 50) {
