@@ -320,6 +320,58 @@ Submitted at: ${new Date().toLocaleString()}
       }
     }, 5000);
   };
+  /**
+   * Services Page Carousel Functionality
+   */
+  const initServicesPageCarousel = () => {
+    const carousel = document.getElementById('services-page-carousel');
+    const prevBtn = document.querySelector('.services-page-carousel-prev');
+    const nextBtn = document.querySelector('.services-page-carousel-next');
+
+    if (!carousel || !prevBtn || !nextBtn) return;
+
+    let scrollAmount = 0;
+    let maxScroll = 0;
+    const slideWidth = 280 + 24; // Slide width + gap (280px + 1.5rem = 24px)
+
+    const updateMaxScroll = () => {
+      // Calculate max scroll based on carousel content width minus visible container width
+      // Container width includes padding for arrows, so we need to account for that
+      const container = carousel.parentElement;
+      const containerWidth = container.offsetWidth - 160; // Subtract side padding (5rem + 5rem = 10rem = 160px)
+      maxScroll = Math.max(0, carousel.scrollWidth - containerWidth);
+    };
+
+    const updateButtons = () => {
+      prevBtn.disabled = scrollAmount <= 0;
+      nextBtn.disabled = scrollAmount >= maxScroll;
+    };
+
+    const scrollTo = (newScrollAmount) => {
+      scrollAmount = Math.max(0, Math.min(newScrollAmount, maxScroll));
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+      updateButtons();
+    };
+
+    prevBtn.addEventListener('click', () => {
+      scrollTo(Math.max(0, scrollAmount - slideWidth));
+    });
+
+    nextBtn.addEventListener('click', () => {
+      scrollTo(Math.min(maxScroll, scrollAmount + slideWidth));
+    });
+
+    // Initialize
+    updateMaxScroll();
+    updateButtons();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      updateMaxScroll();
+      scrollTo(Math.min(scrollAmount, maxScroll));
+    });
+  };
+
   // Initialize when DOM is ready
   const init = () => {
     setCopyrightYear();
@@ -330,6 +382,7 @@ Submitted at: ${new Date().toLocaleString()}
     initFormSubmission();
     initServicesCarousel();
     initServicesAccordion();
+    initServicesPageCarousel();
   };
 
   // Run init function when DOM is ready

@@ -24,7 +24,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
   <meta name="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
   
-  <title>Services - Express It Logistics Limited - Dry Ice & Logistics Solutions</title>
+  <title>Services - Express It Logistics Limited - Logistics & Shipping Solutions</title>
 
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -40,6 +40,10 @@
   <!-- PWA Manifest -->
   <link rel="manifest" href="../manifest.json">
   <meta name="theme-color" content="#e91e63">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg">
+  <link rel="apple-touch-icon" href="../assets/images/icon.svg">
 
   <!-- JSON-LD Schema for Services -->
   <script type="application/ld+json">
@@ -151,113 +155,108 @@
     <section class="section section-light" aria-labelledby="services-title">
       <div class="section-content">
         <h2 id="services-title" class="sr-only">Our Logistics Services</h2>
-        <div class="grid gap-12">
-          
-          <!-- Service 1 - DRY ICE -->
-          <article class="card card-secondary grid md:grid-cols-2 gap-8 items-center">
-            <div class="service-icon" style="width: 80px; height: 80px; margin: 0;">
-              <i class="fas fa-snowflake text-primary text-3xl" aria-hidden="true"></i>
-            </div>
-            <div>
-              <span class="section-label mb-2 block">Specialized Service</span>
-              <h3 class="text-2xl font-bold text-primary-text mb-4">Dry Ice Supply</h3>
-              <p class="text-secondary mb-4">As a specialized provider of dry ice for cold-chain logistics, we supply high-quality dry ice for various industrial, pharmaceutical, and commercial applications across East Africa.</p>
-              <ul class="text-secondary space-y-2">
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>High-purity dry ice supply</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Pharmaceutical and life-science cold chain</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Food preservation and transport</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Industrial cooling applications</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Scheduled delivery and on-demand supply</li>
-              </ul>
-            </div>
-          </article>
+        
+        <!-- Services Sliding Carousel -->
+        <div class="services-page-carousel-container">
+          <div class="services-page-carousel" id="services-page-carousel">
+            
+            <!-- Service 1 - DRY ICE -->
+            <article class="service-page-slide">
+              <div class="service-page-card">
+                <div class="service-page-icon">
+                  <i class="fas fa-snowflake" aria-hidden="true"></i>
+                </div>
+                <h3 class="service-page-title">Dry Ice Supply</h3>
+                <p class="service-page-description">
+                  Specialized dry ice supply for cold-chain logistics, pharmaceutical, and industrial applications across East Africa.
+                </p>
+                <a href="#" class="service-page-learn-more">Learn more</a>
+              </div>
+            </article>
 
-          <!-- Service 2 -->
-          <article class="card card-secondary grid md:grid-cols-2 gap-8 items-center">
-            <div class="service-icon" style="width: 80px; height: 80px; margin: 0;">
-              <i class="fas fa-truck text-primary text-3xl" aria-hidden="true"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-primary-text mb-4">Freight Transportation</h3>
-              <p class="text-secondary mb-4">Reliable road freight services across East Africa and internationally. Our modern fleet of over 50 vehicles ensures safe and timely delivery of your cargo to any destination.</p>
-              <ul class="text-secondary space-y-2">
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Full truckload (FTL) and less than truckload (LTL)</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Temperature-controlled transport</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Heavy cargo and specialized equipment</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Real-time GPS tracking</li>
-              </ul>
-            </div>
-          </article>
+            <!-- Service 2 - FREIGHT -->
+            <article class="service-page-slide">
+              <div class="service-page-card">
+                <div class="service-page-icon">
+                  <i class="fas fa-truck" aria-hidden="true"></i>
+                </div>
+                <h3 class="service-page-title">Freight Transportation</h3>
+                <p class="service-page-description">
+                  Reliable road freight services across East Africa with a modern fleet ensuring safe and timely delivery.
+                </p>
+                <a href="#" class="service-page-learn-more">Learn more</a>
+              </div>
+            </article>
 
-          <!-- Service 3 -->
-          <article class="card card-secondary grid md:grid-cols-2 gap-8 items-center">
-            <div class="service-icon" style="width: 80px; height: 80px; margin: 0;">
-              <i class="fas fa-warehouse text-primary text-3xl" aria-hidden="true"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-primary-text mb-4">Warehousing & Storage</h3>
-              <p class="text-secondary mb-4">Extensive warehousing capacity with secure storage solutions. We offer flexible storage options to meet your inventory management needs across the region.</p>
-              <ul class="text-secondary space-y-2">
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Climate-controlled storage</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Inventory management systems</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Bonded warehousing</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Cross-docking services</li>
-              </ul>
-            </div>
-          </article>
+            <!-- Service 3 - WAREHOUSING -->
+            <article class="service-page-slide">
+              <div class="service-page-card">
+                <div class="service-page-icon">
+                  <i class="fas fa-warehouse" aria-hidden="true"></i>
+                </div>
+                <h3 class="service-page-title">Warehousing</h3>
+                <p class="service-page-description">
+                  Extensive warehousing capacity with secure storage and inventory management solutions.
+                </p>
+                <a href="#" class="service-page-learn-more">Learn more</a>
+              </div>
+            </article>
 
-          <!-- Service 4 -->
-          <article class="card card-secondary grid md:grid-cols-2 gap-8 items-center">
-            <div class="service-icon" style="width: 80px; height: 80px; margin: 0;">
-              <i class="fas fa-boxes-stacked text-primary text-3xl" aria-hidden="true"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-primary-text mb-4">Distribution Services</h3>
-              <p class="text-secondary mb-4">Efficient last-mile delivery and distribution network covering major cities and towns across East Africa. We ensure your products reach customers on time.</p>
-              <ul class="text-secondary space-y-2">
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Same-day delivery in Kampala</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Regional coverage</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Express and standard delivery options</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Proof of delivery documentation</li>
-              </ul>
-            </div>
-          </article>
+            <!-- Service 4 - DISTRIBUTION -->
+            <article class="service-page-slide">
+              <div class="service-page-card">
+                <div class="service-page-icon">
+                  <i class="fas fa-boxes-stacked" aria-hidden="true"></i>
+                </div>
+                <h3 class="service-page-title">Distribution Services</h3>
+                <p class="service-page-description">
+                  Efficient last-mile delivery and distribution network covering major cities and towns.
+                </p>
+                <a href="#" class="service-page-learn-more">Learn more</a>
+              </div>
+            </article>
 
-          <!-- Service 5 -->
-          <article class="card card-secondary grid md:grid-cols-2 gap-8 items-center">
-            <div class="service-icon" style="width: 80px; height: 80px; margin: 0;">
-              <i class="fas fa-earth-africa text-primary text-3xl" aria-hidden="true"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-primary-text mb-4">Cross-Border Logistics</h3>
-              <p class="text-secondary mb-4">Seamless cross-border transportation to Kenya, Tanzania, Rwanda, Democratic Republic of Congo, and beyond. We handle all customs documentation.</p>
-              <ul class="text-secondary space-y-2">
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Customs clearance assistance</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Door-to-door delivery</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Transit insurance</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Documentation handling</li>
-              </ul>
-            </div>
-          </article>
+            <!-- Service 5 - CROSS-BORDER -->
+            <article class="service-page-slide">
+              <div class="service-page-card">
+                <div class="service-page-icon">
+                  <i class="fas fa-earth-africa" aria-hidden="true"></i>
+                </div>
+                <h3 class="service-page-title">Cross-Border Logistics</h3>
+                <p class="service-page-description">
+                  Seamless cross-border transportation to Kenya, Tanzania, Rwanda, DRC, and beyond.
+                </p>
+                <a href="#" class="service-page-learn-more">Learn more</a>
+              </div>
+            </article>
 
-          <!-- Service 6 -->
-          <article class="card card-secondary grid md:grid-cols-2 gap-8 items-center">
-            <div class="service-icon" style="width: 80px; height: 80px; margin: 0;">
-              <i class="fas fa-clipboard-list text-primary text-3xl" aria-hidden="true"></i>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-primary-text mb-4">Supply Chain Consulting</h3>
-              <p class="text-secondary mb-4">Expert advice to optimize your supply chain operations. We analyze and improve efficiency to reduce costs and improve delivery times.</p>
-              <ul class="text-secondary space-y-2">
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Route optimization</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Cost analysis and reduction</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Supply chain audits</li>
-                <li><i class="fas fa-check text-primary mr-2" aria-hidden="true"></i>Strategic planning</li>
-              </ul>
-            </div>
-          </article>
+            <!-- Service 6 - CONSULTING -->
+            <article class="service-page-slide">
+              <div class="service-page-card">
+                <div class="service-page-icon">
+                  <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+                </div>
+                <h3 class="service-page-title">Supply Chain Consulting</h3>
+                <p class="service-page-description">
+                  Expert consulting services to optimize your supply chain efficiency and reduce costs.
+                </p>
+                <a href="#" class="service-page-learn-more">Learn more</a>
+              </div>
+            </article>
 
+          </div>
+
+          <!-- Carousel Navigation -->
+          <div class="services-page-carousel-nav">
+            <button class="services-page-carousel-btn services-page-carousel-prev" aria-label="Previous services">
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="services-page-carousel-btn services-page-carousel-next" aria-label="Next services">
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
+
       </div>
     </section>
 
