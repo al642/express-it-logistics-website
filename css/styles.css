@@ -2329,6 +2329,8 @@ button:focus-visible {
 /* ============================================
    TRACK YOUR SHIPMENT SECTION
    ============================================ */
+
+/* Main Section Container */
 .tracking-section {
   background: linear-gradient(
     135deg,
@@ -2338,8 +2340,10 @@ button:focus-visible {
   padding: 5rem 1.5rem;
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
+/* Subtle pattern overlay */
 .tracking-section::before {
   content: "";
   position: absolute;
@@ -2349,8 +2353,10 @@ button:focus-visible {
   bottom: 0;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e91e63' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   opacity: 0.5;
+  pointer-events: none;
 }
 
+/* Dark mode support */
 .dark .tracking-section {
   background: linear-gradient(
     135deg,
@@ -2359,26 +2365,33 @@ button:focus-visible {
   );
 }
 
+/* Centered container with max-width */
 .tracking-container {
-  max-width: 600px;
+  max-width: 550px;
   margin: 0 auto;
+  padding: 0 0.5rem;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
+/* Main card styling */
 .tracking-card {
   background: var(--bg-primary);
   border-radius: 16px;
   padding: 2.5rem 2rem;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
+  width: 100%;
 }
 
+/* Header section */
 .tracking-header {
   text-align: center;
   margin-bottom: 2rem;
 }
 
+/* Icon styling */
 .tracking-icon {
   width: 64px;
   height: 64px;
@@ -2400,87 +2413,97 @@ button:focus-visible {
   color: #ffffff;
 }
 
+/* Title styling */
 .tracking-title {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.5rem;
+  line-height: 1.3;
 }
 
+/* Subtitle styling */
 .tracking-subtitle {
   color: var(--text-muted);
   font-size: 1rem;
   line-height: 1.5;
 }
 
+/* Form container */
 .tracking-form {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 
+/* Input group wrapper */
 .tracking-input-group {
-  margin-bottom: 1rem;
-}
-
-.tracking-label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-secondary);
   margin-bottom: 0.75rem;
-  text-align: left;
 }
 
+/* Input wrapper - flex for desktop side-by-side */
 .tracking-input-wrapper {
   display: flex;
   gap: 0.75rem;
+  width: 100%;
 }
 
+/* AWB Input field styling */
 .tracking-input {
   flex: 1;
   padding: 1rem 1.25rem;
   font-size: 1rem;
+  font-family: inherit;
   border: 2px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 12px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: all var(--transition-fast);
-  font-family: inherit;
-  min-height: 52px;
-  letter-spacing: 0.1em;
+  min-height: 56px;
   font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.05em;
+  /* Prevent horizontal overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .tracking-input:hover {
   border-color: var(--color-primary-light);
 }
 
+/* Clear focus state with border highlight */
 .tracking-input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.1);
+  box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.15);
 }
 
+/* Error state */
 .tracking-input.error {
   border-color: var(--accent-error);
   box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
 }
 
+/* Success state */
 .tracking-input.success {
   border-color: var(--accent-success);
   box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
 }
 
+/* Placeholder styling */
 .tracking-input::placeholder {
   color: var(--text-muted);
-  letter-spacing: 0.05em;
+  opacity: 0.8;
+  letter-spacing: 0.03em;
 }
 
+/* Submit button styling */
 .tracking-submit-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.75rem;
   background: linear-gradient(
     135deg,
     var(--color-pink),
@@ -2488,16 +2511,19 @@ button:focus-visible {
   );
   color: #ffffff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 0.95rem;
   font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
   transition: all var(--transition-normal);
-  min-height: 52px;
+  min-height: 56px;
   white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(233, 30, 99, 0.3);
+  box-shadow: 0 4px 14px rgba(233, 30, 99, 0.35);
+  flex-shrink: 0;
 }
 
+/* Hover state - darker, slight lift, no jumping */
 .tracking-submit-btn:hover {
   background: linear-gradient(
     135deg,
@@ -2505,78 +2531,161 @@ button:focus-visible {
     var(--color-pink)
   );
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+  box-shadow: 0 8px 24px rgba(233, 30, 99, 0.45);
 }
 
+/* Active state - press effect */
 .tracking-submit-btn:active {
   transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
 }
 
+/* Button icon styling */
 .tracking-submit-btn i {
   font-size: 1rem;
 }
 
-.tracking-format-hint {
-  display: block;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-  text-align: left;
+/* Focus visible for accessibility */
+.tracking-submit-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
-.tracking-error {
-  display: none;
-  background-color: rgba(220, 38, 38, 0.1);
-  border: 1px solid var(--accent-error);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
+/* Helper text container */
+.tracking-helper {
   margin-top: 0.75rem;
-  color: var(--accent-error);
-  font-size: 0.875rem;
-  text-align: left;
-}
-
-.tracking-error.visible {
-  display: block;
-  animation: fadeInUp 0.3s ease;
-}
-
-.tracking-error i {
-  margin-right: 0.5rem;
-}
-
-.tracking-info {
   text-align: center;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
 }
 
-.tracking-info p {
-  color: var(--text-muted);
-  font-size: 0.875rem;
+/* Support text */
+.tracking-support {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
 }
 
-.tracking-info i {
-  color: var(--color-primary);
+.tracking-support i {
+  font-size: 0.75rem;
+  color: var(--color-primary-light);
 }
 
-/* Mobile styles for tracking section */
+/* Example format text */
+.tracking-example {
+  color: var(--text-muted);
+  opacity: 0.7;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+/* Error feedback container */
+.tracking-error {
+  display: none;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background-color: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 8px;
+  padding: 0.625rem 0.875rem;
+  margin-top: 0.75rem;
+  color: var(--accent-error);
+  font-size: 0.8125rem;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* Visible error state */
+.tracking-error.visible {
+  display: flex;
+  animation: fadeInUp 0.3s ease;
+}
+
+/* Error icon */
+.tracking-error i {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   TRACKING SECTION RESPONSIVE STYLES
+   ============================================ */
+
+/* Tablet (max-width: 768px) */
+@media (max-width: 768px) {
+  .tracking-section {
+    padding: 4rem 1.25rem;
+  }
+
+  .tracking-container {
+    max-width: 500px;
+    padding: 0 0.25rem;
+  }
+
+  .tracking-card {
+    padding: 2.25rem 1.75rem;
+  }
+
+  .tracking-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .tracking-icon i {
+    font-size: 1.625rem;
+  }
+
+  .tracking-title {
+    font-size: 1.625rem;
+  }
+
+  .tracking-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .tracking-input,
+  .tracking-submit-btn {
+    min-height: 52px;
+  }
+
+  .tracking-input {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .tracking-submit-btn {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile (max-width: 480px) */
 @media (max-width: 480px) {
   .tracking-section {
     padding: 3rem 1rem;
   }
 
+  .tracking-container {
+    max-width: 100%;
+    padding: 0;
+  }
+
   .tracking-card {
     padding: 2rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .tracking-header {
+    margin-bottom: 1.5rem;
   }
 
   .tracking-icon {
     width: 56px;
     height: 56px;
+    border-radius: 14px;
     margin-bottom: 1rem;
   }
 
@@ -2586,29 +2695,78 @@ button:focus-visible {
 
   .tracking-title {
     font-size: 1.5rem;
+    margin-bottom: 0.375rem;
   }
 
   .tracking-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
+  /* Stack vertically on mobile */
   .tracking-input-wrapper {
     flex-direction: column;
+    gap: 0.625rem;
   }
 
   .tracking-input,
   .tracking-submit-btn {
     width: 100%;
-    min-height: 48px;
+    min-height: 50px;
+    border-radius: 10px;
   }
 
   .tracking-input {
-    text-align: center;
-    letter-spacing: 0.05em;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    /* Prevent zoom on iOS */
+    font-size: 16px;
   }
 
-  .tracking-btn-text {
-    display: inline;
+  .tracking-submit-btn {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  /* Helper text adjustments */
+  .tracking-helper {
+    margin-top: 0.625rem;
+  }
+
+  .tracking-support {
+    font-size: 0.75rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .tracking-example {
+    font-size: 0.7rem;
+  }
+
+  /* Error adjustments */
+  .tracking-error {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Small mobile (max-width: 360px) */
+@media (max-width: 360px) {
+  .tracking-section {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .tracking-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .tracking-title {
+    font-size: 1.35rem;
+  }
+
+  .tracking-input,
+  .tracking-submit-btn {
+    min-height: 48px;
   }
 }
 
