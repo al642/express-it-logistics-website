@@ -1,7 +1,7 @@
 {
   "name": "Express IT Logistics Limited",
   "short_name": "Express IT Logistics",
-  "description": "Uganda's premier logistics solutions provider and leading dry ice producer in East Africa",
+  "description": "Premier logistics and shipping solutions provider across East Africa with specialized cold-chain logistics capabilities",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -13,7 +13,19 @@
       "src": "assets/images/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "categories": ["business", "logistics", "transportation"],
