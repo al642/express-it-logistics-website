@@ -16,12 +16,9 @@ const PRECACHE_ASSETS = [
 
 // Install event - cache critical assets
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing service worker...');
-  
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('[SW] Precaching critical assets');
         // Only cache files that exist, ignore 404s
         const cachePromises = PRECACHE_ASSETS.map(url => {
           return fetch(url)
@@ -30,43 +27,26 @@ self.addEventListener('install', (event) => {
                 return cache.put(url, response);
               }
             })
-            .catch(err => {
-              console.log('[SW] Skipping missing asset:', url);
-              return null;
-            });
+            .catch(() => null);
         });
         return Promise.all(cachePromises);
       })
-      .then(() => {
-        console.log('[SW] Skip waiting');
-        return self.skipWaiting();
-      })
-      .catch((error) => {
-        console.error('[SW] Install failed:', error);
-      })
+      .then(() => self.skipWaiting())
   );
 });
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating service worker...');
-  
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
         return Promise.all(
           cacheNames
             .filter((cacheName) => cacheName !== CACHE_NAME)
-            .map((cacheName) => {
-              console.log('[SW] Deleting old cache:', cacheName);
-              return caches.delete(cacheName);
-            })
+            .map((cacheName) => caches.delete(cacheName))
         );
       })
-      .then(() => {
-        console.log('[SW] Claiming clients');
-        return self.clients.claim();
-      })
+      .then(() => self.clients.claim())
   );
 });
 
@@ -152,8 +132,6 @@ self.addEventListener('message', (event) => {
 
 // Push event - handle push notifications (placeholder for future use)
 self.addEventListener('push', (event) => {
-  console.log('[SW] Push received');
-  
   const data = event.data ? event.data.json() : {};
   const title = data.title || 'Express IT Logistics';
   const options = {
@@ -174,7 +152,6 @@ self.addEventListener('push', (event) => {
 
 // Notification click event
 self.addEventListener('notificationclick', (event) => {
-  console.log('[SW] Notification clicked');
   event.notification.close();
   
   if (event.action === 'close') {
@@ -200,8 +177,6 @@ self.addEventListener('notificationclick', (event) => {
           return clients.openWindow(urlToOpen);
         }
       })
-  );
+);
 });
-
-console.log('[SW] Service Worker loaded - version:', CACHE_NAME);
 

@@ -15,7 +15,7 @@
     - Center: (24, 24)
     - Body radius: 13
     - Teeth: 24 teeth, 3x3.5px, 15 deg intervals
-    - Inner white hub radius: 5.5 (EXACT VALUE)
+    - Inner white hub radius: 4.5.5 (EXACT VALUE)
     - Rotation: -60 deg (EXACT VALUE)
     - Orientation reference: 10 o'clock
     
@@ -23,7 +23,7 @@
     - Center: (40, 40)
     - Body radius: 10
     - Teeth: 16 teeth, 4x3.5px, 22.5 deg intervals
-    - Inner white hub radius: 6 (EXACT VALUE)
+    - Inner white hub radius: 4.5 (EXACT VALUE)
     - Rotation: +60 deg (EXACT VALUE)
     - Orientation reference: 4 o'clock
     
@@ -41,7 +41,7 @@
   <g id="gear-pink" transform="rotate(-60 24 24)">
     <circle cx="24" cy="24" r="13" fill="#e91e63"/>
     <!-- Inner white hub: radius increased from 4 to 5.5 for mechanical realism -->
-    <circle cx="24" cy="24" r="5.5" fill="white"/>
+    <circle cx="24" cy="24" r="6.5" fill="white"/>
     <g fill="#e91e63">
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5"/>
       <rect x="22.5" y="8" width="3" height="3.5" rx="0.5" transform="rotate(15 24 24)"/>
@@ -74,7 +74,7 @@
   <g id="gear-grey" transform="rotate(60 40 40)">
     <circle cx="40" cy="40" r="10" fill="#6b7280"/>
     <!-- Inner white hub: radius reduced from 7 to 6 for visual harmony -->
-    <circle cx="40" cy="40" r="6" fill="white"/>
+    <circle cx="40" cy="40" r="4.5" fill="white"/>
     <g fill="#6b7280">
       <rect x="38" y="27" width="4" height="3.5" rx="0.5"/>
       <rect x="38" y="27" width="4" height="3.5" rx="0.5" transform="rotate(22.5 40 40)"/>

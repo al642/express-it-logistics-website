@@ -43,9 +43,11 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="../assets/images/icon-512.png">
-  <link rel="apple-touch-icon" href="../assets/images/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
 
   <!-- JSON-LD Schema for Services -->
   <script type="application/ld+json">
@@ -67,8 +69,13 @@
       },
       {
         "@type": "Service",
-        "name": "Biological & Clinical Sample Logistics",
-        "description": "Specialized logistics for biological and clinical samples with secure handling and regulatory compliance"
+        "name": "Biological Sample Shipments",
+        "description": "Secure and compliant shipping of biological specimens, medical samples, and clinical trial materials"
+      },
+      {
+        "@type": "Service",
+        "name": "Clinical Sample Logistics",
+        "description": "End-to-end logistics for clinical trial materials and medical samples with regulatory compliance"
       },
       {
         "@type": "Service",
@@ -177,21 +184,83 @@
                 <p class="service-page-description">
                   Temperature-controlled logistics solutions for pharmaceutical, food, and industrial applications across East Africa.
                 </p>
-                <a href="#" class="service-page-learn-more">Learn more</a>
+                <button class="service-page-learn-more" aria-expanded="false" aria-controls="service-content-1" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-1" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our specialized cold-chain logistics ensure temperature integrity from origin to destination. We offer:</p>
+                    <ul>
+                      <li>Temperature-controlled vehicles (-25°C to +25°C range)</li>
+                      <li>Real-time temperature monitoring and reporting</li>
+                      <li>GDP-compliant handling procedures</li>
+                      <li>Pharmaceutical-grade storage facilities</li>
+                      <li>24/7 emergency response for temperature excursions</li>
+                    </ul>
+                    <p>Serving healthcare, food, and industrial clients across Uganda, Kenya, Tanzania, Rwanda, and the DRC.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
-            <!-- Service 1b - BIOLOGICAL & CLINICAL SAMPLE LOGISTICS (NEW) -->
+            <!-- Service 1b - BIOLOGICAL SAMPLE SHIPMENTS -->
+            <article class="service-page-slide">
+              <div class="service-page-card">
+                <div class="service-page-icon">
+                  <i class="fas fa-flask" aria-hidden="true"></i>
+                </div>
+                <h3 class="service-page-title">Biological Sample Shipments</h3>
+                <p class="service-page-description">
+                  Secure and compliant shipping of biological specimens, medical samples, and clinical trial materials with full chain of custody.
+                </p>
+                <button class="service-page-learn-more" aria-expanded="false" aria-controls="service-content-1b" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-1b" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Specialized logistics for biological specimen transport with regulatory compliance and temperature integrity throughout the journey:</p>
+                    <ul>
+                      <li>IATA-compliant packaging and documentation</li>
+                      <li>Chain of custody tracking and handling</li>
+                      <li>Real-time temperature monitoring and alerts</li>
+                      <li>Door-to-door global delivery options</li>
+                      <li>Biohazard and infectious substance handling</li>
+                    </ul>
+                    <p>Trusted by research institutions, hospitals, and pharmaceutical companies for sensitive biological shipments worldwide.</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Service 1c - CLINICAL SAMPLE LOGISTICS -->
             <article class="service-page-slide">
               <div class="service-page-card">
                 <div class="service-page-icon">
                   <i class="fas fa-dna" aria-hidden="true"></i>
                 </div>
-                <h3 class="service-page-title">Biological & Clinical Sample Logistics</h3>
+                <h3 class="service-page-title">Clinical Sample Logistics</h3>
                 <p class="service-page-description">
-                  Specialized logistics for biological and clinical samples, ensuring secure handling, temperature integrity, regulatory compliance, and timely delivery.
+                  End-to-end logistics for clinical trial materials and medical samples with regulatory compliance and secure handling.
                 </p>
-                <a href="#" class="service-page-learn-more">Learn more</a>
+                <button class="service-page-learn-more" aria-expanded="false" aria-controls="service-content-1c" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-1c" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Clinical logistics solutions meeting the highest standards for specimen transport and pharmaceutical distribution:</p>
+                    <ul>
+                      <li>GDP-compliant handling procedures</li>
+                      <li>Validated cold chain packaging systems</li>
+                      <li>Complete regulatory documentation</li>
+                      <li>Regional and international transport</li>
+                      <li>Clinical trial site delivery network</li>
+                    </ul>
+                    <p>Supporting pharmaceutical companies, CROs, and healthcare providers with reliable clinical sample logistics.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -205,7 +274,23 @@
                 <p class="service-page-description">
                   Reliable road freight services across East Africa with a modern fleet ensuring safe and timely delivery.
                 </p>
-                <a href="#" class="service-page-learn-more">Learn more</a>
+                <button class="service-page-learn-more" aria-expanded="false" aria-controls="service-content-2" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-2" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our freight transportation services cover major routes across East Africa:</p>
+                    <ul>
+                      <li>Full truckload (FTL) and less than truckload (LTL) options</li>
+                      <li>Modern fleet with GPS tracking and real-time updates</li>
+                      <li>Experienced drivers with safety certifications</li>
+                      <li>Door-to-door and terminal-to-terminal services</li>
+                      <li>Project cargo and oversized load handling</li>
+                    </ul>
+                    <p>Coverage includes Uganda, Kenya, Tanzania, Rwanda, Burundi, South Sudan, and DRC.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -219,7 +304,23 @@
                 <p class="service-page-description">
                   Scalable logistics infrastructure with secure storage and inventory management solutions.
                 </p>
-                <a href="#" class="service-page-learn-more">Learn more</a>
+                <button class="service-page-learn-more" aria-expanded="false" aria-controls="service-content-3" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-3" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our warehousing solutions provide secure, flexible storage options:</p>
+                    <ul>
+                      <li>Temperature-controlled storage facilities</li>
+                      <li>Bonded warehousing for customs-clearance needs</li>
+                      <li>Advanced inventory management systems</li>
+                      <li>Pick-and-pack and fulfillment services</li>
+                      <li>Cross-docking and transshipment capabilities</li>
+                    </ul>
+                    <p>Located strategically in Kampala with easy access to major highways and the airport.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -233,7 +334,23 @@
                 <p class="service-page-description">
                   Efficient last-mile delivery and distribution network covering major cities and towns.
                 </p>
-                <a href="#" class="service-page-learn-more">Learn more</a>
+                <button class="service-page-learn-more" aria-expanded="false" aria-controls="service-content-4" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-4" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our distribution network ensures efficient delivery across East Africa:</p>
+                    <ul>
+                      <li>Last-mile delivery to urban and rural areas</li>
+                      <li>Scheduled and express delivery options</li>
+                      <li>Cash-on-delivery and payment collection services</li>
+                      <li>Return logistics and reverse pickup</li>
+                      <li>Proof of delivery with digital signatures and photos</li>
+                    </ul>
+                    <p>Coverage includes Kampala, Nairobi, Kigali, Dar es Salaam, Entebbe, and surrounding regions.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -247,7 +364,23 @@
                 <p class="service-page-description">
                   Seamless cross-border transportation to Kenya, Tanzania, Rwanda, DRC, and beyond.
                 </p>
-                <a href="#" class="service-page-learn-more">Learn more</a>
+                <button class="service-page-learn-more" aria-expanded="false" aria-controls="service-content-5" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-5" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our cross-border expertise simplifies international trade:</p>
+                    <ul>
+                      <li>Full customs clearance and documentation services</li>
+                      <li>Bonded truck transport for duty-suspended goods</li>
+                      <li>Partner network across East African borders</li>
+                      <li>Transit insurance and cargo guarantee</li>
+                      <li>Clearance at Malaba, Busia, Nimule, and other major border points</li>
+                    </ul>
+                    <p>We handle all regulatory requirements for smooth cross-border operations.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -261,7 +394,23 @@
                 <p class="service-page-description">
                   Expert consulting services to optimize your supply chain efficiency and reduce costs.
                 </p>
-                <a href="#" class="service-page-learn-more">Learn more</a>
+                <button class="service-page-learn-more" aria-expanded="false" aria-controls="service-content-6" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-6" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our consulting services help you achieve operational excellence:</p>
+                    <ul>
+                      <li>Supply chain network design and optimization</li>
+                      <li>Inventory management and forecasting</li>
+                      <li>Warehouse layout and process improvement</li>
+                      <li>Cost analysis and reduction strategies</li>
+                      <li>Technology implementation guidance</li>
+                    </ul>
+                    <p>Trusted by leading businesses across East Africa to transform their logistics operations.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -338,7 +487,8 @@
           <h3 class="footer-title">Services</h3>
           <ul class="footer-links">
             <li><a href="services.html" class="footer-link">Cold-Chain Support</a></li>
-            <li><a href="services.html" class="footer-link">Biological & Clinical Sample Logistics</a></li>
+            <li><a href="services.html" class="footer-link">Biological Sample Shipments</a></li>
+            <li><a href="services.html" class="footer-link">Clinical Sample Logistics</a></li>
             <li><a href="services.html" class="footer-link">Freight Transportation</a></li>
             <li><a href="services.html" class="footer-link">Warehousing</a></li>
             <li><a href="services.html" class="footer-link">Distribution</a></li>

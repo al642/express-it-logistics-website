@@ -219,24 +219,8 @@
           submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i> Sending...';
           submitBtn.disabled = true;
 
-          // Simulate API call delay
+// Simulate API call delay
           setTimeout(() => {
-            // Build email body for the "submission"
-            const emailBody = `
-New Contact Form Submission
-===========================
-Name: ${sanitizedName}
-Email: ${sanitizedEmail}
-Phone: ${sanitizedPhone || 'Not provided'}
-Service: ${sanitizedService || 'Not specified'}
-Message: ${sanitizedMessage}
----------------------------
-Submitted from: Express IT Logistics Website
-Submitted at: ${new Date().toLocaleString()}
-            `.trim();
-
-            console.log('Form submitted to info@expressitlogistics.co.ug');
-
             // Show success message
             showNotification('Thank you for your inquiry! Our team will contact you at ' + sanitizedEmail + ' within 24 hours.', 'success');
 
@@ -322,6 +306,7 @@ Submitted at: ${new Date().toLocaleString()}
   };
   /**
    * Services Page Carousel Functionality
+   * Handles "Learn more" expand/collapse for services carousel
    */
   const initServicesPageCarousel = () => {
     const carousel = document.getElementById('services-page-carousel');
@@ -332,14 +317,17 @@ Submitted at: ${new Date().toLocaleString()}
 
     let scrollAmount = 0;
     let maxScroll = 0;
-    const slideWidth = 280 + 24; // Slide width + gap (280px + 1.5rem = 24px)
-
+    
+    // Use getBoundingClientRect for accurate measurements that account for padding
     const updateMaxScroll = () => {
-      // Calculate max scroll based on carousel content width minus visible container width
-      // Container width includes padding for arrows, so we need to account for that
       const container = carousel.parentElement;
-      const containerWidth = container.offsetWidth - 160; // Subtract side padding (5rem + 5rem = 10rem = 160px)
-      maxScroll = Math.max(0, carousel.scrollWidth - containerWidth);
+      const containerRect = container.getBoundingClientRect();
+      const carouselWidth = carousel.scrollWidth;
+      // Account for the padding in the container (5rem left + 5rem right = 160px)
+      const horizontalPadding = 160;
+      const visibleWidth = Math.max(0, containerRect.width - horizontalPadding);
+      
+      maxScroll = Math.max(0, carouselWidth - visibleWidth);
     };
 
     const updateButtons = () => {
@@ -354,21 +342,36 @@ Submitted at: ${new Date().toLocaleString()}
     };
 
     prevBtn.addEventListener('click', () => {
-      scrollTo(Math.max(0, scrollAmount - slideWidth));
+      scrollTo(Math.max(0, scrollAmount - 304)); // 280px slide + 24px gap
     });
 
     nextBtn.addEventListener('click', () => {
-      scrollTo(Math.min(maxScroll, scrollAmount + slideWidth));
+      scrollTo(Math.min(maxScroll, scrollAmount + 304));
     });
 
     // Initialize
     updateMaxScroll();
     updateButtons();
 
-    // Handle window resize
+    // Handle window resize - recalculate scroll limits
     window.addEventListener('resize', () => {
       updateMaxScroll();
       scrollTo(Math.min(scrollAmount, maxScroll));
+    }, { passive: true });
+
+    // Handle accordion expansion - recalculate after content expands
+    const learnMoreButtons = document.querySelectorAll('.service-page-learn-more');
+    learnMoreButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Give time for CSS transition to complete before recalculating
+        setTimeout(() => {
+          updateMaxScroll();
+          // Ensure current scroll position is still valid
+          scrollAmount = Math.min(scrollAmount, maxScroll);
+          carousel.style.transform = `translateX(-${scrollAmount}px)`;
+          updateButtons();
+        }, 400); // Match or slightly exceed CSS transition time
+      });
     });
   };
 
@@ -401,7 +404,7 @@ Submitted at: ${new Date().toLocaleString()}
   };
 
   /**
-   * Services Carousel Functionality
+   * Services Carousel Functionality (Home Page)
    */
   const initServicesCarousel = () => {
     const carousel = document.getElementById('services-carousel');
@@ -411,53 +414,88 @@ Submitted at: ${new Date().toLocaleString()}
     if (!carousel || !prevBtn || !nextBtn) return;
 
     let scrollAmount = 0;
-    const slideWidth = 320 + 24; // Slide width + gap
-    const maxScroll = carousel.scrollWidth - carousel.parentElement.offsetWidth;
+    let maxScroll = 0;
+    
+    // Use getBoundingClientRect for accurate measurements
+    const updateMaxScroll = () => {
+      const container = carousel.parentElement;
+      const containerRect = container.getBoundingClientRect();
+      const carouselWidth = carousel.scrollWidth;
+      // Account for horizontal padding (5rem left + 5rem right = 160px)
+      const horizontalPadding = 160;
+      const visibleWidth = Math.max(0, containerRect.width - horizontalPadding);
+      
+      maxScroll = Math.max(0, carouselWidth - visibleWidth);
+    };
 
     const updateButtons = () => {
       prevBtn.disabled = scrollAmount <= 0;
       nextBtn.disabled = scrollAmount >= maxScroll;
     };
 
-    prevBtn.addEventListener('click', () => {
-      scrollAmount = Math.max(0, scrollAmount - slideWidth);
+    const scrollTo = (newScrollAmount) => {
+      scrollAmount = Math.max(0, Math.min(newScrollAmount, maxScroll));
       carousel.style.transform = `translateX(-${scrollAmount}px)`;
       updateButtons();
+    };
+
+    prevBtn.addEventListener('click', () => {
+      scrollTo(Math.max(0, scrollAmount - 344)); // 320px slide + 24px gap
     });
 
     nextBtn.addEventListener('click', () => {
-      scrollAmount = Math.min(maxScroll, scrollAmount + slideWidth);
-      carousel.style.transform = `translateX(-${scrollAmount}px)`;
-      updateButtons();
+      scrollTo(Math.min(maxScroll, scrollAmount + 344));
     });
 
     // Initialize button states
+    updateMaxScroll();
     updateButtons();
 
-    // Handle window resize
+    // Handle window resize - recalculate scroll limits
     window.addEventListener('resize', () => {
-      scrollAmount = Math.min(scrollAmount, carousel.scrollWidth - carousel.parentElement.offsetWidth);
+      updateMaxScroll();
+      scrollAmount = Math.min(scrollAmount, maxScroll);
       carousel.style.transform = `translateX(-${scrollAmount}px)`;
       updateButtons();
+    }, { passive: true });
+
+    // Handle accordion expansion - recalculate after content expands
+    const learnMoreButtons = document.querySelectorAll('.service-learn-more');
+    learnMoreButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Give time for CSS transition to complete before recalculating
+        setTimeout(() => {
+          updateMaxScroll();
+          // Ensure current scroll position is still valid
+          scrollAmount = Math.min(scrollAmount, maxScroll);
+          carousel.style.transform = `translateX(-${scrollAmount}px)`;
+          updateButtons();
+        }, 400); // Match or slightly exceed CSS transition time
+      });
     });
   };
 
   /**
-   * Services Accordion Functionality
+   * Services Page Accordion Functionality
+   * Handles "Learn more" expand/collapse for services carousel
    */
   const initServicesAccordion = () => {
-    const learnMoreButtons = document.querySelectorAll('.service-learn-more');
+    const learnMoreButtons = document.querySelectorAll('.service-page-learn-more');
 
     learnMoreButtons.forEach(button => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
         const contentId = button.getAttribute('aria-controls');
         const content = document.getElementById(contentId);
 
-        // Close other open items
+        // Close all other open items first (accordion behavior)
         learnMoreButtons.forEach(otherButton => {
           if (otherButton !== button) {
             otherButton.setAttribute('aria-expanded', 'false');
+            otherButton.setAttribute('aria-label', 'Learn more');
             const otherContentId = otherButton.getAttribute('aria-controls');
             const otherContent = document.getElementById(otherContentId);
             if (otherContent) {
@@ -467,82 +505,55 @@ Submitted at: ${new Date().toLocaleString()}
         });
 
         // Toggle current item
-        button.setAttribute('aria-expanded', !isExpanded);
+        const newExpandedState = !isExpanded;
+        button.setAttribute('aria-expanded', newExpandedState.toString());
+        button.setAttribute('aria-label', newExpandedState ? 'Show less' : 'Learn more');
+
         if (content) {
-          content.hidden = isExpanded;
+          content.hidden = !newExpandedState;
         }
       });
     });
   };
 
-  /**
+/**
    * Service Worker Registration
    * Provides offline capability and improved performance
    * Safe implementation for GitHub Pages deployment
    */
   const initServiceWorker = () => {
     // Check if service workers are supported
-    if ('serviceWorker' in navigator) {
-      // Only register on HTTPS (or localhost for development)
-      if (window.location.protocol === 'https:' || window.location.hostname === 'localhost') {
-        // Wait for the page to load
-        window.addEventListener('load', () => {
-          // Register the service worker
-          navigator.serviceWorker.register('./sw.js')
-            .then((registration) => {
-              console.log('[SW] Service Worker registered successfully');
-              console.log('[SW] Scope:', registration.scope);
-
-              // Check for updates
-              registration.addEventListener('updatefound', () => {
-                const installingWorker = registration.installing;
-                console.log('[SW] New service worker found');
-
-                installingWorker.addEventListener('statechange', () => {
-                  if (installingWorker.state === 'installed') {
-                    if (navigator.serviceWorker.controller) {
-                      // New update available
-                      console.log('[SW] New content available, please refresh');
-                      // Only show notification if user is active
-                      if (document.visibilityState === 'visible') {
-                        showNotification('New version available! Refresh to update.', 'info');
-                      }
-                    } else {
-                      // Content cached for offline use
-                      console.log('[SW] Content cached for offline use');
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+          window.addEventListener('load', () => {
+            // Register the service worker
+            navigator.serviceWorker.register('./sw.js')
+              .then((registration) => {
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                  const installingWorker = registration.installing;
+    
+                  installingWorker.addEventListener('statechange', () => {
+                    if (installingWorker.state === 'installed' && navigator.serviceWorker.controller && document.visibilityState === 'visible') {
+                          showNotification('New version available! Refresh to update.', 'info');
                     }
+                  });
+                });
+              })
+              .catch((error) => {
+                // Service worker registration failed - silently fail for production
+              });
+    
+            // Check for updates periodically (every 5 minutes)
+            setInterval(() => {
+              if (navigator.serviceWorker.controller) {
+                navigator.serviceWorker.getRegistration().then((registration) => {
+                  if (registration) {
+                    registration.update();
                   }
                 });
-              });
-            })
-            .catch((error) => {
-              console.error('[SW] Service Worker registration failed:', error);
-              // Don't break the site if SW fails
-            });
-
-          // Check for updates periodically (every 5 minutes)
-          setInterval(() => {
-            if (navigator.serviceWorker.controller) {
-              navigator.serviceWorker.getRegistration().then((registration) => {
-                if (registration) {
-                  registration.update();
-                }
-              });
-            }
-          }, 300000);
-
-          // Handle messages from service worker
-          navigator.serviceWorker.addEventListener('message', (event) => {
-            if (event.data && event.data.version) {
-              console.log('[SW] Current cache version:', event.data.version);
-            }
+              }
+            }, 300000);
           });
-        });
-      } else {
-        console.log('[SW] Service workers require HTTPS (or localhost)');
-      }
-    } else {
-      console.log('[SW] Service workers not supported in this browser');
     }
   };
 
