@@ -1,192 +1,215 @@
-# Express IT Logistics - Brand Guide
+# Express IT Logistics - Brand Guide & Lock Reference
 
-**Internal Reference Document**  
-*This is a reference guide only - do not lock files or block future edits.*
-
----
-
-## Logo Specifications
-
-### Visual Elements
-
-**Icon Design:**
-- Two interlocking gears (pink and grey)
-- Embroidery-safe flat paths (no gradients or complex effects)
-- Pink gear: 24 teeth, positioned at approximately 10 o'clock
-- Grey gear: 16 teeth, positioned at approximately 4 o'clock
-- Central white cutouts in each gear
-
-**Colors:**
-- Pink: `#e91e63` (primary accent)
-- Grey: `#6b7280` (secondary gear)
-- White: `#ffffff` (gear cutouts)
-
-**File Location:** `assets/images/icon.svg`
-
-### Logo Text
-
-**Primary Brand Name:**
-```
-Express IT Logistics Ltd
-```
-(Note: "IT" in all caps, no space between Express and IT)
-
-**Alternative (Footer/Compact):**
-```
-Express It
-Logistics
-```
-
-### Gear Animation
-
-**Allowed Animation:**
-- Subtle 6° oscillation on hover (desktop only)
-- 360° rotation on hover (current implementation)
-- Must disable on touch devices (`@media (hover: hover)`)
-- Must respect `prefers-reduced-motion`
-
-**Prohibited:**
-- Complex transforms that override gear positioning
-- Animated colors or gradients on gears
-- Stretched or distorted proportions
+**Internal Reference Document - MASTER BRAND LOCK**  
+*This document establishes what MUST NEVER CHANGE to prevent brand drift.*
 
 ---
 
-## Typography
+## SECTION A: LOGO GEOMETRY LOCK (CRITICAL)
 
-**Primary Font:** Inter (Google Fonts)
-- Weights: 400, 500, 600, 700, 800
-- Fallback: system-ui stack
+### Exact Gear Specifications
 
-**Usage:**
-- Headings: 700-800 weight
-- Body text: 400-500 weight
-- UI elements: 500-600 weight
+#### Pink Gear (Left, ~10 o'clock orientation)
+| Property | Value | Notes |
+|----------|-------|-------|
+| Center Coordinates | (24, 24) | In 64x64 viewBox |
+| Body Radius | 13px | EXACT - Do not change |
+| Inner Hub Radius | 5.5px | EXACT - Do not change |
+| Number of Teeth | 24 | EXACT - Do not change |
+| Tooth Size | 3 × 3.5px | Width × Height |
+| Rotation | -60° | EXACT - Creates 10 o'clock orientation |
+| Fill Color | `#e91e63` | Never change |
 
-**Character Spacing:**
-- Logo subtitle: `0.1em` letter-spacing (uppercase)
-- Section labels: `0.1em` letter-spacing (uppercase)
+#### Grey Gear (Right, ~4 o'clock orientation)
+| Property | Value | Notes |
+|----------|-------|-------|
+| Center Coordinates | (40, 40) | In 64x64 viewBox |
+| Body Radius | 10px | EXACT - Do not change |
+| Inner Hub Radius | 6px | EXACT - Do not change |
+| Number of Teeth | 16 | EXACT - Do not change |
+| Tooth Size | 4 × 3.5px | Width × Height |
+| Rotation | +60° | EXACT - Creates 4 o'clock orientation |
+| Fill Color | `#6b7280` | Never change |
+
+### Gear Positioning Rules
+- Pink gear MUST be at (24, 24) - upper-left quadrant
+- Grey gear MUST be at (40, 40) - lower-right quadrant
+- Gears MUST NOT overlap
+- Inner hubs MUST be white (`#ffffff`)
+- Background MUST be transparent (no white backing)
+
+### Logo File Requirements
+- **Format:** SVG only (vector scalable)
+- **ViewBox:** 0 0 64 64
+- **No gradients** - solid fills only
+- **No raster effects** - clean paths only
+- **Suitable for:** Web, favicon, PWA (192/512), print, embroidery
 
 ---
 
-## Color System
+## SECTION B: COLOR USAGE LOCK
 
-### Pink Brand Colors (Light Mode)
-
+### Pink Accent Colors (NEVER CHANGE)
 | Variable | Value | Usage |
 |----------|-------|-------|
-| `--color-pink` | `#e91e63` | Primary brand color, CTAs, links |
-| `--color-pink-light` | `#f06292` | Hover states, subtle accents |
-| `--color-pink-dark` | `#c2185b` | Gradients, darker accents |
-| `--color-pink-bg` | `#fce4ec` | Light backgrounds, icons |
-| `--color-pink-subtle` | `#f8bbd9` | Borders, dividers |
+| `--color-pink` | `#e91e63` | Primary brand, CTAs, links |
+| `--color-pink-light` | `#f06292` | Hover states |
+| `--color-pink-dark` | `#c2185b` | Active/pressed states |
 
-### Text Colors
+**CRITICAL RULE:** Pink values MUST be identical in light AND dark modes.
 
-| Variable | Light Mode | Dark Mode |
-|----------|------------|-----------|
-| `--text-primary` | `#1a1a2e` | `#ffffff` |
-| `--text-secondary` | `#2d2d44` | `#e8e8f0` |
-| `--text-muted` | `#5c5c70` | `#a8a8c0` |
+### Grey Accent
+| Variable | Value | Usage |
+|----------|-------|-------|
+| `--color-grey` | `#6b7280` | Secondary gear, muted text |
 
-### Background Colors
-
+### Background Colors (Theme Variables)
 | Variable | Light Mode | Dark Mode |
 |----------|------------|-----------|
 | `--bg-primary` | `#ffffff` | `#1a1a2e` |
 | `--bg-secondary` | `#faf5f7` | `#252542` |
-| `--bg-tertiary` | `#f5eef2` | `#323258` |
 
-### Important: Pink Color Consistency
+---
 
-**CRITICAL:** Pink colors must remain IDENTICAL in light and dark modes.
+## SECTION C: TYPOGRAPHY LOCK
 
-✅ **CORRECT:**
-```css
---color-pink: #e91e63;  /* Same value in :root and .dark */
+### Font Family
+```
+Primary: Inter (Google Fonts)
+Fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif
 ```
 
-❌ **INCORRECT:**
+### Font Weights (LOCKED)
+| Usage | Weight | CSS Value |
+|-------|--------|-----------|
+| Body text | Regular | 400-500 |
+| Navigation | Medium | 500-600 |
+| Headings | Bold | 700-800 |
+| Hero/Stats | Extra Bold | 800 |
+
+### Character Spacing (LOCKED)
+| Element | Spacing |
+|---------|---------|
+| Logo subtitle | `0.1em` (uppercase) |
+| Section labels | `0.1em` (uppercase) |
+
+---
+
+## SECTION D: ANIMATION CONSTRAINTS
+
+### Allowed Animations
+| Element | Animation | Duration |
+|---------|-----------|----------|
+| Logo gears | 360° rotation on hover | 1s |
+| Buttons | Transform translateY(-2px) | 300ms |
+| Cards | Transform translateY(-4px) | 300ms |
+
+### Prohibited Animations
+- ❌ Gear color changes
+- ❌ Animated gradients
+- ❌ Scale transforms on logo (except load animation)
+- ❌ Bounce/spring physics
+- ❌ Complex keyframe sequences
+
+### Motion Preferences
 ```css
-.dark {
-  --color-pink: #f48fb1;  /* DO NOT shift pink in dark mode */
+@media (prefers-reduced-motion: reduce) {
+  /* ALL animations disabled */
+}
+@media (hover: none) {
+  /* Touch devices - no hover animations */
 }
 ```
 
-The pink accent should NOT shift toward purple in dark mode.
-
 ---
 
-## Tone & Messaging
+## SECTION E: MESSAGING RULES (LOCKED)
 
-### Core Messaging
+### Experience Statement
+**Use:** "18+ Years Experience" (NEVER "10+ years")
 
-**Primary Focus:** Logistics, shipping, and global reach
-
-**Tone:** Professional, reliable, logistics-first
+### Service Names (EXACT)
+1. Cold-Chain Support
+2. Biological & Clinical Sample Logistics
+3. Freight Transportation
+4. Warehousing
+5. Distribution Services
+6. Cross-Border Logistics
+7. Supply Chain Consulting
 
 ### Dry Ice Positioning
+- Dry ice is a **SUPPORT SERVICE**, not the primary focus
+- Use: "Cold-Chain Support" (primary)
+- Use: "Dry Ice Supply" only in footer service list if needed
+- NEVER use: "Dry Ice Production" or "Dry Ice Manufacturing"
 
-Dry ice is a **SERVICE**, not a production focus.
-
-✅ **CORRECT:**
-- "Dry Ice Supply" (service offering)
-- "Specialized dry ice for cold-chain logistics"
-- "24/7 Dry Ice Supply Available"
-
-❌ **INCORRECT:**
-- "Dry Ice Production" (implies manufacturing focus)
-- "Dry Ice Manufacturing" (not our core business)
-
-### Experience
-
-**Use:** "18+ Years Experience" (not 10+ years)
+### Taglines
+- **Primary:** "We Deliver What Others Promise!"
+- **Partner Subtitle:** "Industry collaborators who trust our logistics solutions"
 
 ---
 
-## File Structure Reference
+## SECTION F: WHAT MUST NEVER CHANGE
 
+### Logo Elements
+- [ ] Gear geometry (radii, tooth count, positions)
+- [ ] Gear colors (#e91e63 pink, #6b7280 grey)
+- [ ] Inner hub white circles
+- [ ] 10 o'clock / 4 o'clock orientation
+- [ ] Transparent background
+
+### Brand Colors
+- [ ] Primary pink (#e91e63)
+- [ ] Pink consistency across light/dark modes
+- [ ] No purple drift in dark mode
+
+### Typography
+- [ ] Inter font family
+- [ ] Weight hierarchy (400/500/700/800)
+- [ ] Letter spacing on labels and subtitles
+
+### Core Messaging
+- [ ] 18+ years experience
+- [ ] Logistics-first positioning
+- [ ] Cold-chain (not dry ice production)
+- [ ] East Africa + international focus
+
+### File Structure
 ```
-Express-it-logistics-website/
-├── assets/images/
-│   └── icon.svg          # Logo (64x64 viewBox)
-├── css/
-│   └── styles.css        # All CSS (variables at top)
-├── js/
-│   └── main.js           # All JavaScript
-├── pages/
-│   ├── services.html     # Services page
-│   ├── team.html         # Team page
-│   └── contact.html      # Contact page
-├── index.html            # Homepage
-├── BRAND_GUIDE.md        # This file
-└── manifest.json         # PWA manifest
+assets/images/
+  ├── icon.svg           (MASTER logo)
+  ├── icon-192.png       (PNG derivative)
+  └── icon-512.png        (PNG derivative)
+
+css/
+  └── styles.css         (Single source of styles)
+
+js/
+  └── main.js            (Single source of JS)
 ```
 
 ---
 
-## Common Mistakes to Avoid
+## SECTION G: ANTI-DRIFT CHECKLIST
 
-1. **Pink Color Drift:** Never modify pink values in `.dark` mode
-2. **Logo Text:** Always use "Express IT Logistics Ltd" (caps as shown)
-3. **Dry Ice Wording:** "Supply" not "Production" or "Manufacturing"
-4. **Experience:** Use "18+ years" consistently
-5. **Gear Animation:** Must respect reduced motion preferences
+Before any AI-assisted edit, verify:
 
----
-
-## Approval & Updates
-
-This guide is for reference only. Files are not locked.
-
-When making changes:
-1. Update this guide if brand rules change
-2. Ensure CSS variables are updated consistently
-3. Test across Chrome, Safari, Firefox, Edge
-4. Test on iOS and Android devices
+- [ ] Pink colors unchanged in `.dark` mode
+- [ ] Logo radii remain at 5.5px (pink) and 6px (grey)
+- [ ] No new fonts introduced
+- [ ] No gradients added to logo
+- [ ] "18+ years" used (not 10+)
+- [ ] Services use "Cold-Chain Support" (not "Dry Ice Supply")
+- [ ] No new animations beyond allowed list
+- [ ] File structure unchanged
 
 ---
 
-*Last Updated: 2026*  
-*Document Version: 1.0*
+## Approval & Compliance
+
+This is a **HARD LOCK** document. Violations must be flagged and corrected.
+
+**Version:** 1.0  
+**Last Updated:** 2026  
+**Applies to:** All files in Express-it-logistics-website repository
 
