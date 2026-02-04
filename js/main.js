@@ -304,6 +304,132 @@
       }
     }, 5000);
   };
+
+  /**
+   * AWB Tracking Functionality
+   * Handles Air Waybill (AWB) number validation and redirect tracking
+   */
+  const initAWBTracking = () => {
+    const trackingForm = document.getElementById('awb-tracking-form');
+    const awbInput = document.getElementById('awb-input');
+    const trackingError = document.getElementById('tracking-error');
+
+    if (!trackingForm || !awbInput || !trackingError) return;
+
+    // Validate AWB format: 000-00000000 (3 digits + optional dash + 8 digits)
+    const validateAWB = (awb) => {
+      // Remove all spaces
+      const sanitized = awb.replace(/\s+/g, '');
+      
+      // Check if empty
+      if (!sanitized || !sanitized.trim()) {
+        return { isValid: false, message: 'Please enter an AWB number', sanitized: '' };
+      }
+      
+      // Check if contains only numbers and optional dash
+      if (!/^[\d-]+$/.test(sanitized)) {
+        return { isValid: false, message: 'AWB number must contain only numbers and a dash (-)', sanitized: sanitized };
+      }
+      
+      // Check format: 3 digits + optional dash + 8 digits
+      // Must be either 11 chars with dash or 11 chars without (3+8=11)
+      if (sanitized.length !== 11 && sanitized.length !== 12) {
+        return { isValid: false, message: 'AWB must be 11 digits (with or without dash)', sanitized: sanitized };
+      }
+      
+      // Validate the pattern
+      const patternWithDash = /^(\d{3})-(\d{8})$/;
+      const patternWithoutDash = /^(\d{11})$/;
+      
+      if (!patternWithDash.test(sanitized) && !patternWithoutDash.test(sanitized)) {
+        return { isValid: false, message: 'Invalid AWB format. Use: 000-00000000 or 00000000000', sanitized: sanitized };
+      }
+      
+      return { isValid: true, message: '', sanitized: sanitized };
+    };
+
+    // Format AWB with dash for display
+    const formatAWB = (awb) => {
+      const sanitized = awb.replace(/\s+/g, '');
+      if (sanitized.length === 11 && !sanitized.includes('-')) {
+        return sanitized.substring(0, 3) + '-' + sanitized.substring(3);
+      }
+      return sanitized;
+    };
+
+    // Show error message
+    const showError = (message) => {
+      trackingError.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + message;
+      trackingError.classList.add('visible');
+      awbInput.classList.add('error');
+      awbInput.classList.remove('success');
+    };
+
+    // Clear error message
+    const clearError = () => {
+      trackingError.classList.remove('visible');
+      trackingError.innerHTML = '';
+      awbInput.classList.remove('error');
+    };
+
+    // Handle input change
+    awbInput.addEventListener('input', () => {
+      const value = awbInput.value;
+      if (value) {
+        // Auto-format while typing
+        const formatted = formatAWB(value);
+        if (formatted !== value) {
+          awbInput.value = formatted;
+        }
+        clearError();
+      }
+    });
+
+    // Handle form submission
+    trackingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const awbValue = awbInput.value;
+      const validation = validateAWB(awbValue);
+      
+      if (!validation.isValid) {
+        showError(validation.message);
+        awbInput.focus();
+        return;
+      }
+      
+      // Valid AWB - clear any errors and show success state
+      clearError();
+      awbInput.classList.add('success');
+      
+      // Sanitize and format AWB for URL
+      const sanitizedAWB = validation.sanitized.replace(/[^0-9-]/g, '');
+      const formattedForURL = formatAWB(sanitizedAWB).toUpperCase();
+      
+      // Build redirect URL
+      const trackingURL = `https://www.cargotracking.aero/track/awb/${formattedForURL}`;
+      
+      // Open in new tab
+      window.open(trackingURL, '_blank', 'noopener,noreferrer');
+      
+      // Show success notification
+      showNotification('Redirecting to tracking page...', 'success');
+      
+      // Clear input after successful submission
+      setTimeout(() => {
+        awbInput.value = '';
+        awbInput.classList.remove('success');
+      }, 500);
+    });
+
+    // Handle Enter key press
+    awbInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        trackingForm.dispatchEvent(new Event('submit'));
+      }
+    });
+  };
   /**
    * Services Page Carousel Functionality
    * Handles "Learn more" expand/collapse for services carousel
@@ -360,8 +486,8 @@
     }, { passive: true });
 
     // Handle accordion expansion - recalculate after content expands
-    const learnMoreButtons = document.querySelectorAll('.service-page-learn-more');
-    learnMoreButtons.forEach(button => {
+    const pageLearnMoreButtons = document.querySelectorAll('.service-page-learn-more');
+    pageLearnMoreButtons.forEach(button => {
       button.addEventListener('click', () => {
         // Give time for CSS transition to complete before recalculating
         setTimeout(() => {
@@ -383,8 +509,9 @@
     initNavbarScroll();
     initSmoothScroll();
     initFormSubmission();
+    initAWBTracking();
     initServicesCarousel();
-    initServicesAccordion();
+    initServicesPageAccordion();
     initServicesPageCarousel();
   };
 
@@ -458,29 +585,16 @@
       carousel.style.transform = `translateX(-${scrollAmount}px)`;
       updateButtons();
     }, { passive: true });
-
-    // Handle accordion expansion - recalculate after content expands
-    const learnMoreButtons = document.querySelectorAll('.service-learn-more');
-    learnMoreButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Give time for CSS transition to complete before recalculating
-        setTimeout(() => {
-          updateMaxScroll();
-          // Ensure current scroll position is still valid
-          scrollAmount = Math.min(scrollAmount, maxScroll);
-          carousel.style.transform = `translateX(-${scrollAmount}px)`;
-          updateButtons();
-        }, 400); // Match or slightly exceed CSS transition time
-      });
-    });
   };
 
   /**
    * Services Page Accordion Functionality
-   * Handles "Learn more" expand/collapse for services carousel
+   * Handles "Learn more" expand/collapse for services on the services page only
    */
-  const initServicesAccordion = () => {
+  const initServicesPageAccordion = () => {
     const learnMoreButtons = document.querySelectorAll('.service-page-learn-more');
+
+    if (!learnMoreButtons.length) return;
 
     learnMoreButtons.forEach(button => {
       button.addEventListener('click', (e) => {
@@ -491,14 +605,14 @@
         const contentId = button.getAttribute('aria-controls');
         const content = document.getElementById(contentId);
 
-        // Close all other open items first (accordion behavior)
+        // Close all other open items (accordion behavior - one at a time)
         learnMoreButtons.forEach(otherButton => {
           if (otherButton !== button) {
-            otherButton.setAttribute('aria-expanded', 'false');
-            otherButton.setAttribute('aria-label', 'Learn more');
             const otherContentId = otherButton.getAttribute('aria-controls');
             const otherContent = document.getElementById(otherContentId);
-            if (otherContent) {
+            if (otherButton.getAttribute('aria-expanded') === 'true' && otherContent) {
+              otherButton.setAttribute('aria-expanded', 'false');
+              otherButton.setAttribute('aria-label', 'Learn more');
               otherContent.hidden = true;
             }
           }
