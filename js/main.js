@@ -14,68 +14,135 @@
     });
   };
 
-  // Initialize Dark Mode
-  const initDarkMode = () => {
-    const darkModeToggles = document.querySelectorAll("#dark-mode-toggle, #dark-mode-toggle-mobile");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const savedPreference = localStorage.getItem("darkMode");
-    const { classList } = document.body;
+/**
+ * Dark Mode Manager Class
+ * Handles dark mode toggle, persistence, and sync across pages
+ */
+class DarkModeManager {
+  constructor() {
+    this.storageKey = 'expressit_theme';
+    this.systemPreferenceKey = 'expressit_system_preference';
+    this.bodyClass = 'dark';
+    this.toggleSelectors = ['#dark-mode-toggle', '#dark-mode-toggle-mobile'];
+    this.isDark = false;
+    this.init();
+  }
 
-    // Apply dark mode if: saved preference is true OR (no saved preference AND system is dark)
-    const shouldBeDark = savedPreference === "true" || (savedPreference === null && prefersDark);
+  init() {
+    // Check if user has manually set preference
+    const savedPreference = localStorage.getItem(this.storageKey);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (shouldBeDark) {
-      classList.add("dark");
+    // Apply dark mode based on saved preference or system default
+    if (savedPreference !== null) {
+      // User has manually set a preference
+      this.isDark = savedPreference === 'true';
+      localStorage.setItem(this.systemPreferenceKey, 'false');
+    } else {
+      // Use system preference
+      this.isDark = prefersDark;
+      localStorage.setItem(this.systemPreferenceKey, 'true');
     }
 
-    // Update toggle icons
-    updateDarkModeIcons();
+    // Apply the theme
+    this.applyTheme();
 
-    // Add click handlers
-    darkModeToggles.forEach((toggle) => {
-      if (toggle) {
-        toggle.addEventListener("click", toggleDarkMode);
-      }
+    // Set up event listeners
+    this.bindEvents();
+
+    // Update toggle icons
+    this.updateIcons();
+  }
+
+  bindEvents() {
+    // Toggle buttons - use event delegation for instant response
+    this.toggleSelectors.forEach(selector => {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach(element => {
+        if (element) {
+          element.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.toggle();
+          });
+        }
+      });
     });
 
     // Listen for system preference changes
     if (window.matchMedia) {
-      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         // Only auto-switch if user hasn't set a manual preference
-        if (localStorage.getItem("darkMode") === null) {
-          if (e.matches) {
-            classList.add("dark");
-          } else {
-            classList.remove("dark");
-          }
-          updateDarkModeIcons();
+        if (localStorage.getItem(this.systemPreferenceKey) === 'true') {
+          this.isDark = e.matches;
+          this.applyTheme();
+          this.updateIcons();
         }
       });
     }
-  };
+  }
 
-  // Toggle Dark Mode
-  const toggleDarkMode = () => {
+  toggle() {
+    this.isDark = !this.isDark;
+    localStorage.setItem(this.storageKey, this.isDark);
+    localStorage.setItem(this.systemPreferenceKey, 'false');
+    this.applyTheme();
+    this.updateIcons();
+    this.animateToggle();
+  }
+
+  applyTheme() {
     const { classList } = document.body;
-    const isDark = classList.toggle("dark");
-    localStorage.setItem("darkMode", isDark);
-    updateDarkModeIcons();
-  };
+    
+    if (this.isDark) {
+      classList.add(this.bodyClass);
+    } else {
+      classList.remove(this.bodyClass);
+    }
 
-  // Update Dark Mode Icons
-  const updateDarkModeIcons = () => {
-    const { classList: bodyClassList } = document.body;
-    const isDark = bodyClassList.contains("dark");
-    const icons = document.querySelectorAll("#dark-mode-toggle i, #dark-mode-toggle-mobile i");
+    // Update theme-color meta tag for PWA
+    this.updateThemeColor();
+  }
 
-    icons.forEach((icon) => {
-      if (isDark) {
-        icon.className = "fas fa-sun";
+  updateThemeColor() {
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', this.isDark ? '#1a1a2e' : '#e91e63');
+    }
+  }
+
+  updateIcons() {
+    const icons = document.querySelectorAll('#dark-mode-toggle i, #dark-mode-toggle-mobile i');
+    icons.forEach(icon => {
+      if (this.isDark) {
+        icon.className = 'fas fa-sun';
       } else {
-        icon.className = "fas fa-moon";
+        icon.className = 'fas fa-moon';
       }
     });
-  };
+  }
+
+  animateToggle() {
+    const toggles = document.querySelectorAll('.dark-mode-toggle');
+    toggles.forEach(toggle => {
+      toggle.style.transform = 'scale(0.9)';
+      setTimeout(() => {
+        toggle.style.transform = 'scale(1)';
+      }, 150);
+    });
+  }
+
+  // Static method to get current state
+  static isDarkMode() {
+    return document.body.classList.contains('dark');
+  }
+}
+
+/**
+ * Initialize Dark Mode
+ */
+const initDarkMode = () => {
+  window.darkModeManager = new DarkModeManager();
+};
 
   // Mobile Menu Functionality
   const initMobileMenu = () => {
@@ -306,371 +373,13 @@
   };
 
   /**
-   * AWB Tracking Functionality
-   * Handles Air Waybill (AWB) number validation and redirect tracking
+   * Services Page Grid
+   * Services now display in a vertical stacked grid layout (no carousel)
+   * All content is visible by default - no accordion/expand behavior
    */
-  const initAWBTracking = () => {
-    const trackingForm = document.getElementById('awb-tracking-form');
-    const awbInput = document.getElementById('awb-input');
-    const trackingError = document.getElementById('tracking-error');
-
-    if (!trackingForm || !awbInput || !trackingError) return;
-
-    // Validate AWB format: Numbers only, min 8 digits, max 12 digits
-    const validateAWB = (awb) => {
-      // Remove all spaces
-      const sanitized = awb.replace(/\s+/g, '');
-      
-      // Check if empty
-      if (!sanitized || !sanitized.trim()) {
-        return { isValid: false, message: 'Please enter an AWB number', sanitized: '' };
-      }
-      
-      // Check if contains only numbers (no dashes or other characters)
-      if (!/^\d+$/.test(sanitized)) {
-        return { isValid: false, message: 'AWB must contain numbers only', sanitized: sanitized };
-      }
-      
-      // Min length: 8 digits
-      if (sanitized.length < 8) {
-        return { isValid: false, message: 'AWB must be at least 8 digits', sanitized: sanitized };
-      }
-      
-      // Max length: 12 digits
-      if (sanitized.length > 12) {
-        return { isValid: false, message: 'AWB cannot exceed 12 digits', sanitized: sanitized };
-      }
-      
-      return { isValid: true, message: '', sanitized: sanitized };
-    };
-
-    // Show error message
-    const showError = (message) => {
-      trackingError.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + message;
-      trackingError.classList.add('visible');
-      awbInput.classList.add('error');
-      awbInput.classList.remove('success');
-    };
-
-    // Clear error message
-    const clearError = () => {
-      trackingError.classList.remove('visible');
-      trackingError.innerHTML = '';
-      awbInput.classList.remove('error');
-    };
-
-    // Handle input change - only allow numbers
-    awbInput.addEventListener('input', () => {
-      const {value} = awbInput;
-      if (value) {
-        // Only allow numbers
-        const numbersOnly = value.replace(/[^0-9]/g, '');
-        if (numbersOnly !== value) {
-          awbInput.value = numbersOnly;
-        }
-        clearError();
-      }
-    });
-
-    // Handle form submission
-    trackingForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const awbValue = awbInput.value;
-      const validation = validateAWB(awbValue);
-      
-      if (!validation.isValid) {
-        showError(validation.message);
-        awbInput.focus();
-        return;
-      }
-      
-      // Valid AWB - clear any errors and show success state
-      clearError();
-      awbInput.classList.add('success');
-      
-      // Get submit button and show loading
-      const submitBtn = trackingForm.querySelector('.tracking-submit-btn');
-      const originalContent = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="loading-spinner"></span><span>Tracking...</span>';
-      submitBtn.classList.add('loading');
-      
-      // Build redirect URL with query parameter after 800ms fake delay
-      setTimeout(() => {
-        const trackingURL = `https://www.track-trace.com/aircargo?awb=${awbValue}`;
-        
-        // Open in new tab
-        window.open(trackingURL, '_blank', 'noopener,noreferrer');
-        
-        // Reset button
-        submitBtn.innerHTML = originalContent;
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('loading');
-        
-        // Show success notification
-        showNotification('Redirecting to tracking page...', 'success');
-        
-        // Clear input after successful submission
-        setTimeout(() => {
-          awbInput.value = '';
-          awbInput.classList.remove('success');
-        }, 500);
-      }, 800);
-    });
-
-    // Handle Enter key press
-    awbInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        trackingForm.dispatchEvent(new Event('submit'));
-      }
-    });
-  };
-
-  /**
-   * Track Shipment Modal Functionality
-   * Handles modal open/close for quick tracking access
-   */
-  const initTrackingModal = () => {
-    const modal = document.getElementById('tracking-modal');
-    const headerBtn = document.getElementById('header-track-btn');
-    const heroBtn = document.getElementById('hero-track-btn');
-    const modalClose = document.getElementById('modal-close');
-    const modalBackdrop = document.querySelector('.tracking-modal-backdrop');
-    const modalAwbInput = document.getElementById('modal-awb-input');
-    const modalForm = document.getElementById('modal-tracking-form');
-    const modalError = document.getElementById('modal-tracking-error');
-
-    if (!modal || !modalAwbInput || !modalForm) return;
-
-    // Open modal function
-    const openModal = () => {
-      modal.removeAttribute('hidden');
-      document.body.style.overflow = 'hidden';
-      // Focus input after animation
-      setTimeout(() => {
-        modalAwbInput.focus();
-      }, 100);
-    };
-
-    // Close modal function
-    const closeModal = () => {
-      modal.setAttribute('hidden', '');
-      document.body.style.overflow = '';
-      // Clear input and errors
-      modalAwbInput.value = '';
-      modalAwbInput.classList.remove('error', 'success');
-      modalError.classList.remove('visible');
-      modalError.innerHTML = '';
-    };
-
-    // Event listeners for open buttons
-    if (headerBtn) {
-      headerBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-      });
-    }
-
-    if (heroBtn) {
-      heroBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
-      });
-    }
-
-    // Event listeners for close
-    if (modalClose) {
-      modalClose.addEventListener('click', closeModal);
-    }
-
-    if (modalBackdrop) {
-      modalBackdrop.addEventListener('click', closeModal);
-    }
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !modal.hasAttribute('hidden')) {
-        closeModal();
-      }
-    });
-
-    // Modal AWB validation (numbers only, min 8, max 12)
-    const validateAWB = (awb) => {
-      const sanitized = awb.replace(/\s+/g, '');
-      
-      if (!sanitized || !sanitized.trim()) {
-        return { isValid: false, message: 'Please enter an AWB number', sanitized: '' };
-      }
-      
-      // Numbers only - reject any non-digit characters
-      if (!/^\d+$/.test(sanitized)) {
-        return { isValid: false, message: 'AWB must contain numbers only', sanitized: sanitized };
-      }
-      
-      // Min length: 8 digits
-      if (sanitized.length < 8) {
-        return { isValid: false, message: 'AWB must be at least 8 digits', sanitized: sanitized };
-      }
-      
-      // Max length: 12 digits
-      if (sanitized.length > 12) {
-        return { isValid: false, message: 'AWB cannot exceed 12 digits', sanitized: sanitized };
-      }
-      
-      return { isValid: true, message: '', sanitized: sanitized };
-    };
-
-    const showModalError = (message) => {
-      modalError.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + message;
-      modalError.classList.add('visible');
-      modalAwbInput.classList.add('error');
-      modalAwbInput.classList.remove('success');
-    };
-
-    const clearModalError = () => {
-      modalError.classList.remove('visible');
-      modalError.innerHTML = '';
-      modalAwbInput.classList.remove('error');
-    };
-
-    // Handle modal input - only allow numbers
-    modalAwbInput.addEventListener('input', () => {
-      const {value} = modalAwbInput;
-      if (value) {
-        // Only allow numbers
-        const numbersOnly = value.replace(/[^0-9]/g, '');
-        if (numbersOnly !== value) {
-          modalAwbInput.value = numbersOnly;
-        }
-        clearModalError();
-      }
-    });
-
-    // Handle modal form submission
-    modalForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const awbValue = modalAwbInput.value;
-      const validation = validateAWB(awbValue);
-      
-      if (!validation.isValid) {
-        showModalError(validation.message);
-        modalAwbInput.focus();
-        return;
-      }
-      
-      // Valid AWB
-      clearModalError();
-      modalAwbInput.classList.add('success');
-      
-      // Get submit button and show loading
-      const submitBtn = modalForm.querySelector('.tracking-modal-submit-btn');
-      const originalContent = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="loading-spinner"></span><span>Tracking...</span>';
-      submitBtn.classList.add('loading');
-      
-      // Build redirect URL with query parameter after 800ms fake delay
-      setTimeout(() => {
-        const trackingURL = `https://www.track-trace.com/aircargo?awb=${awbValue}`;
-        
-        // Open in new tab
-        window.open(trackingURL, '_blank', 'noopener,noreferrer');
-        
-        // Reset button
-        submitBtn.innerHTML = originalContent;
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('loading');
-        
-        // Show success notification
-        showNotification('Redirecting to tracking page...', 'success');
-        
-        // Close modal after short delay
-        setTimeout(() => {
-          closeModal();
-        }, 500);
-      }, 800);
-    });
-
-    // Handle Enter key in modal input
-    modalAwbInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        modalForm.dispatchEvent(new Event('submit'));
-      }
-    });
-  };
-  /**
-   * Services Page Carousel Functionality
-   * Handles "Learn more" expand/collapse for services carousel
-   */
-  const initServicesPageCarousel = () => {
-    const carousel = document.getElementById('services-page-carousel');
-    const prevBtn = document.querySelector('.services-page-carousel-prev');
-    const nextBtn = document.querySelector('.services-page-carousel-next');
-
-    if (!carousel || !prevBtn || !nextBtn) return;
-
-    let scrollAmount = 0;
-    let maxScroll = 0;
-    
-    // Use getBoundingClientRect for accurate measurements that account for padding
-    const updateMaxScroll = () => {
-      const container = carousel.parentElement;
-      const containerRect = container.getBoundingClientRect();
-      const carouselWidth = carousel.scrollWidth;
-      // Account for the padding in the container (5rem left + 5rem right = 160px)
-      const horizontalPadding = 160;
-      const visibleWidth = Math.max(0, containerRect.width - horizontalPadding);
-      
-      maxScroll = Math.max(0, carouselWidth - visibleWidth);
-    };
-
-    const updateButtons = () => {
-      prevBtn.disabled = scrollAmount <= 0;
-      nextBtn.disabled = scrollAmount >= maxScroll;
-    };
-
-    const scrollTo = (newScrollAmount) => {
-      scrollAmount = Math.max(0, Math.min(newScrollAmount, maxScroll));
-      carousel.style.transform = `translateX(-${scrollAmount}px)`;
-      updateButtons();
-    };
-
-    prevBtn.addEventListener('click', () => {
-      scrollTo(Math.max(0, scrollAmount - 304)); // 280px slide + 24px gap
-    });
-
-    nextBtn.addEventListener('click', () => {
-      scrollTo(Math.min(maxScroll, scrollAmount + 304));
-    });
-
-    // Initialize
-    updateMaxScroll();
-    updateButtons();
-
-    // Handle window resize - recalculate scroll limits
-    window.addEventListener('resize', () => {
-      updateMaxScroll();
-      scrollTo(Math.min(scrollAmount, maxScroll));
-    }, { passive: true });
-
-    // Handle accordion expansion - recalculate after content expands
-    const pageLearnMoreButtons = document.querySelectorAll('.service-page-learn-more');
-    pageLearnMoreButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Give time for CSS transition to complete before recalculating
-        setTimeout(() => {
-          updateMaxScroll();
-          // Ensure current scroll position is still valid
-          scrollAmount = Math.min(scrollAmount, maxScroll);
-          carousel.style.transform = `translateX(-${scrollAmount}px)`;
-          updateButtons();
-        }, 400); // Match or slightly exceed CSS transition time
-      });
-    });
+  const initServicesPageGrid = () => {
+    // Services page now uses a simple vertical grid layout
+    // No JavaScript needed - all content is visible by default
   };
 
   // Initialize when DOM is ready
@@ -681,11 +390,8 @@
     initNavbarScroll();
     initSmoothScroll();
     initFormSubmission();
-    initAWBTracking();
-    initTrackingModal();
     initServicesCarousel();
-    initServicesPageAccordion();
-    initServicesPageCarousel();
+    initServicesPageGrid();
   };
 
   // Run init function when DOM is ready
@@ -697,7 +403,11 @@
 
   // Export functions for potential use in other scripts
   window.ExpressIT = {
-    toggleDarkMode: toggleDarkMode,
+    darkMode: {
+      toggle: () => window.darkModeManager?.toggle(),
+      isDark: () => DarkModeManager.isDarkMode(),
+      updateThemeColor: () => window.darkModeManager?.updateThemeColor()
+    },
     showNotification: showNotification,
     isValidEmail: isValidEmail,
     sanitizeInput: sanitizeInput
@@ -705,6 +415,7 @@
 
   /**
    * Services Carousel Functionality (Home Page)
+   * Includes touch swipe support and dynamic scroll calculation
    */
   const initServicesCarousel = () => {
     const carousel = document.getElementById('services-carousel');
@@ -715,39 +426,158 @@
 
     let scrollAmount = 0;
     let maxScroll = 0;
+    let scrollAmountPerClick = 0;
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let initialTranslate = 0;
 
-    // Use getBoundingClientRect for accurate measurements
+    // Get the first slide width for calculating scroll amount
+    const getSlideWidth = () => {
+      const firstSlide = carousel.querySelector('.service-slide');
+      if (firstSlide) {
+        const slideRect = firstSlide.getBoundingClientRect();
+        const computedStyle = window.getComputedStyle(carousel);
+        const gap = parseFloat(computedStyle.gap) || 24;
+        return slideRect.width + gap;
+      }
+      return 344; // fallback: 320px slide + 24px gap
+    };
+
+    // Update max scroll based on container and carousel dimensions
     const updateMaxScroll = () => {
       const container = carousel.parentElement;
       const containerRect = container.getBoundingClientRect();
       const carouselWidth = carousel.scrollWidth;
-      // Account for horizontal padding (3.5rem left + 3.5rem right = 56px)
-      const horizontalPadding = 56;
+      
+      // Account for horizontal padding (4rem left + 4rem right = 64px on desktop)
+      const containerStyle = window.getComputedStyle(container);
+      const paddingLeft = parseFloat(containerStyle.paddingLeft) || 0;
+      const paddingRight = parseFloat(containerStyle.paddingRight) || 0;
+      const horizontalPadding = paddingLeft + paddingRight;
+
       const visibleWidth = Math.max(0, containerRect.width - horizontalPadding);
-
       maxScroll = Math.max(0, carouselWidth - visibleWidth);
+      
+      // Update scroll amount per click based on current slide width
+      scrollAmountPerClick = getSlideWidth();
     };
 
+    // Update button states based on scroll position
     const updateButtons = () => {
-      prevBtn.disabled = scrollAmount <= 0;
-      nextBtn.disabled = scrollAmount >= maxScroll;
+      const tolerance = 5; // Small tolerance for floating point comparisons
+      prevBtn.disabled = scrollAmount <= tolerance;
+      nextBtn.disabled = scrollAmount >= maxScroll - tolerance;
     };
 
+    // Smooth scroll to specific position
     const scrollTo = (newScrollAmount) => {
       scrollAmount = Math.max(0, Math.min(newScrollAmount, maxScroll));
       carousel.style.transform = `translateX(-${scrollAmount}px)`;
       updateButtons();
     };
 
-    prevBtn.addEventListener('click', () => {
-      scrollTo(Math.max(0, scrollAmount - 344)); // 320px slide + 24px gap
+    // Scroll by one card width
+    const scrollByCard = (direction) => {
+      const scrollDelta = direction === 'next' ? scrollAmountPerClick : -scrollAmountPerClick;
+      scrollTo(scrollAmount + scrollDelta);
+    };
+
+    // Event listeners for navigation buttons
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollByCard('prev');
     });
 
-    nextBtn.addEventListener('click', () => {
-      scrollTo(Math.min(maxScroll, scrollAmount + 344));
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollByCard('next');
     });
 
-    // Initialize button states
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchStartScroll = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartScroll = scrollAmount;
+      carousel.classList.add('dragging');
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', (e) => {
+      if (!carousel.classList.contains('dragging')) return;
+      
+      const touchCurrentX = e.touches[0].clientX;
+      const diff = touchStartX - touchCurrentX;
+      
+      // Apply drag with some resistance
+      const newScroll = touchStartScroll + diff;
+      scrollAmount = Math.max(0, Math.min(newScroll, maxScroll));
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', () => {
+      carousel.classList.remove('dragging');
+      updateButtons();
+    }, { passive: true });
+
+    // Mouse drag support for desktop
+    let isMouseDown = false;
+    let mouseStartX = 0;
+    let mouseStartScroll = 0;
+
+    carousel.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.services-carousel-btn')) return; // Don't drag when clicking buttons
+      isMouseDown = true;
+      mouseStartX = e.clientX;
+      mouseStartScroll = scrollAmount;
+      carousel.classList.add('dragging');
+      carousel.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isMouseDown) return;
+      
+      const mouseCurrentX = e.clientX;
+      const diff = mouseStartX - mouseCurrentX;
+      
+      const newScroll = mouseStartScroll + diff;
+      scrollAmount = Math.max(0, Math.min(newScroll, maxScroll));
+      carousel.style.transform = `translateX(-${scrollAmount}px)`;
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isMouseDown) {
+        isMouseDown = false;
+        carousel.classList.remove('dragging');
+        carousel.style.cursor = 'grab';
+        updateButtons();
+      }
+    });
+
+    // Prevent text selection during drag
+    carousel.addEventListener('selectstart', (e) => {
+      if (isMouseDown) {
+        e.preventDefault();
+      }
+    });
+
+    // Keyboard navigation
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        scrollByCard('prev');
+      } else if (e.key === 'ArrowRight') {
+        scrollByCard('next');
+      }
+    });
+
+    // Make carousel focusable for keyboard navigation
+    carousel.setAttribute('tabindex', '0');
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-label', 'Services carousel');
+    carousel.style.outline = 'none';
+
+    // Initialize
     updateMaxScroll();
     updateButtons();
 
@@ -758,52 +588,19 @@
       carousel.style.transform = `translateX(-${scrollAmount}px)`;
       updateButtons();
     }, { passive: true });
-  };
 
-  /**
-   * Services Page Accordion Functionality
-   * Handles "Learn more" expand/collapse for services on the services page only
-   */
-  const initServicesPageAccordion = () => {
-    const learnMoreButtons = document.querySelectorAll('.service-page-learn-more');
-
-    if (!learnMoreButtons.length) return;
-
-    learnMoreButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        const contentId = button.getAttribute('aria-controls');
-        const content = document.getElementById(contentId);
-
-        // Close all other open items (accordion behavior - one at a time)
-        learnMoreButtons.forEach(otherButton => {
-          if (otherButton !== button) {
-            const otherContentId = otherButton.getAttribute('aria-controls');
-            const otherContent = document.getElementById(otherContentId);
-            if (otherButton.getAttribute('aria-expanded') === 'true' && otherContent) {
-              otherButton.setAttribute('aria-expanded', 'false');
-              otherButton.setAttribute('aria-label', 'Learn more');
-              otherContent.hidden = true;
-            }
-          }
-        });
-
-        // Toggle current item
-        const newExpandedState = !isExpanded;
-        button.setAttribute('aria-expanded', newExpandedState.toString());
-        button.setAttribute('aria-label', newExpandedState ? 'Show less' : 'Learn more');
-
-        if (content) {
-          content.hidden = !newExpandedState;
-        }
-      });
+    // Recalculate on orientation change
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => {
+        updateMaxScroll();
+        scrollAmount = Math.min(scrollAmount, maxScroll);
+        carousel.style.transform = `translateX(-${scrollAmount}px)`;
+        updateButtons();
+      }, 100);
     });
   };
 
-/**
+  /**
    * Service Worker Registration
    * Provides offline capability and improved performance
    * Safe implementation for GitHub Pages deployment
