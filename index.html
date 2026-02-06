@@ -154,6 +154,11 @@
             Get Quote
             <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
+          <!-- Track Shipment Button -->
+          <button class="btn btn-outline track-shipment-btn" id="header-track-btn" aria-label="Track Shipment">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            Track Shipment
+          </button>
           <!-- Dark Mode Toggle -->
           <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
             <i class="fas fa-moon" aria-hidden="true"></i>
@@ -216,6 +221,10 @@
               <i class="fas fa-phone mr-2" aria-hidden="true"></i>
               Contact Us
             </a>
+            <button class="btn btn-white track-shipment-btn" id="hero-track-btn">
+              <i class="fas fa-search" aria-hidden="true"></i>
+              Track Shipment
+            </button>
           </div>
 
           <!-- Stats -->
@@ -223,15 +232,19 @@
             <div class="stat-item">
               <div class="stat-value">18+</div>
               <div class="stat-label">Years Experience</div>
+            </div>
             <div class="stat-item">
               <div class="stat-value">500+</div>
               <div class="stat-label">Clients Served</div>
+            </div>
             <div class="stat-item">
               <div class="stat-value">50K+</div>
               <div class="stat-label">Deliveries Made</div>
+            </div>
             <div class="stat-item">
               <div class="stat-value">99%</div>
               <div class="stat-label">Satisfaction Rate</div>
+            </div>
           </div>
       </div>
 
@@ -280,6 +293,7 @@
                 <i class="fas fa-check-circle text-primary" aria-hidden="true"></i>
                 <span class="text-secondary">Real-time Tracking</span>
               </div>
+            </div>
 
             <div>
               <a href="pages/contact.html" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
@@ -287,6 +301,7 @@
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
               </a>
             </div>
+          </div>
 
           <!-- Image/Visual -->
           <div class="relative">
@@ -302,19 +317,25 @@
                   <div class="card-secondary p-4 text-center">
                     <i class="fas fa-snowflake text-primary text-2xl mb-2" aria-hidden="true"></i>
                     <div class="text-sm text-secondary">Cold-Chain Support</div>
+                  </div>
                   <div class="card-secondary p-4 text-center">
                     <i class="fas fa-truck text-primary text-2xl mb-2" aria-hidden="true"></i>
                     <div class="text-sm text-secondary">50+ Vehicles</div>
+                  </div>
                   <div class="card-secondary p-4 text-center">
                     <i class="fas fa-warehouse text-primary text-2xl mb-2" aria-hidden="true"></i>
                     <div class="text-sm text-secondary">Extensive Warehousing</div>
+                  </div>
                 </div>
-            </div>
+              </div>
 
-            <!-- Decorative Elements -->
-            <div class="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full"></div>
-            <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/20 rounded-full"></div>
+              <!-- Decorative Elements -->
+              <div class="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full"></div>
+              <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/20 rounded-full"></div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Trusted Partners Section -->
@@ -444,6 +465,23 @@
                 <p class="service-description">
                   Temperature-controlled logistics solutions for pharmaceutical, food, and industrial applications across East Africa. Our specialized cold-chain support ensures temperature integrity for sensitive shipments including biological samples, vaccines, and cold chain products. Available 24/7 for emergency requirements with temperature-controlled packaging and monitored handling.
                 </p>
+                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-1" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-1" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our specialized cold-chain logistics ensure temperature integrity from origin to destination. We offer:</p>
+                    <ul>
+                      <li>Temperature-controlled vehicles (-25°C to +25°C range)</li>
+                      <li>Real-time temperature monitoring and reporting</li>
+                      <li>GDP-compliant handling procedures</li>
+                      <li>Pharmaceutical-grade storage facilities</li>
+                      <li>24/7 emergency response for temperature excursions</li>
+                    </ul>
+                    <p>Serving healthcare, food, and industrial clients across Uganda, Kenya, Tanzania, Rwanda, and the DRC.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -457,6 +495,23 @@
                 <p class="service-description">
                   Secure and compliant shipping of biological specimens, medical samples, and clinical trial materials with full chain of custody. Specialized logistics for biological specimen transport with IATA-compliant packaging, regulatory compliance, real-time temperature monitoring, and door-to-door global delivery.
                 </p>
+                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-1b" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-1b" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Specialized logistics for biological specimen transport with regulatory compliance and temperature integrity throughout the journey:</p>
+                    <ul>
+                      <li>IATA-compliant packaging and documentation</li>
+                      <li>Chain of custody tracking and handling</li>
+                      <li>Real-time temperature monitoring and alerts</li>
+                      <li>Door-to-door global delivery options</li>
+                      <li>Biohazard and infectious substance handling</li>
+                    </ul>
+                    <p>Trusted by research institutions, hospitals, and pharmaceutical companies for sensitive biological shipments worldwide.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -483,6 +538,23 @@
                 <p class="service-description">
                   Reliable road freight services across East Africa with a modern fleet ensuring safe and timely delivery. Professional freight transportation solutions covering Uganda and the broader East African region with fleet of 50+ modern vehicles, real-time GPS tracking, temperature-controlled transport, and cross-border expertise.
                 </p>
+                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-2" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-2" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our freight transportation services cover major routes across East Africa:</p>
+                    <ul>
+                      <li>Full truckload (FTL) and less than truckload (LTL) options</li>
+                      <li>Modern fleet with GPS tracking and real-time updates</li>
+                      <li>Experienced drivers with safety certifications</li>
+                      <li>Door-to-door and terminal-to-terminal services</li>
+                      <li>Project cargo and oversized load handling</li>
+                    </ul>
+                    <p>Coverage includes Uganda, Kenya, Tanzania, Rwanda, Burundi, South Sudan, and DRC.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -509,6 +581,23 @@
                 <p class="service-description">
                   Efficient last-mile delivery and distribution network covering major cities and towns. Comprehensive distribution solutions ensuring your products reach customers efficiently across Uganda and East Africa with same-day delivery in Kampala, nationwide coverage, express and standard options, and proof of delivery documentation.
                 </p>
+                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-4" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-4" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our distribution network ensures efficient delivery across East Africa:</p>
+                    <ul>
+                      <li>Last-mile delivery to urban and rural areas</li>
+                      <li>Scheduled and express delivery options</li>
+                      <li>Cash-on-delivery and payment collection services</li>
+                      <li>Return logistics and reverse pickup</li>
+                      <li>Proof of delivery with digital signatures and photos</li>
+                    </ul>
+                    <p>Coverage includes Kampala, Nairobi, Kigali, Dar es Salaam, Entebbe, and surrounding regions.</p>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -535,6 +624,23 @@
                 <p class="service-description">
                   Seamless cross-border transportation to Kenya, Tanzania, Rwanda, DRC, and beyond. End-to-end cross-border logistics solutions handling customs documentation, customs clearance assistance, door-to-door delivery, transit insurance, and full documentation handling.
                 </p>
+                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-6" type="button">
+                  Learn more
+                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div id="service-content-6" class="service-expanded-content" hidden>
+                  <div class="service-expanded-details">
+                    <p>Our cross-border expertise simplifies international trade:</p>
+                    <ul>
+                      <li>Full customs clearance and documentation services</li>
+                      <li>Bonded truck transport for duty-suspended goods</li>
+                      <li>Partner network across East African borders</li>
+                      <li>Transit insurance and cargo guarantee</li>
+                      <li>Clearance at Malaba, Busia, Nimule, and other major border points</li>
+                    </ul>
+                    <p>We handle all regulatory requirements for smooth cross-border operations.</p>
+                  </div>
+                </div>
               </div>
             </article>
           </div>
@@ -607,7 +713,7 @@
                   <i class="fas fa-globe" aria-hidden="true"></i>
                   Supports all major airlines worldwide
                 </p>
-                <p class="tracking-example">Example: 176-12345678</p>
+                <p class="tracking-example">Enter 8-12 digit AWB number</p>
               </div>
               <div id="tracking-error" class="tracking-error" role="alert" aria-live="polite"></div>
             </div>
@@ -616,6 +722,50 @@
     </section>
 
   </main>
+
+  <!-- Track Shipment Modal -->
+  <div id="tracking-modal" class="tracking-modal" role="dialog" aria-modal="true" aria-labelledby="modal-tracking-title" hidden>
+    <div class="tracking-modal-backdrop" tabindex="-1"></div>
+    <div class="tracking-modal-container">
+      <div class="tracking-modal-content">
+        <button class="tracking-modal-close" id="modal-close" aria-label="Close modal">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="tracking-modal-header">
+          <div class="tracking-modal-icon">
+            <i class="fas fa-box-open" aria-hidden="true"></i>
+          </div>
+          <h2 id="modal-tracking-title" class="tracking-modal-title">Track Your Shipment</h2>
+          <p class="tracking-modal-subtitle">Enter your Air Waybill (AWB) number to track your cargo</p>
+        </div>
+        <form id="modal-tracking-form" class="tracking-modal-form" novalidate>
+          <div class="tracking-modal-input-group">
+            <input 
+              type="text" 
+              id="modal-awb-input" 
+              class="tracking-modal-input" 
+              placeholder="Enter AWB Number" 
+              aria-describedby="modal-awb-helper"
+              autocomplete="off"
+              spellcheck="false"
+              maxlength="12"
+            >
+            <div id="modal-awb-helper" class="tracking-modal-helper">
+              <p class="tracking-modal-support">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                Enter 8-12 digit AWB number (numbers only)
+              </p>
+            </div>
+            <div id="modal-tracking-error" class="tracking-modal-error" role="alert" aria-live="polite"></div>
+          </div>
+          <button type="submit" class="tracking-modal-submit-btn">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            Track Shipment
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
@@ -631,6 +781,7 @@
               <span class="logo-title text-white">Express IT</span>
               <span class="logo-subtitle">Logistics Ltd</span>
             </div>
+          </div>
           <p class="footer-description">
             East Africa's premier logistics and shipping solutions provider with specialized cold-chain capabilities.
           </p>
@@ -639,6 +790,7 @@
               <i class="fab fa-whatsapp" aria-hidden="true"></i>
             </a>
           </div>
+        </div>
 
         <!-- Quick Links -->
         <div>
@@ -669,7 +821,7 @@
         <div>
           <h3 class="footer-title">Contact Us</h3>
           <ul class="contact-list">
-              <li>
+            <li>
               <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
               <span>Rumee House, 3rd Floor<br>Plot 19 Lumumba Avenue – Nakasero<br>P.O. Box 74638<br>Kampala – Uganda</span>
             </li>
@@ -691,6 +843,7 @@
             </li>
           </ul>
         </div>
+      </div>
 
       <!-- Copyright Bar -->
       <div class="footer-bottom">

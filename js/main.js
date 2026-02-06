@@ -19,7 +19,7 @@
     const darkModeToggles = document.querySelectorAll("#dark-mode-toggle, #dark-mode-toggle-mobile");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const savedPreference = localStorage.getItem("darkMode");
-    const { classList } = document.documentElement;
+    const { classList } = document.body;
 
     // Apply dark mode if: saved preference is true OR (no saved preference AND system is dark)
     const shouldBeDark = savedPreference === "true" || (savedPreference === null && prefersDark);
@@ -56,7 +56,7 @@
 
   // Toggle Dark Mode
   const toggleDarkMode = () => {
-    const { classList } = document.documentElement;
+    const { classList } = document.body;
     const isDark = classList.toggle("dark");
     localStorage.setItem("darkMode", isDark);
     updateDarkModeIcons();
@@ -64,8 +64,8 @@
 
   // Update Dark Mode Icons
   const updateDarkModeIcons = () => {
-    const { classList: rootClassList } = document.documentElement;
-    const isDark = rootClassList.contains("dark");
+    const { classList: bodyClassList } = document.body;
+    const isDark = bodyClassList.contains("dark");
     const icons = document.querySelectorAll("#dark-mode-toggle i, #dark-mode-toggle-mobile i");
 
     icons.forEach((icon) => {
@@ -316,7 +316,7 @@
 
     if (!trackingForm || !awbInput || !trackingError) return;
 
-    // Validate AWB format: 000-00000000 (3 digits + optional dash + 8 digits)
+    // Validate AWB format: Numbers only, min 8 digits, max 12 digits
     const validateAWB = (awb) => {
       // Remove all spaces
       const sanitized = awb.replace(/\s+/g, '');
@@ -326,35 +326,22 @@
         return { isValid: false, message: 'Please enter an AWB number', sanitized: '' };
       }
       
-      // Check if contains only numbers and optional dash
-      if (!/^[\d-]+$/.test(sanitized)) {
-        return { isValid: false, message: 'AWB number must contain only numbers and a dash (-)', sanitized: sanitized };
+      // Check if contains only numbers (no dashes or other characters)
+      if (!/^\d+$/.test(sanitized)) {
+        return { isValid: false, message: 'AWB must contain numbers only', sanitized: sanitized };
       }
       
-      // Check format: 3 digits + optional dash + 8 digits
-      // Must be either 11 chars with dash or 11 chars without (3+8=11)
-      if (sanitized.length !== 11 && sanitized.length !== 12) {
-        return { isValid: false, message: 'AWB must be 11 digits (with or without dash)', sanitized: sanitized };
+      // Min length: 8 digits
+      if (sanitized.length < 8) {
+        return { isValid: false, message: 'AWB must be at least 8 digits', sanitized: sanitized };
       }
       
-      // Validate the pattern
-      const patternWithDash = /^(\d{3})-(\d{8})$/;
-      const patternWithoutDash = /^(\d{11})$/;
-      
-      if (!patternWithDash.test(sanitized) && !patternWithoutDash.test(sanitized)) {
-        return { isValid: false, message: 'Invalid AWB format. Use: 000-00000000 or 00000000000', sanitized: sanitized };
+      // Max length: 12 digits
+      if (sanitized.length > 12) {
+        return { isValid: false, message: 'AWB cannot exceed 12 digits', sanitized: sanitized };
       }
       
       return { isValid: true, message: '', sanitized: sanitized };
-    };
-
-    // Format AWB with dash for display
-    const formatAWB = (awb) => {
-      const sanitized = awb.replace(/\s+/g, '');
-      if (sanitized.length === 11 && !sanitized.includes('-')) {
-        return sanitized.substring(0, 3) + '-' + sanitized.substring(3);
-      }
-      return sanitized;
     };
 
     // Show error message
@@ -372,14 +359,14 @@
       awbInput.classList.remove('error');
     };
 
-    // Handle input change
+    // Handle input change - only allow numbers
     awbInput.addEventListener('input', () => {
-      const value = awbInput.value;
+      const {value} = awbInput;
       if (value) {
-        // Auto-format while typing
-        const formatted = formatAWB(value);
-        if (formatted !== value) {
-          awbInput.value = formatted;
+        // Only allow numbers
+        const numbersOnly = value.replace(/[^0-9]/g, '');
+        if (numbersOnly !== value) {
+          awbInput.value = numbersOnly;
         }
         clearError();
       }
@@ -402,24 +389,34 @@
       clearError();
       awbInput.classList.add('success');
       
-      // Sanitize and format AWB for URL
-      const sanitizedAWB = validation.sanitized.replace(/[^0-9-]/g, '');
-      const formattedForURL = formatAWB(sanitizedAWB).toUpperCase();
+      // Get submit button and show loading
+      const submitBtn = trackingForm.querySelector('.tracking-submit-btn');
+      const originalContent = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span><span>Tracking...</span>';
+      submitBtn.classList.add('loading');
       
-      // Build redirect URL
-      const trackingURL = `https://www.cargotracking.aero/track/awb/${formattedForURL}`;
-      
-      // Open in new tab
-      window.open(trackingURL, '_blank', 'noopener,noreferrer');
-      
-      // Show success notification
-      showNotification('Redirecting to tracking page...', 'success');
-      
-      // Clear input after successful submission
+      // Build redirect URL with query parameter after 800ms fake delay
       setTimeout(() => {
-        awbInput.value = '';
-        awbInput.classList.remove('success');
-      }, 500);
+        const trackingURL = `https://www.track-trace.com/aircargo?awb=${awbValue}`;
+        
+        // Open in new tab
+        window.open(trackingURL, '_blank', 'noopener,noreferrer');
+        
+        // Reset button
+        submitBtn.innerHTML = originalContent;
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        
+        // Show success notification
+        showNotification('Redirecting to tracking page...', 'success');
+        
+        // Clear input after successful submission
+        setTimeout(() => {
+          awbInput.value = '';
+          awbInput.classList.remove('success');
+        }, 500);
+      }, 800);
     });
 
     // Handle Enter key press
@@ -427,6 +424,181 @@
       if (e.key === 'Enter') {
         e.preventDefault();
         trackingForm.dispatchEvent(new Event('submit'));
+      }
+    });
+  };
+
+  /**
+   * Track Shipment Modal Functionality
+   * Handles modal open/close for quick tracking access
+   */
+  const initTrackingModal = () => {
+    const modal = document.getElementById('tracking-modal');
+    const headerBtn = document.getElementById('header-track-btn');
+    const heroBtn = document.getElementById('hero-track-btn');
+    const modalClose = document.getElementById('modal-close');
+    const modalBackdrop = document.querySelector('.tracking-modal-backdrop');
+    const modalAwbInput = document.getElementById('modal-awb-input');
+    const modalForm = document.getElementById('modal-tracking-form');
+    const modalError = document.getElementById('modal-tracking-error');
+
+    if (!modal || !modalAwbInput || !modalForm) return;
+
+    // Open modal function
+    const openModal = () => {
+      modal.removeAttribute('hidden');
+      document.body.style.overflow = 'hidden';
+      // Focus input after animation
+      setTimeout(() => {
+        modalAwbInput.focus();
+      }, 100);
+    };
+
+    // Close modal function
+    const closeModal = () => {
+      modal.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+      // Clear input and errors
+      modalAwbInput.value = '';
+      modalAwbInput.classList.remove('error', 'success');
+      modalError.classList.remove('visible');
+      modalError.innerHTML = '';
+    };
+
+    // Event listeners for open buttons
+    if (headerBtn) {
+      headerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    }
+
+    if (heroBtn) {
+      heroBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    }
+
+    // Event listeners for close
+    if (modalClose) {
+      modalClose.addEventListener('click', closeModal);
+    }
+
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', closeModal);
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.hasAttribute('hidden')) {
+        closeModal();
+      }
+    });
+
+    // Modal AWB validation (numbers only, min 8, max 12)
+    const validateAWB = (awb) => {
+      const sanitized = awb.replace(/\s+/g, '');
+      
+      if (!sanitized || !sanitized.trim()) {
+        return { isValid: false, message: 'Please enter an AWB number', sanitized: '' };
+      }
+      
+      // Numbers only - reject any non-digit characters
+      if (!/^\d+$/.test(sanitized)) {
+        return { isValid: false, message: 'AWB must contain numbers only', sanitized: sanitized };
+      }
+      
+      // Min length: 8 digits
+      if (sanitized.length < 8) {
+        return { isValid: false, message: 'AWB must be at least 8 digits', sanitized: sanitized };
+      }
+      
+      // Max length: 12 digits
+      if (sanitized.length > 12) {
+        return { isValid: false, message: 'AWB cannot exceed 12 digits', sanitized: sanitized };
+      }
+      
+      return { isValid: true, message: '', sanitized: sanitized };
+    };
+
+    const showModalError = (message) => {
+      modalError.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + message;
+      modalError.classList.add('visible');
+      modalAwbInput.classList.add('error');
+      modalAwbInput.classList.remove('success');
+    };
+
+    const clearModalError = () => {
+      modalError.classList.remove('visible');
+      modalError.innerHTML = '';
+      modalAwbInput.classList.remove('error');
+    };
+
+    // Handle modal input - only allow numbers
+    modalAwbInput.addEventListener('input', () => {
+      const {value} = modalAwbInput;
+      if (value) {
+        // Only allow numbers
+        const numbersOnly = value.replace(/[^0-9]/g, '');
+        if (numbersOnly !== value) {
+          modalAwbInput.value = numbersOnly;
+        }
+        clearModalError();
+      }
+    });
+
+    // Handle modal form submission
+    modalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const awbValue = modalAwbInput.value;
+      const validation = validateAWB(awbValue);
+      
+      if (!validation.isValid) {
+        showModalError(validation.message);
+        modalAwbInput.focus();
+        return;
+      }
+      
+      // Valid AWB
+      clearModalError();
+      modalAwbInput.classList.add('success');
+      
+      // Get submit button and show loading
+      const submitBtn = modalForm.querySelector('.tracking-modal-submit-btn');
+      const originalContent = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span><span>Tracking...</span>';
+      submitBtn.classList.add('loading');
+      
+      // Build redirect URL with query parameter after 800ms fake delay
+      setTimeout(() => {
+        const trackingURL = `https://www.track-trace.com/aircargo?awb=${awbValue}`;
+        
+        // Open in new tab
+        window.open(trackingURL, '_blank', 'noopener,noreferrer');
+        
+        // Reset button
+        submitBtn.innerHTML = originalContent;
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        
+        // Show success notification
+        showNotification('Redirecting to tracking page...', 'success');
+        
+        // Close modal after short delay
+        setTimeout(() => {
+          closeModal();
+        }, 500);
+      }, 800);
+    });
+
+    // Handle Enter key in modal input
+    modalAwbInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        modalForm.dispatchEvent(new Event('submit'));
       }
     });
   };
@@ -510,6 +682,7 @@
     initSmoothScroll();
     initFormSubmission();
     initAWBTracking();
+    initTrackingModal();
     initServicesCarousel();
     initServicesPageAccordion();
     initServicesPageCarousel();
@@ -542,16 +715,16 @@
 
     let scrollAmount = 0;
     let maxScroll = 0;
-    
+
     // Use getBoundingClientRect for accurate measurements
     const updateMaxScroll = () => {
       const container = carousel.parentElement;
       const containerRect = container.getBoundingClientRect();
       const carouselWidth = carousel.scrollWidth;
-      // Account for horizontal padding (5rem left + 5rem right = 160px)
-      const horizontalPadding = 160;
+      // Account for horizontal padding (3.5rem left + 3.5rem right = 56px)
+      const horizontalPadding = 56;
       const visibleWidth = Math.max(0, containerRect.width - horizontalPadding);
-      
+
       maxScroll = Math.max(0, carouselWidth - visibleWidth);
     };
 
