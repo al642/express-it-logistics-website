@@ -38,19 +38,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="css/styles.css">
-  
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#e91e63">
+  <link rel="stylesheet" href="/css/styles.css">
 
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#e91e63">
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/images/icon.svg">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/images/icon-512.png">
-  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/icon.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icon-512.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
   <!-- JSON-LD Schema Markup (Organization & LocalBusiness) -->
   <script type="application/ld+json">
@@ -80,7 +79,7 @@
       "@type": "GeoShape",
       "box": "-1.2921 29.8739 4.2476 35.3994"
     },
-    "image": "https://expressitlogistics.github.io/assets/images/logo.png",
+    "image": "https://expressitlogistics.github.io/assets/images/icon.svg",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -134,9 +133,9 @@
     <div class="nav-container">
       <div class="nav-wrapper">
         <!-- Logo -->
-        <a href="index.html" class="logo-link" aria-label="Express It Logistics - Home">
+        <a href="/index.html" class="logo-link" aria-label="Express It Logistics - Home">
           <div class="logo-icon">
-            <img src="assets/images/icon.svg" alt="" aria-hidden="true" width="48" height="48" class="logo-load-animation">
+            <img src="/assets/images/icon.svg" alt="" aria-hidden="true" width="48" height="48" class="logo-load-animation">
           </div>
           <div class="logo-text">
             <span class="logo-title">Express IT</span>
@@ -146,19 +145,19 @@
 
         <!-- Desktop Navigation -->
         <nav class="nav-menu" role="navigation" aria-label="Main navigation">
-          <a href="index.html" class="nav-link active" aria-current="page">Home</a>
-          <a href="pages/services.html" class="nav-link">Services</a>
-          <a href="pages/team.html" class="nav-link">Team</a>
-          <a href="pages/contact.html" class="nav-link">Contact</a>
-          <a href="pages/contact.html" class="btn btn-primary">
+          <a href="/index.html" class="nav-link active" aria-current="page">Home</a>
+          <a href="/pages/services.html" class="nav-link">Services</a>
+          <a href="/pages/team.html" class="nav-link">Team</a>
+          <a href="/pages/contact.html" class="nav-link">Contact</a>
+          <a href="/pages/contact.html" class="btn btn-primary">
             Get Quote
             <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
           <!-- Track Shipment Button -->
-          <button class="btn btn-outline track-shipment-btn" id="header-track-btn" aria-label="Track Shipment">
+          <a href="https://www.track-trace.com/aircargo" class="btn btn-outline track-shipment-btn" id="header-track-btn" aria-label="Track Shipment" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-search" aria-hidden="true"></i>
             Track Shipment
-          </button>
+          </a>
           <!-- Dark Mode Toggle -->
           <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
             <i class="fas fa-moon" aria-hidden="true"></i>
@@ -213,18 +212,14 @@
           </p>
 
           <div class="hero-buttons">
-            <a href="pages/services.html" class="btn btn-white">
+            <a href="/pages/services.html" class="btn btn-white">
               Our Services
               <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
             </a>
-            <a href="pages/contact.html" class="btn btn-secondary">
+            <a href="/pages/contact.html" class="btn btn-secondary">
               <i class="fas fa-phone mr-2" aria-hidden="true"></i>
               Contact Us
             </a>
-            <button class="btn btn-white track-shipment-btn" id="hero-track-btn">
-              <i class="fas fa-search" aria-hidden="true"></i>
-              Track Shipment
-            </button>
           </div>
 
           <!-- Stats -->
@@ -296,7 +291,7 @@
             </div>
 
             <div>
-              <a href="pages/contact.html" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+              <a href="/pages/contact.html" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
                 Learn More About Us
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
               </a>
@@ -465,23 +460,6 @@
                 <p class="service-description">
                   Temperature-controlled logistics solutions for pharmaceutical, food, and industrial applications across East Africa. Our specialized cold-chain support ensures temperature integrity for sensitive shipments including biological samples, vaccines, and cold chain products. Available 24/7 for emergency requirements with temperature-controlled packaging and monitored handling.
                 </p>
-                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-1" type="button">
-                  Learn more
-                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                </button>
-                <div id="service-content-1" class="service-expanded-content" hidden>
-                  <div class="service-expanded-details">
-                    <p>Our specialized cold-chain logistics ensure temperature integrity from origin to destination. We offer:</p>
-                    <ul>
-                      <li>Temperature-controlled vehicles (-25°C to +25°C range)</li>
-                      <li>Real-time temperature monitoring and reporting</li>
-                      <li>GDP-compliant handling procedures</li>
-                      <li>Pharmaceutical-grade storage facilities</li>
-                      <li>24/7 emergency response for temperature excursions</li>
-                    </ul>
-                    <p>Serving healthcare, food, and industrial clients across Uganda, Kenya, Tanzania, Rwanda, and the DRC.</p>
-                  </div>
-                </div>
               </div>
             </article>
 
@@ -495,23 +473,6 @@
                 <p class="service-description">
                   Secure and compliant shipping of biological specimens, medical samples, and clinical trial materials with full chain of custody. Specialized logistics for biological specimen transport with IATA-compliant packaging, regulatory compliance, real-time temperature monitoring, and door-to-door global delivery.
                 </p>
-                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-1b" type="button">
-                  Learn more
-                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                </button>
-                <div id="service-content-1b" class="service-expanded-content" hidden>
-                  <div class="service-expanded-details">
-                    <p>Specialized logistics for biological specimen transport with regulatory compliance and temperature integrity throughout the journey:</p>
-                    <ul>
-                      <li>IATA-compliant packaging and documentation</li>
-                      <li>Chain of custody tracking and handling</li>
-                      <li>Real-time temperature monitoring and alerts</li>
-                      <li>Door-to-door global delivery options</li>
-                      <li>Biohazard and infectious substance handling</li>
-                    </ul>
-                    <p>Trusted by research institutions, hospitals, and pharmaceutical companies for sensitive biological shipments worldwide.</p>
-                  </div>
-                </div>
               </div>
             </article>
 
@@ -538,23 +499,6 @@
                 <p class="service-description">
                   Reliable road freight services across East Africa with a modern fleet ensuring safe and timely delivery. Professional freight transportation solutions covering Uganda and the broader East African region with fleet of 50+ modern vehicles, real-time GPS tracking, temperature-controlled transport, and cross-border expertise.
                 </p>
-                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-2" type="button">
-                  Learn more
-                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                </button>
-                <div id="service-content-2" class="service-expanded-content" hidden>
-                  <div class="service-expanded-details">
-                    <p>Our freight transportation services cover major routes across East Africa:</p>
-                    <ul>
-                      <li>Full truckload (FTL) and less than truckload (LTL) options</li>
-                      <li>Modern fleet with GPS tracking and real-time updates</li>
-                      <li>Experienced drivers with safety certifications</li>
-                      <li>Door-to-door and terminal-to-terminal services</li>
-                      <li>Project cargo and oversized load handling</li>
-                    </ul>
-                    <p>Coverage includes Uganda, Kenya, Tanzania, Rwanda, Burundi, South Sudan, and DRC.</p>
-                  </div>
-                </div>
               </div>
             </article>
 
@@ -581,23 +525,6 @@
                 <p class="service-description">
                   Efficient last-mile delivery and distribution network covering major cities and towns. Comprehensive distribution solutions ensuring your products reach customers efficiently across Uganda and East Africa with same-day delivery in Kampala, nationwide coverage, express and standard options, and proof of delivery documentation.
                 </p>
-                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-4" type="button">
-                  Learn more
-                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                </button>
-                <div id="service-content-4" class="service-expanded-content" hidden>
-                  <div class="service-expanded-details">
-                    <p>Our distribution network ensures efficient delivery across East Africa:</p>
-                    <ul>
-                      <li>Last-mile delivery to urban and rural areas</li>
-                      <li>Scheduled and express delivery options</li>
-                      <li>Cash-on-delivery and payment collection services</li>
-                      <li>Return logistics and reverse pickup</li>
-                      <li>Proof of delivery with digital signatures and photos</li>
-                    </ul>
-                    <p>Coverage includes Kampala, Nairobi, Kigali, Dar es Salaam, Entebbe, and surrounding regions.</p>
-                  </div>
-                </div>
               </div>
             </article>
 
@@ -624,23 +551,6 @@
                 <p class="service-description">
                   Seamless cross-border transportation to Kenya, Tanzania, Rwanda, DRC, and beyond. End-to-end cross-border logistics solutions handling customs documentation, customs clearance assistance, door-to-door delivery, transit insurance, and full documentation handling.
                 </p>
-                <button class="service-learn-more" aria-expanded="false" aria-controls="service-content-6" type="button">
-                  Learn more
-                  <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                </button>
-                <div id="service-content-6" class="service-expanded-content" hidden>
-                  <div class="service-expanded-details">
-                    <p>Our cross-border expertise simplifies international trade:</p>
-                    <ul>
-                      <li>Full customs clearance and documentation services</li>
-                      <li>Bonded truck transport for duty-suspended goods</li>
-                      <li>Partner network across East African borders</li>
-                      <li>Transit insurance and cargo guarantee</li>
-                      <li>Clearance at Malaba, Busia, Nimule, and other major border points</li>
-                    </ul>
-                    <p>We handle all regulatory requirements for smooth cross-border operations.</p>
-                  </div>
-                </div>
               </div>
             </article>
           </div>
@@ -657,7 +567,7 @@
 
         <!-- View All Services Button -->
         <div class="text-center mt-12">
-          <a href="pages/services.html" class="btn btn-primary">
+          <a href="/pages/services.html" class="btn btn-primary">
             View All Services
             <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
           </a>
@@ -672,100 +582,16 @@
           Contact us today for a free consultation and quote. Let us help streamline your supply chain.
         </p>
         <div class="hero-buttons">
-          <a href="pages/contact.html" class="btn btn-white">
+          <a href="/pages/contact.html" class="btn btn-white">
             Get Free Quote
           </a>
-          <a href="pages/contact.html" class="btn btn-secondary">
+          <a href="/pages/contact.html" class="btn btn-secondary">
             Contact Us
           </a>
         </div>
     </section>
 
-    <!-- Track Your Shipment Section -->
-    <section id="track-shipment" class="tracking-section" aria-labelledby="tracking-title">
-      <div class="tracking-container">
-        <div class="tracking-card">
-          <div class="tracking-header">
-            <h2 id="tracking-title" class="tracking-title">Track Your Shipment</h2>
-            <p class="tracking-subtitle">Enter your Air Waybill (AWB) number to track your cargo</p>
-          </div>
-          
-          <form id="awb-tracking-form" class="tracking-form" novalidate>
-            <div class="tracking-input-group">
-              <div class="tracking-input-wrapper">
-                <input 
-                  type="text" 
-                  id="awb-input" 
-                  class="tracking-input" 
-                  placeholder="Enter Air Waybill (AWB) Number" 
-                  aria-describedby="awb-helper"
-                  autocomplete="off"
-                  spellcheck="false"
-                  maxlength="12"
-                >
-                <button type="submit" class="tracking-submit-btn">
-                  <i class="fas fa-search" aria-hidden="true"></i>
-                  <span>Track Shipment</span>
-                </button>
-              </div>
-              <div id="awb-helper" class="tracking-helper">
-                <p class="tracking-support">
-                  <i class="fas fa-globe" aria-hidden="true"></i>
-                  Supports all major airlines worldwide
-                </p>
-                <p class="tracking-example">Enter 8-12 digit AWB number</p>
-              </div>
-              <div id="tracking-error" class="tracking-error" role="alert" aria-live="polite"></div>
-            </div>
-          </form>
-        </div>
-    </section>
-
   </main>
-
-  <!-- Track Shipment Modal -->
-  <div id="tracking-modal" class="tracking-modal" role="dialog" aria-modal="true" aria-labelledby="modal-tracking-title" hidden>
-    <div class="tracking-modal-backdrop" tabindex="-1"></div>
-    <div class="tracking-modal-container">
-      <div class="tracking-modal-content">
-        <button class="tracking-modal-close" id="modal-close" aria-label="Close modal">
-          <i class="fas fa-times" aria-hidden="true"></i>
-        </button>
-        <div class="tracking-modal-header">
-          <div class="tracking-modal-icon">
-            <i class="fas fa-box-open" aria-hidden="true"></i>
-          </div>
-          <h2 id="modal-tracking-title" class="tracking-modal-title">Track Your Shipment</h2>
-          <p class="tracking-modal-subtitle">Enter your Air Waybill (AWB) number to track your cargo</p>
-        </div>
-        <form id="modal-tracking-form" class="tracking-modal-form" novalidate>
-          <div class="tracking-modal-input-group">
-            <input 
-              type="text" 
-              id="modal-awb-input" 
-              class="tracking-modal-input" 
-              placeholder="Enter AWB Number" 
-              aria-describedby="modal-awb-helper"
-              autocomplete="off"
-              spellcheck="false"
-              maxlength="12"
-            >
-            <div id="modal-awb-helper" class="tracking-modal-helper">
-              <p class="tracking-modal-support">
-                <i class="fas fa-info-circle" aria-hidden="true"></i>
-                Enter 8-12 digit AWB number (numbers only)
-              </p>
-            </div>
-            <div id="modal-tracking-error" class="tracking-modal-error" role="alert" aria-live="polite"></div>
-          </div>
-          <button type="submit" class="tracking-modal-submit-btn">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            Track Shipment
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
 
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
@@ -775,7 +601,7 @@
         <div class="footer-brand">
           <div class="footer-logo">
             <div class="logo-icon">
-              <img src="assets/images/icon.svg" alt="" aria-hidden="true" width="44" height="44" class="logo-load-animation">
+              <img src="/assets/images/icon.svg" alt="" aria-hidden="true" width="44" height="44" class="logo-load-animation">
             </div>
             <div class="logo-text">
               <span class="logo-title text-white">Express IT</span>
@@ -796,10 +622,10 @@
         <div>
           <h3 class="footer-title">Quick Links</h3>
           <ul class="footer-links">
-            <li><a href="index.html" class="footer-link">Home</a></li>
-            <li><a href="pages/services.html" class="footer-link">Services</a></li>
-            <li><a href="pages/team.html" class="footer-link">Our Team</a></li>
-            <li><a href="pages/contact.html" class="footer-link">Contact</a></li>
+            <li><a href="/index.html" class="footer-link">Home</a></li>
+            <li><a href="/pages/services.html" class="footer-link">Services</a></li>
+            <li><a href="/pages/team.html" class="footer-link">Our Team</a></li>
+            <li><a href="/pages/contact.html" class="footer-link">Contact</a></li>
           </ul>
         </div>
 
@@ -856,4 +682,6 @@
   </footer>
 
   <!-- Main JavaScript -->
-  <script src="js
+  <script src="js/main.js"></script>
+</body>
+</html>
