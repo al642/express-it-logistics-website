@@ -50,7 +50,7 @@ Consistent, brand-faithful pink accent system
 }
 
 /* Dark Mode Colors */
-.dark {
+body.dark {
   --bg-primary: #1a1a2e;
   --bg-secondary: #252542;
   --bg-tertiary: #323258;
@@ -404,7 +404,7 @@ body {
   text-align: center;
 }
 
-.dark .dark-mode-toggle i {
+body.dark .dark-mode-toggle i {
   color: #fbbf24;
 }
 
@@ -782,11 +782,11 @@ body {
   line-height: 1.7;
 }
 
-.dark .section-title {
+body.dark .section-title {
   color: var(--text-primary);
 }
 
-.dark .section-subtitle {
+body.dark .section-subtitle {
   color: var(--text-secondary);
 }
 
@@ -961,7 +961,7 @@ body {
   text-align: center;
 }
 
-.dark .partner-logo-text {
+body.dark .partner-logo-text {
   color: var(--text-primary);
 }
 
@@ -1168,7 +1168,7 @@ body {
   font-weight: bold;
 }
 
-/* Navigation - Desktop: arrows outside container with proper positioning */
+/* Navigation - arrows positioned inside container bounds */
 .services-page-carousel-nav {
   position: absolute;
   top: 0;
@@ -1179,9 +1179,8 @@ body {
   justify-content: space-between;
   align-items: center;
   pointer-events: none;
-  z-index: 50;
-  /* Arrows sit outside the visible carousel area on desktop */
-  padding: 0 5rem;
+  z-index: 60;
+  padding: 0 1rem;
 }
 
 .services-page-carousel-btn {
@@ -1200,6 +1199,7 @@ body {
   box-shadow: var(--shadow-md);
   flex-shrink: 0;
   position: relative;
+  z-index: 70;
 }
 
 .services-page-carousel-btn:hover {
@@ -1218,15 +1218,13 @@ body {
   outline-offset: 2px;
 }
 
-/* Desktop: pull arrows outside container using transform */
+/* Position arrows inside container bounds */
 .services-page-carousel-prev {
-  margin-left: 0;
-  transform: translateX(-50%);
+  left: 0;
 }
 
 .services-page-carousel-next {
-  margin-right: 0;
-  transform: translateX(50%);
+  right: 0;
 }
 
 /* Tablet */
@@ -1236,16 +1234,12 @@ body {
   }
 
   .services-page-carousel-nav {
-    padding: 0 4.5rem;
+    padding: 0 1rem;
   }
 
   .services-page-carousel-prev,
   .services-page-carousel-next {
-    transform: translateX(-50%);
-  }
-
-  .services-page-carousel-next {
-    transform: translateX(50%);
+    /* No transform needed - positioned inside bounds */
   }
 }
 
@@ -1261,7 +1255,7 @@ body {
   }
 
   .services-page-carousel-nav {
-    padding: 0 3.5rem;
+    padding: 0 0.5rem;
     margin: 0;
   }
 
@@ -1272,15 +1266,11 @@ body {
 
   /* Mobile: arrows sit inside container edges, vertically centered */
   .services-page-carousel-prev {
-    margin-left: 0;
     left: 0;
-    transform: translateY(-50%);
   }
 
   .services-page-carousel-next {
-    margin-right: 0;
     right: 0;
-    transform: translateY(-50%);
   }
 }
 
@@ -1392,8 +1382,8 @@ body {
   justify-content: space-between;
   align-items: center;
   pointer-events: none;
-  z-index: 50;
-  padding: 0 5rem;
+  z-index: 60;
+  padding: 0 1rem;
 }
 
 .services-carousel-btn {
@@ -1412,6 +1402,7 @@ body {
   box-shadow: var(--shadow-md);
   flex-shrink: 0;
   position: relative;
+  z-index: 70;
 }
 
 .services-carousel-btn:hover {
@@ -1430,15 +1421,13 @@ body {
   outline-offset: 2px;
 }
 
-/* Desktop: pull arrows outside container using transform */
+/* Position arrows inside container bounds */
 .services-carousel-prev {
-  margin-left: 0;
-  transform: translateX(-50%);
+  left: 0;
 }
 
 .services-carousel-next {
-  margin-right: 0;
-  transform: translateX(50%);
+  right: 0;
 }
 
 /* Mobile styles for services carousel */
@@ -1449,7 +1438,7 @@ body {
   }
 
   .services-carousel-nav {
-    padding: 0 3rem;
+    padding: 0 0.5rem;
     margin: 0;
   }
 
@@ -1464,15 +1453,11 @@ body {
 
   /* Mobile: arrows inside container, vertically centered */
   .services-carousel-prev {
-    margin-left: 0;
     left: 0;
-    transform: translateY(-50%);
   }
 
   .services-carousel-next {
-    margin-right: 0;
     right: 0;
-    transform: translateY(-50%);
   }
 }
 
@@ -1492,7 +1477,7 @@ body {
   }
 
   .services-carousel-nav {
-    padding: 0 2.5rem;
+    padding: 0 0.25rem;
   }
 }
 
@@ -2327,6 +2312,37 @@ button:focus-visible {
 }
 
 /* ============================================
+   TRACK SHIPMENT BUTTONS
+   ============================================ */
+
+/* Header Track Button - Outline Style */
+.track-shipment-btn {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  box-shadow: none;
+}
+
+.track-shipment-btn:hover {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(233, 30, 99, 0.3);
+}
+
+/* Dark mode toggle position adjustment for header track button */
+.nav-menu .track-shipment-btn {
+  margin-left: 0.75rem;
+}
+
+/* Mobile - Hide header track button on small screens */
+@media (max-width: 768px) {
+  .nav-menu .track-shipment-btn {
+    display: none;
+  }
+}
+
+/* ============================================
    TRACK YOUR SHIPMENT SECTION
    ============================================ */
 
@@ -2357,7 +2373,7 @@ button:focus-visible {
 }
 
 /* Dark mode support */
-.dark .tracking-section {
+body.dark .tracking-section {
   background: linear-gradient(
     135deg,
     var(--color-pink-bg-light) 0%,
@@ -2471,11 +2487,13 @@ button:focus-visible {
   border-color: var(--color-primary-light);
 }
 
-/* Clear focus state with border highlight */
+/* Clear focus state with border highlight and subtle glow */
 .tracking-input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.15);
+  box-shadow:
+    0 0 0 4px rgba(233, 30, 99, 0.15),
+    0 0 20px rgba(233, 30, 99, 0.1);
 }
 
 /* Error state */
@@ -2523,7 +2541,7 @@ button:focus-visible {
   flex-shrink: 0;
 }
 
-/* Hover state - darker, slight lift, no jumping */
+/* Hover state - darker, subtle lift, smooth transition */
 .tracking-submit-btn:hover {
   background: linear-gradient(
     135deg,
@@ -2767,6 +2785,435 @@ button:focus-visible {
   .tracking-input,
   .tracking-submit-btn {
     min-height: 48px;
+  }
+}
+
+/* ============================================
+   TRACKING MODAL
+   ============================================ */
+
+/* Modal Overlay */
+.tracking-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.tracking-modal:not([hidden]) {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Backdrop */
+.tracking-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+/* Modal Container */
+.tracking-modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  padding: 1.5rem;
+  z-index: 1;
+}
+
+/* Modal Content */
+.tracking-modal-content {
+  background: var(--bg-primary);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.tracking-modal:not([hidden]) .tracking-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+/* Modal Close Button */
+.tracking-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  font-size: 1.125rem;
+}
+
+.tracking-modal-close:hover {
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  border-color: var(--color-primary-light);
+}
+
+.tracking-modal-close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Modal Header */
+.tracking-modal-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+/* Modal Icon */
+.tracking-modal-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(
+    135deg,
+    var(--color-pink),
+    var(--color-pink-light)
+  );
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  box-shadow: 0 8px 24px rgba(233, 30, 99, 0.3);
+}
+
+.tracking-modal-icon i {
+  font-size: 1.75rem;
+  color: #ffffff;
+}
+
+/* Modal Title */
+.tracking-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+/* Modal Subtitle */
+.tracking-modal-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Modal Form */
+.tracking-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Modal Input Group */
+.tracking-modal-input-group {
+  margin-bottom: 0.5rem;
+}
+
+/* Modal Input */
+.tracking-modal-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+  min-height: 54px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.tracking-modal-input:hover {
+  border-color: var(--color-primary-light);
+}
+
+.tracking-modal-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 4px rgba(233, 30, 99, 0.15),
+    0 0 20px rgba(233, 30, 99, 0.1);
+}
+
+.tracking-modal-input.error {
+  border-color: var(--accent-error);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+}
+
+.tracking-modal-input.success {
+  border-color: var(--accent-success);
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+}
+
+.tracking-modal-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+  letter-spacing: 0.03em;
+}
+
+/* Modal Helper */
+.tracking-modal-helper {
+  margin-top: 0.625rem;
+  text-align: center;
+}
+
+.tracking-modal-support {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.tracking-modal-support i {
+  font-size: 0.7rem;
+  color: var(--color-primary-light);
+}
+
+/* Modal Error */
+.tracking-modal-error {
+  display: none;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background-color: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.625rem;
+  color: var(--accent-error);
+  font-size: 0.8125rem;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.tracking-modal-error.visible {
+  display: flex;
+  animation: fadeInUp 0.3s ease;
+}
+
+.tracking-modal-error i {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+}
+
+/* Modal Submit Button */
+.tracking-modal-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--color-pink),
+    var(--color-pink-light)
+  );
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  min-height: 52px;
+  box-shadow: 0 4px 14px rgba(233, 30, 99, 0.35);
+  width: 100%;
+}
+
+.tracking-modal-submit-btn:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-pink-dark),
+    var(--color-pink)
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(233, 30, 99, 0.45);
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Loading state */
+.tracking-submit-btn.loading,
+.tracking-modal-submit-btn.loading {
+  pointer-events: none;
+  opacity: 0.85;
+  transform: none !important;
+  box-shadow: 0 4px 14px rgba(233, 30, 99, 0.25);
+}
+
+.tracking-modal-submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+}
+
+.tracking-modal-submit-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.tracking-modal-submit-btn i {
+  font-size: 0.95rem;
+}
+
+/* Modal Responsive - Tablet */
+@media (max-width: 768px) {
+  .tracking-modal-container {
+    max-width: 420px;
+    padding: 1.25rem;
+  }
+
+  .tracking-modal-content {
+    padding: 2rem 1.75rem;
+  }
+
+  .tracking-modal-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .tracking-modal-icon i {
+    font-size: 1.5rem;
+  }
+
+  .tracking-modal-title {
+    font-size: 1.375rem;
+  }
+
+  .tracking-modal-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .tracking-modal-input {
+    min-height: 50px;
+    padding: 0.875rem 1rem;
+  }
+
+  .tracking-modal-submit-btn {
+    min-height: 50px;
+    padding: 0.875rem 1.25rem;
+  }
+}
+
+/* Modal Responsive - Mobile */
+@media (max-width: 480px) {
+  .tracking-modal {
+    align-items: flex-end;
+  }
+
+  .tracking-modal-container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .tracking-modal-content {
+    border-radius: 20px 20px 0 0;
+    padding: 2rem 1.5rem;
+    transform: translateY(100%);
+  }
+
+  .tracking-modal:not([hidden]) .tracking-modal-content {
+    transform: translateY(0);
+  }
+
+  .tracking-modal-close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .tracking-modal-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    margin-bottom: 0.875rem;
+  }
+
+  .tracking-modal-icon i {
+    font-size: 1.375rem;
+  }
+
+  .tracking-modal-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .tracking-modal-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .tracking-modal-input {
+    min-height: 48px;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    /* Prevent zoom on iOS */
+    font-size: 16px;
+  }
+
+  .tracking-modal-submit-btn {
+    min-height: 48px;
+    padding: 0.8rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .tracking-modal-support {
+    font-size: 0.7rem;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 }
 
