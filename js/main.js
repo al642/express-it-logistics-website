@@ -70,14 +70,22 @@ class DarkModeManager {
 
     // Listen for system preference changes
     if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = (e) => {
         // Only auto-switch if user hasn't set a manual preference
         if (localStorage.getItem(this.systemPreferenceKey) === 'true') {
           this.isDark = e.matches;
           this.applyTheme();
           this.updateIcons();
         }
-      });
+      };
+
+      // Use addEventListener if supported, fallback to addListener for older Safari
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', handleChange);
+      } else if (mediaQuery.addListener) {
+        mediaQuery.addListener(handleChange);
+      }
     }
   }
 
@@ -575,7 +583,6 @@ const initDarkMode = () => {
     carousel.setAttribute('tabindex', '0');
     carousel.setAttribute('role', 'region');
     carousel.setAttribute('aria-label', 'Services carousel');
-    carousel.style.outline = 'none';
 
     // Initialize
     updateMaxScroll();
