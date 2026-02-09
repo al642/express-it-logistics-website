@@ -1643,6 +1643,47 @@ body.dark .partner-logo-text {
   transform: translateY(-2px);
 }
 
+/* ============================================
+   WHATSAPP FLOATING BUTTON - Enhanced Discoverability
+   ============================================ */
+.social-link[aria-label="WhatsApp"] {
+  cursor: pointer;
+  /* Rest state: subtle glow for discoverability without distraction */
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.2);
+}
+
+/* Hover state - lift, scale, and intensified glow */
+.social-link[aria-label="WhatsApp"]:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+  background-color: #25d366; /* WhatsApp green */
+  color: #ffffff;
+}
+
+/* Focus-visible for keyboard accessibility */
+.social-link[aria-label="WhatsApp"]:focus-visible {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+  background-color: #25d366;
+  color: #ffffff;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Active/tap state - press feedback */
+.social-link[aria-label="WhatsApp"]:active {
+  transform: translateY(-1px) scale(0.95);
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+}
+
+/* Smooth transition for all interactive states */
+.social-link[aria-label="WhatsApp"],
+.social-link[aria-label="WhatsApp"]:hover,
+.social-link[aria-label="WhatsApp"]:focus-visible,
+.social-link[aria-label="WhatsApp"]:active {
+  transition: all 250ms ease;
+}
+
 .footer-title {
   font-size: 1.125rem;
   font-weight: 600;
