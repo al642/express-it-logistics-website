@@ -159,13 +159,17 @@ const initDarkMode = () => {
 
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("open");
+        const isOpen = mobileMenu.classList.toggle("open");
+        mobileMenuBtn.classList.toggle("active", isOpen);
+        mobileMenuBtn.setAttribute("aria-expanded", isOpen);
       });
 
       // Close mobile menu when clicking outside
       document.addEventListener("click", (e) => {
         if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
           mobileMenu.classList.remove("open");
+          mobileMenuBtn.classList.remove("active");
+          mobileMenuBtn.setAttribute("aria-expanded", "false");
         }
       });
 
@@ -173,7 +177,18 @@ const initDarkMode = () => {
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && mobileMenu.classList.contains("open")) {
           mobileMenu.classList.remove("open");
+          mobileMenuBtn.classList.remove("active");
+          mobileMenuBtn.setAttribute("aria-expanded", "false");
         }
+      });
+
+      // Close mobile menu when clicking a link inside it
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove("open");
+          mobileMenuBtn.classList.remove("active");
+          mobileMenuBtn.setAttribute("aria-expanded", "false");
+        });
       });
     }
   };
