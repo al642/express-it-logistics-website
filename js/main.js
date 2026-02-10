@@ -405,6 +405,36 @@ const initDarkMode = () => {
     // No JavaScript needed - all content is visible by default
   };
 
+  /**
+   * Mobile Track Shipment Link Manager
+   * Updates the Track Shipment link href based on viewport width
+   * Desktop (≥769px): www.track-trace.com
+   * Mobile (≤768px): touch.track-trace.com
+   */
+  const initMobileTrackLink = () => {
+    const DESKTOP_URL = 'https://www.track-trace.com/';
+    const MOBILE_URL = 'https://touch.track-trace.com';
+    const BREAKPOINT = '(max-width: 768px)';
+
+    const updateTrackLink = () => {
+      const mobileTrackLink = document.getElementById('mobile-track-link');
+      if (!mobileTrackLink) return;
+
+      const isMobile = window.matchMedia(BREAKPOINT).matches;
+      mobileTrackLink.href = isMobile ? MOBILE_URL : DESKTOP_URL;
+    };
+
+    // Initial update on page load
+    updateTrackLink();
+
+    // Listen for viewport size changes (e.g., window resize, orientation change)
+    window.addEventListener('resize', updateTrackLink, { passive: true });
+    window.addEventListener('orientationchange', () => {
+      // Small delay to ensure layout completes after orientation change
+      setTimeout(updateTrackLink, 100);
+    });
+  };
+
   // Initialize when DOM is ready
   const init = () => {
     setCopyrightYear();
@@ -413,6 +443,7 @@ const initDarkMode = () => {
     initNavbarScroll();
     initSmoothScroll();
     initFormSubmission();
+    initMobileTrackLink();
     initServicesCarousel();
     initServicesPageGrid();
   };
