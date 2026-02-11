@@ -257,12 +257,12 @@ const initDarkMode = () => {
     });
   };
 
-  // Form Submission Handler for Contact Form
+  // Form Submission Handler for Contact Form (Formspree Integration)
   const initFormSubmission = () => {
     const contactForm = document.getElementById('contact-form');
 
     if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
+      contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Get form data
@@ -303,22 +303,56 @@ const initDarkMode = () => {
         }
 
         if (isValid) {
-          // Simulate form submission to info@expressitlogistics.co.ug
+          // Submit to Formspree via AJAX
           const submitBtn = contactForm.querySelector('button[type="submit"]');
           const originalText = submitBtn.innerHTML;
           submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i> Sending...';
           submitBtn.disabled = true;
 
-// Simulate API call delay
-          setTimeout(() => {
-            // Show success message
-            showNotification('Thank you for your inquiry! Our team will contact you at ' + sanitizedEmail + ' within 24 hours.', 'success');
+          try {
+            const formspreeEndpoint = contactForm.action;
+            
+            // Update FormData with sanitized values
+            const cleanFormData = new FormData();
+            cleanFormData.set('name', sanitizedName);
+            cleanFormData.set('email', sanitizedEmail);
+            cleanFormData.set('phone', sanitizedPhone);
+            cleanFormData.set('service', sanitizedService);
+            cleanFormData.set('message', sanitizedMessage);
 
-            // Reset form
-            contactForm.reset();
+            const response = await fetch(formspreeEndpoint, {
+              method: 'POST',
+              body: cleanFormData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+
+            if (response.ok) {
+              // Success - Formspree returns 200 if submission was successful
+              showNotification('Thank you for your inquiry! Our team will contact you at ' + sanitizedEmail + ' within 24 hours.', 'success');
+              
+              // Reset form
+              contactForm.reset();
+            } else {
+              // Formspree returned an error
+              const errorData = await response.json();
+              if (errorData.errors) {
+                // Formspree validation errors
+                showNotification('Please check your form entries and try again.', 'error');
+              } else {
+                // Generic error
+                showNotification('There was a problem sending your message. Please try again or email us directly at info@expressitlogistics.co.ug', 'error');
+              }
+            }
+          } catch (error) {
+            // Network or other errors - silently fail and show user-friendly message
+            showNotification('There was a problem sending your message. Please try again or email us directly at info@expressitlogistics.co.ug', 'error');
+          } finally {
+            // Restore button state
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-          }, 1500);
+          }
         } else {
           showNotification(errors.join('. '), 'error');
         }

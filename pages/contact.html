@@ -21,7 +21,7 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io">
   <meta name="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
   
   <title>Contact Express It Logistics Limited - Logistics Solutions</title>
@@ -161,7 +161,7 @@
               Fill out the form below and our team will get back to you within 24 hours.
             </p>
 
-            <form id="contact-form" class="space-y-6" action="#" method="post" novalidate>
+<form id="contact-form" class="space-y-6" action="https://formspree.io/f/mvzbzqyl" method="POST" novalidate>
               <div class="form-row">
                 <div class="form-group">
                   <label for="name" class="form-label">Full Name *</label>
@@ -203,10 +203,14 @@
                 Send Message
                 <i class="fas fa-paper-plane ml-2" aria-hidden="true"></i>
               </button>
-              <p class="text-muted text-sm mt-4">
+<p class="text-muted text-sm mt-4">
                 <i class="fas fa-info-circle mr-1" aria-hidden="true"></i>
-                Your message will be sent directly to our team at info@expressitlogistics.co.ug
+                Your quote request will be sent directly to our team at info@expressitlogistics.co.ug
               </p>
+              <!-- Formspree subject line for email identification -->
+              <input type="hidden" name="_subject" value="Quote Request - Express It Logistics">
+              <!-- Formspree honeypot - leave this field empty -->
+              <input type="text" name="_gotcha" style="display:none" autocomplete="false" tabindex="-1" aria-hidden="true">
             </form>
           </div>
 
