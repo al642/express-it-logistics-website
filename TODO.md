@@ -1,23 +1,17 @@
-# GitHub Pages Path Fix - TODO
+# TODO - Logo Replacement + Brand Name Standardization
 
-## Objective
+## Brand Name Standardization
+- [ ] Update index.html - Replace "Express IT" → "Express It"
+- [ ] Update pages/services.html - Replace "Express IT" → "Express It"
+- [ ] Update pages/contact.html - Replace "Express IT" → "Express It"
+- [ ] Update pages/team.html - Replace "Express IT" → "Express It"
 
-Fix broken asset loading by replacing root-relative paths with correct relative paths for GitHub Pages compatibility.
+## Logo PNG Creation
+- [ ] Create optimized logo.png (220px, transparent)
+- [ ] Save to /assets/images/logo.png
 
-## Files Modified
+## Validation
+- [ ] Verify logo paths on all pages
+- [ ] Confirm brand name consistency
+- [ ] Check for any remaining "Express IT" variations
 
-- ✅ index.html - Fixed 4 footer quick links
-- ✅ pages/services.html - Fixed 4 footer quick links
-- ✅ pages/team.html - Fixed 4 footer quick links
-- ✅ pages/contact.html - Fixed 4 mobile nav links + 4 footer links
-
-## Path Changes Applied
-
-- `/index.html` → `index.html` (in root)
-- `/index.html` → `../index.html` (in pages/)
-- `/pages/*.html` → `*.html` (in pages/)
-
-## Verification Complete
-
-- ✅ No root-relative paths remain
-- ✅ All asset paths now relative for GitHub Pages compatibility
