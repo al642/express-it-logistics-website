@@ -1,5 +1,5 @@
 /**
- * Express IT Logistics - Main JavaScript
+ * Express It Logistics Ltd - Main JavaScript
  * Consolidated functionality for all pages
  * Safari-compatible with proper event handling
  */

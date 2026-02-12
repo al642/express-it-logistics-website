@@ -1,4 +1,4 @@
-# Express IT Logistics - robots.txt
+# Express It Logistics Ltd - robots.txt
 # Allows search engine crawlers to discover and index website content
 
 User-agent: *

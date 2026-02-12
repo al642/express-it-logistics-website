@@ -1,5 +1,5 @@
 /**
- * Express IT Logistics - Service Worker
+ * Express It Logistics Ltd - Service Worker
  * Provides offline functionality and caching for better performance
  * Safe implementation for GitHub Pages deployment
  */
@@ -133,9 +133,9 @@ self.addEventListener('message', (event) => {
 // Push event - handle push notifications (placeholder for future use)
 self.addEventListener('push', (event) => {
   const data = event.data ? event.data.json() : {};
-  const title = data.title || 'Express IT Logistics';
+  const title = data.title || 'Express It Logistics Ltd';
   const options = {
-    body: data.body || 'New notification from Express IT Logistics',
+    body: data.body || 'New notification from Express It Logistics Ltd',
     icon: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 rx=%2264%22 fill=%22%23e91e63%22/%3E%3Cpath d=%22M160 192h192v32H160zm0 64h128v32H160zm0 64h160v32H160z%22 fill=%22white%22/%3E%3C/svg%3E',
     badge: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 rx=%2264%22 fill=%22%23e91e63%22/%3E%3C/svg%3E',
     data: data.url || './index.html',
