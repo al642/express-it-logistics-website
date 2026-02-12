@@ -1,44 +1,27 @@
-# Mobile Header Refinement - TODO
+# Header & Footer Fixes - Progress Tracking
 
-## Task: STEP 3 — MOBILE HEADER REFINEMENT
+## Completed Tasks
 
-### Requirements
+- [x] Add CSS for `.header-left` and `.header-right` flexbox classes
 
-- Logo height: 42px for screens under 768px
-- Logo not touching edges
-- No collision with hamburger menu
-- No horizontal scroll
-- Proper spacing
+## Header Structure Updates
 
-### Implementation Steps
+- [x] Update `index.html` - Add header-left/header-right wrappers
+- [x] Update `pages/services.html` - Add header-left/header-right wrappers
+- [x] Update `pages/contact.html` - Add header-left/header-right wrappers
+- [x] Update `pages/team.html` - Add header-left/header-right wrappers
 
-- [x] 1. Analyze current CSS structure
-- [x] 2. Review HTML structure for header elements
-- [x] 3. Create and confirm implementation plan
-- [x] 4. Update CSS for mobile logo (42px height)
-- [x] 5. Add left padding to prevent edge touching
-- [x] 6. Add right margin to prevent hamburger collision
-- [x] 7. Add horizontal overflow protection to navbar
-- [x] 8. Verify changes don't break other layouts
+## Footer Location Removal
 
-### Changes to make in css/styles.css
+- [x] Remove Contact Info column from `index.html` footer
+- [x] Remove Contact Info column from `pages/services.html` footer
+- [x] Remove Contact Info column from `pages/contact.html` footer
+- [x] Remove Contact Info column from `pages/team.html` footer
 
-```css
-@media (max-width: 768px) {
-  .logo-link img {
-    height: 42px;
-    width: auto;
-  }
-  
-  .logo-link {
-    padding-left: 0.25rem;
-    margin-right: 0.75rem;
-  }
-  
-  .navbar {
-    overflow-x: hidden;
-  }
-}
-```
+## CSS Grid Updates
 
-### Status: ✅ COMPLETED
+- [x] Update `.footer-grid` from 4 columns to 3 columns
+
+## Map Section Removal
+
+- [x] Remove "Our Location" section from `pages/contact.html`
