@@ -1,4 +1,4 @@
-# Formspree Setup for Express It Logistics
+# Formspree Setup for Express IT Logistics Ltd
 
 ## Current Status
 
@@ -27,7 +27,7 @@ The Formspree integration is now fully configured and operational.
 - **Recipient Email**: `info@expressitlogistics.co.ug`
 - **Form Location**: `pages/contact.html`
 
-### What Was Implemented
+### What Was Implemented```
 
 1. **HTML Updates** (`pages/contact.html`):
    - Content Security Policy (CSP) updated to allow Formspree
@@ -56,7 +56,8 @@ The following fields are sent to Formspree:
 ### Email Subject Line
 
 All quote requests include a custom subject line:
-- **Subject**: `Quote Request - Express It Logistics`
+
+- **Subject**: `Quote Request - Express IT Logistics Ltd`
 
 This ensures that quote requests can be easily identified in the inbox and distinguished from other emails.
 
@@ -69,7 +70,7 @@ This ensures that quote requests can be easily identified in the inbox and disti
    - Success message appearing
    - Email received at <info@expressitlogistics.co.ug>
 
-## Form Fields
+### Form Fields```
 
 The following fields are sent to Formspree:
 
@@ -81,10 +82,9 @@ The following fields are sent to Formspree:
 - `_subject` - Email Subject Line (identifies quote requests)
 - `_gotcha` - Honeypot field (spam protection)
 
-### Email Subject Line
-
 All quote requests include a custom subject line:
-- **Subject**: `Quote Request - Express It Logistics`
+
+- **Subject**: `Quote Request - Express IT Logistics Ltd`
 
 This ensures that quote requests can be easily identified in the inbox and distinguished from other emails.
 
