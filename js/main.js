@@ -243,7 +243,7 @@
 
   class NavbarScrollManager {
     constructor() {
-      this.navbar = document.getElementById("navbar");
+      this.navbar = document.querySelector(".site-header");
       this.lastScrollY = 0;
       this.ticking = false;
       if (this.navbar) this.init();
