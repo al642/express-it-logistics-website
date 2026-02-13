@@ -64,74 +64,65 @@
 <body>
 
   <!-- Navigation Bar -->
-  <header id="navbar" class="navbar" role="banner">
-    <div class="nav-container">
-      <div class="nav-wrapper">
-        <!-- Header Left - Logo + Brand -->
-        <div class="header-left">
-          <!-- Logo -->
-          <a href="../index.html" class="logo-link" aria-label="Express It Logistics Ltd - Home">
-            <div class="logo-wrapper">
-              <div class="logo-icon">
-                <img src="../assets/images/logo.png" alt="" aria-hidden="true" width="48" height="48">
-              </div>
-            </div>
-            <div class="logo-text">
-              <span class="logo-title">Express It Logistics Ltd</span>
-            </div>
-          </a>
-        </div>
+  <header class="site-header">
+    <div class="header-container">
 
-        <!-- Header Right - Navigation + Buttons -->
-        <div class="header-right">
-          <!-- Desktop Navigation -->
-          <nav class="nav-menu" role="navigation" aria-label="Main navigation">
-            <a href="../index.html" class="nav-link">Home</a>
-            <a href="services.html" class="nav-link">Services</a>
-            <a href="team.html" class="nav-link active" aria-current="page">Team</a>
-            <a href="contact.html" class="nav-link">Contact</a>
-            <a href="contact.html" class="btn btn-primary">
-              Get Quote
-              <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </a>
-            <!-- Dark Mode Toggle -->
-            <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-              <i class="fas fa-moon" aria-hidden="true"></i>
-            </button>
-          </nav>
-
-          <!-- Mobile Menu Button -->
-          <div class="mobile-menu-btn-container">
-            <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
-              <i class="fas fa-bars" aria-hidden="true"></i>
-              <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
+      <div class="header-left">
+        <a href="../index.html" class="brand">
+          <img src="../assets/images/logo.png" alt="Express It Logistics Ltd">
+          <span class="brand-text">Express It Logistics Ltd</span>
+        </a>
       </div>
 
-      <!-- Mobile Menu -->
-      <nav id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-        <a href="../index.html" class="mobile-nav-link">Home</a>
-        <a href="services.html" class="mobile-nav-link">Services</a>
-        <a href="team.html" class="mobile-nav-link active" aria-current="page">Team</a>
-        <a href="contact.html" class="mobile-nav-link">Contact</a>
-        <a href="https://www.track-trace.com/" class="mobile-nav-link" id="mobile-track-link" target="_blank" rel="noopener noreferrer" aria-label="Track Shipment">
-          <i class="fas fa-search" aria-hidden="true" style="margin-right: 0.5rem;"></i>
-          Track Shipment
-        </a>
-        <a href="contact.html" class="btn btn-primary inline-block mt-2">
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="team.html" class="nav-link active" aria-current="page">Team</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn btn-primary">
           Get Quote
           <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
-        <div class="mobile-dark-mode-toggle">
-          <button id="dark-mode-toggle-mobile" class="dark-mode-toggle" aria-label="Toggle dark mode">
-            <i class="fas fa-moon" aria-hidden="true"></i>
-            <span class="dark-mode-label">Dark Mode</span>
+        <!-- Track Shipment Button -->
+        <a href="https://www.track-trace.com/" class="btn btn-outline track-shipment-btn" aria-label="Track Shipment" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          Track Shipment
+        </a>
+        <!-- Dark Mode Toggle -->
+        <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <!-- Mobile Menu Button -->
+        <div class="mobile-menu-btn-container">
+          <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+            <i class="fas fa-times" aria-hidden="true"></i>
           </button>
         </div>
       </nav>
+
     </div>
+
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <a href="../index.html" class="mobile-nav-link">Home</a>
+      <a href="services.html" class="mobile-nav-link">Services</a>
+      <a href="team.html" class="mobile-nav-link active" aria-current="page">Team</a>
+      <a href="contact.html" class="mobile-nav-link">Contact</a>
+      <a href="https://www.track-trace.com/" class="mobile-nav-link" target="_blank" rel="noopener noreferrer" aria-label="Track Shipment">
+        <i class="fas fa-search" aria-hidden="true" style="margin-right: 0.5rem;"></i>
+        Track Shipment
+      </a>
+      <a href="contact.html" class="btn btn-primary inline-block mt-2">
+        Get Quote
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      <div class="mobile-dark-mode-toggle">
+        <button id="dark-mode-toggle-mobile" class="dark-mode-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
   </header>
 
   <!-- Main Content -->
@@ -443,6 +434,18 @@
             <li><a href="services.html" class="footer-link">Distribution</a></li>
             <li><a href="services.html" class="footer-link">Cross-Border Logistics</a></li>
           </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact">
+          <h3 class="footer-title">Contact Us</h3>
+          <p class="footer-contact-name">Express It Logistics Ltd</p>
+          <p class="footer-contact-email">
+            <a href="mailto:info@expressitlogistics.co.ug">info@expressitlogistics.co.ug</a>
+          </p>
+          <p class="footer-contact-phone">
+            <a href="tel:+256772200122">+256 772 200 122</a>
+          </p>
         </div>
       </div>
 
